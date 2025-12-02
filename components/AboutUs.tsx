@@ -147,7 +147,7 @@ const AboutUs = () => {
                 preserveAspectRatio="xMidYMid slice"
                 width="100%"
                 height="100%"
-                href="/about-us/684-min.jpg"
+                href="/about-us/about-us.jpg"
               />
             </svg>
           </TimelineContent>
@@ -197,7 +197,7 @@ const AboutUs = () => {
                 className="flex items-center gap-2 mb-2 sm:text-base text-xs"
               >
                 <span className="text-teal-700 dark:text-gray-300 font-bold text-xl lg:text-2xl">
-                 Global
+                  Global
                 </span>
                 <p className="text-gray-600">Technologies</p>
                 <span className="text-gray-300 lg:hidden block">|</span>
