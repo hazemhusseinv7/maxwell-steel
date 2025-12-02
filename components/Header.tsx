@@ -29,13 +29,13 @@ const Header = () => {
         isBordered
         className="fixed top-0"
       >
-        <NavbarContent>
+        <NavbarContent   as="div">
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="sm:hidden"
           />
           <NavbarBrand>
-            <Link href="/" className="font-bold text-teal-700">
+            <Link href="/" className="font-bold text-lg text-teal-800">
               Fine Edge
             </Link>
           </NavbarBrand>
@@ -44,7 +44,7 @@ const Header = () => {
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           {items.map(({ name, link }, i) => (
             <NavbarItem key={i}>
-              <Link className="text-teal-800 text-md font-medium" href={link}>
+              <Link className="text-teal-900 text-lg" href={link}>
                 {name}
               </Link>
             </NavbarItem>
@@ -54,9 +54,9 @@ const Header = () => {
           <NavbarItem>
             <Button
               as={Link}
-              className="text-teal-700 text-md font-medium"
+              className="text-white text-md font-medium bg-linear-to-tr from-teal-400 to-teal-700"
               href="#"
-              variant="faded"
+              variant="shadow"
             >
               Contact Us
             </Button>
