@@ -1,11 +1,15 @@
+import ReactLenis from "lenis/react";
+
 import Hero from "@/components/Hero";
 import AboutUs from "@/components/AboutUs";
+import RiskAdvantageCards from "@/components/RiskAdvantageCards";
 
 export default function Home() {
   return (
-    <main className="min-h-[200vh] overflow-hidden">
+    <ReactLenis root className="min-h-[200vh] overflow-hidden">
       <Hero />
+      <RiskAdvantageCards />
       <AboutUs />
-    </main>
+    </ReactLenis>
   );
 }

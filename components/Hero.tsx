@@ -27,9 +27,9 @@ const Hero = () => {
                   per="word"
                   preset="fade"
                   as="h1"
-                  className="text-xl md:text-3xl lg:text-7xl text-neutral-100 relative"
+                  className="text-xl md:text-3xl lg:text-7xl text-neutral-100 font-medium relative"
                 >
-                  Decades of Steel. Unmatched Quality
+                  Decades of Steel, Unmatched Quality.
                 </TextEffect>
               </LiquidGlassCard>
             </div>
