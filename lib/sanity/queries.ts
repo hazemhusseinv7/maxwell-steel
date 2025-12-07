@@ -162,6 +162,36 @@ export async function getAboutUsData(
   }
 }
 
+export async function getClientsData(): Promise<ClientsType | null> {
+  const query = `*[_type == "clients"][0]{
+    logos[] {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      }
+    }
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      {},
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["clients"],
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching clients data:", error);
+    return null;
+  }
+}
+
 export async function getBlogPosts(
   lang: string = "en"
 ): Promise<BlogPost[] | null> {

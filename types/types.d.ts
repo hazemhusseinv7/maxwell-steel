@@ -72,6 +72,10 @@ interface AboutUsType {
   };
 }
 
+interface ClientsType {
+  logos: ImageType[];
+}
+
 interface CategoryType {
   title: string;
   description?: any[];
