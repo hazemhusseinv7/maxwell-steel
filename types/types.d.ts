@@ -36,6 +36,16 @@ interface RiskAdvantageType {
   }[];
 }
 
+interface ProductsType {
+  productsList: {
+    name: string;
+    description: string;
+    features: string[];
+    specifications: string[];
+    image: ImageType;
+  }[];
+}
+
 interface AboutUsType {
   title: string;
   heroImage: {

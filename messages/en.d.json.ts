@@ -9,16 +9,22 @@ declare const messages: {
 
   "Header": {
     "links": {
-      "link-1": "Services",
+      "link-1": "Products",
       "link-2": "About us",
       "link-3": "Blog"
     },
     "button": "Contact us"
   },
 
+  "Products": {
+    "title": "Products",
+    "features": "Features",
+    "specifications": "Specifications"
+  },
+
   "Footer": {
     "links": {
-      "link-1": "Services",
+      "link-1": "Products",
       "link-2": "About us",
       "link-3": "Blog",
       "link-4": "Contact us"
@@ -26,7 +32,7 @@ declare const messages: {
 
     "copyright": "All rights reserved."
   },
-  
+
   "Testimonials": {
     "title": "Testimonials"
   },

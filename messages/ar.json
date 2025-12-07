@@ -6,11 +6,17 @@
 
   "Header": {
     "links": {
-      "link-1": "الخدمات",
+      "link-1": "المنتجات",
       "link-2": "من نحن",
       "link-3": "المدونة"
     },
     "button": "تواصل معنا"
+  },
+
+  "Products": {
+    "title": "المنتجات",
+    "features": "المميزات",
+    "specifications": "الخصائص"
   },
 
   "Testimonials": {
@@ -19,7 +25,7 @@
 
   "Footer": {
     "links": {
-      "link-1": "الخدمات",
+      "link-1": "المنتجات",
       "link-2": "من نحن",
       "link-3": "المدونة",
       "link-4": "تواصل معنا"

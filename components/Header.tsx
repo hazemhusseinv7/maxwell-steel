@@ -22,7 +22,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const items = [
-    { name: t("links.link-1"), link: "/services" },
+    { name: t("links.link-1"), link: "/products" },
     { name: t("links.link-2"), link: "/about-us" },
     { name: t("links.link-3"), link: "/blog" },
   ];

@@ -110,6 +110,41 @@ export async function getRiskAdvantageData(
   }
 }
 
+export async function getProductsData(
+  lang: string = "en"
+): Promise<ProductsType | null> {
+  const query = `*[_type == "products"][0]{
+    "productsList": productsList[] {
+      "name": name[_key == $lang][0].value,
+      "description": description[_key == $lang][0].value,
+      "features": features[].item[_key == $lang][0].value,
+      "specifications": specifications[].item[_key == $lang][0].value,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      }
+    }
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { lang },
+      {
+        next: { revalidate: REVALIDATE_TIME, tags: ["products"] },
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching products data:", error);
+    return null;
+  }
+}
+
 export async function getAboutUsData(
   lang: string = "en"
 ): Promise<AboutUsType | null> {
