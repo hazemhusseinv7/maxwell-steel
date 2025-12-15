@@ -91,7 +91,7 @@
   --border: oklch(0.93 0.0094 286.2156);
   --input: oklch(0.9401 0 0);
   --ring: oklch(0 0 0);
-  --chart-1: oklch(0.7459 0.1483 156.4499);
+  --chart-1: #4ac885;
   --chart-2: oklch(0.5393 0.2713 286.7462);
   --chart-3: oklch(0.7336 0.1758 50.5517);
   --chart-4: oklch(0.5828 0.1809 259.7276);
@@ -203,11 +203,11 @@
 }
 /* Text Selection */
 ::-moz-selection {
-  @apply text-white bg-teal-500;
+  @apply text-white bg-blue-500;
 }
 
 ::selection {
-  @apply text-white bg-teal-500;
+  @apply text-white bg-blue-500;
 }
 
 /* Scrollbar */
@@ -218,10 +218,10 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  @apply bg-teal-50;
+  @apply bg-blue-50;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply hover:from-teal-500 hover:to-teal-700 rounded-full bg-linear-to-br from-teal-400 to-teal-500;
+  @apply hover:from-blue-400 hover:to-blue-500 rounded-full bg-linear-to-br from-blue-500 to-blue-700;
 }

@@ -32,7 +32,7 @@ const ChangeLang = ({ className }: { className?: string }) => {
         // are used in combination with a given `pathname`. Since the two will
         // always match for the current route, we can skip runtime checks.
         { pathname, params },
-        { locale: nextLocale }
+        { locale: nextLocale },
       );
     });
   };
@@ -41,9 +41,14 @@ const ChangeLang = ({ className }: { className?: string }) => {
     <Dropdown>
       <DropdownTrigger>
         <Button
-          className={cn(className, "min-w-12 px-3 bg-linear-to-tr from-teal-400 to-teal-700")}
+          className={cn(
+            className,
+            "min-w-12 bg-linear-to-tr from-blue-400 to-blue-700 px-3",
+          )}
           variant="shadow"
-          endContent={!isPending && <FaEarthAfrica className="size-5 text-teal-50" />}
+          endContent={
+            !isPending && <FaEarthAfrica className="size-5 text-blue-50" />
+          }
           isLoading={isPending}
           aria-label="Change Language"
         />

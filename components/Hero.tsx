@@ -11,37 +11,37 @@ const Hero = async () => {
   const data: HeroType | null = await getHeroData(locale);
 
   const img = urlFor(data?.image).url();
-  const badge = urlFor(data?.certificateBadge).url();
+  const badge = urlFor(data?.certificateBadge).url() || undefined;
 
   return (
-    <section className="mt-16 relative">
+    <section className="relative mt-16">
       <Aurora
-        colorStops={["#46ecd5", "#5ee9b5", "#8ec5ff"]}
+        colorStops={["#51a2ff", "#2b7fff", "#155dfc"]}
         blend={0.5}
         amplitude={1.0}
         speed={0.5}
       />
-      <div className="p-4 sm:p-6 lg:p-8 relative">
-        <div className="p-2 shadow-xl shadow-neutral-200 rounded-3xl bg-white/50">
+      <div className="relative p-4 sm:p-6 lg:p-8">
+        <div className="rounded-3xl bg-white/50 p-2 shadow-xl shadow-neutral-200">
           <div
-            className="h-120 md:h-[80dvh] flex flex-col bg-cover bg-center bg-no-repeat rounded-2xl"
+            className="flex h-120 flex-col rounded-2xl bg-cover bg-center bg-no-repeat md:h-[80dvh]"
             style={{ backgroundImage: `url(${img})` }}
           >
-            <div className="mt-auto px-5 pb-22 lg:pb-5 md:px-10 md:pb-10">
+            <div className="mt-auto px-5 pb-22 md:px-10 md:pb-10 lg:pb-5">
               <LiquidGlassCard
                 glowIntensity="sm"
                 shadowIntensity="sm"
                 borderRadius="12px"
                 blurIntensity="lg"
                 draggable
-                className="p-4 w-fit max-md:mx-auto"
+                className="w-fit p-4 max-md:mx-auto"
               >
                 {data?.title && (
                   <TextEffect
                     per="word"
                     preset="fade"
                     as="h1"
-                    className="text-xl md:text-3xl lg:text-7xl text-neutral-100 font-medium relative"
+                    className="relative text-xl font-medium text-neutral-100 md:text-3xl lg:text-7xl"
                   >
                     {data?.title}
                   </TextEffect>
@@ -50,13 +50,15 @@ const Hero = async () => {
             </div>
           </div>
         </div>
-        <Image
-          className="size-32 lg:size-50 absolute -bottom-8 end-1 lg:end-2 z-20"
-          src={badge}
-          width={200}
-          height={200}
-          alt="Certificate Badge"
-        />
+        {badge && (
+          <Image
+            className="absolute end-1 -bottom-8 z-20 size-32 lg:end-2 lg:size-50"
+            src={badge}
+            width={200}
+            height={200}
+            alt="Certificate Badge"
+          />
+        )}
       </div>
     </section>
   );

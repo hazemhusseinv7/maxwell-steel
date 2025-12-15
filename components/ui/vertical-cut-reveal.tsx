@@ -60,7 +60,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       autoStart = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const containerRef = useRef<HTMLSpanElement>(null);
     const text =
@@ -89,8 +89,8 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
       return splitBy === "words"
         ? text.split(" ")
         : splitBy === "lines"
-        ? text.split("\n")
-        : text.split(splitBy);
+          ? text.split("\n")
+          : text.split(splitBy);
     }, [text, splitBy]);
 
     // Calculate stagger delays based on staggerFrom
@@ -104,7 +104,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
                   (typeof word === "string"
                     ? 1
                     : word.characters.length + (word.needsSpace ? 1 : 0)),
-                0
+                0,
               )
             : elements.length;
         if (staggerFrom === "first") return index * staggerDuration;
@@ -120,7 +120,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
         }
         return Math.abs(staggerFrom - index) * staggerDuration;
       },
-      [elements.length, staggerFrom, staggerDuration]
+      [elements.length, staggerFrom, staggerDuration],
     );
 
     const startAnimation = useCallback(() => {
@@ -157,7 +157,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
         className={cn(
           containerClassName,
           "flex flex-wrap whitespace-pre-wrap",
-          splitBy === "lines" && "flex-col"
+          splitBy === "lines" && "flex-col",
         )}
         onClick={onClick}
         ref={containerRef}
@@ -186,7 +186,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
                 <span
                   className={cn(
                     elementLevelClassName,
-                    "whitespace-pre-wrap relative"
+                    "relative whitespace-pre-wrap",
                   )}
                   key={charIndex}
                 >
@@ -213,7 +213,7 @@ const VerticalCutReveal = forwardRef<VerticalCutRevealRef, TextProps>(
         })}
       </span>
     );
-  }
+  },
 );
 
 VerticalCutReveal.displayName = "VerticalCutReveal";

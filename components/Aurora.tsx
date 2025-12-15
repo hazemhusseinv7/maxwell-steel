@@ -211,5 +211,5 @@ export default function Aurora(props: AuroraProps) {
     };
   }, [amplitude, blend, colorStops]);
 
-  return <div ref={ctnDom} className="w-full h-full absolute -top-16" />;
+  return <div ref={ctnDom} className="absolute -top-16 h-full w-full" />;
 }

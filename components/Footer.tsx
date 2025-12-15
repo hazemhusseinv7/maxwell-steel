@@ -83,7 +83,7 @@ const Footer = async () => {
   ].filter((item) => item.link);
 
   return (
-    <footer className="py-16">
+    <footer className="border-t py-16">
       <div className="mx-auto max-w-5xl px-6">
         {/* <Link href="/" aria-label="go home" className="mx-auto block size-fit">
           <Image
@@ -100,7 +100,7 @@ const Footer = async () => {
             <Link
               key={index}
               href={link.href}
-              className="text-muted-foreground hover:text-teal-700 block transition-colors duration-300"
+              className="text-muted-foreground block transition-colors duration-300 hover:text-blue-700"
             >
               <span>{link.title}</span>
             </Link>
@@ -114,21 +114,21 @@ const Footer = async () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={name}
-              className="text-muted-foreground hover:text-teal-700 transition-colors duration-300"
+              className="text-muted-foreground transition-colors duration-300 hover:text-blue-700"
             >
               <Icon className="size-6" />
             </Link>
           ))}
         </div>
 
-        <p className="flex items-center justify-center gap-1 text-muted-foreground text-center text-sm">
+        <p className="text-muted-foreground flex items-center justify-center gap-1 text-center text-sm">
           <FaRegCopyright className="inline" />
           <span>{new Date().getFullYear()}</span>
           <Link
             href="/"
-            className="hover:text-teal-700 transition-colors duration-300"
+            className="transition-colors duration-300 hover:text-blue-700"
           >
-            Fine Edge
+            Maxwell Steel
           </Link>
           <span>{t("copyright")}</span>
         </p>

@@ -50,10 +50,10 @@ export default function Page() {
   return (
     <main>
       {/* Card Blog */}
-      <div className="max-w-340 px-4 pb-10 sm:px-6 lg:px-8 lg:pb-14 mx-auto">
+      <div className="mx-auto max-w-340 px-4 pb-10 sm:px-6 lg:px-8 lg:pb-14">
         {/* Title */}
-        <div className="relative flex w-full flex-col items-center justify-center pt-32 sm:pt-40 pb-32">
-          <h1 className="relative max-w-[12ch] text-4xl lg:text-8xl uppercase leading-tight opacity-70">
+        <div className="relative flex w-full flex-col items-center justify-center pt-32 pb-32 sm:pt-40">
+          <h1 className="relative max-w-[12ch] text-4xl leading-tight uppercase opacity-70 lg:text-8xl">
             {t("title")}
           </h1>
         </div>
@@ -61,7 +61,7 @@ export default function Page() {
         {loading ? (
           <Loading id="blog" className="min-h-120 lg:min-h-170" />
         ) : !allPosts || allPosts.length === 0 ? (
-          <div className="text-center py-20">
+          <div className="py-20 text-center">
             <p className="text-xl text-gray-600 dark:text-neutral-400">
               {t("not-found")}
             </p>
@@ -72,29 +72,29 @@ export default function Page() {
               return (
                 <div className="space-y-10">
                   {/* Grid */}
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {currentPosts.map(({ _id, title, slug, mainImage }) => (
                       // Card
                       <Link
-                        className="group bg-gray-200/70 hover:bg-gray-300/70 focus:outline-hidden focus:bg-gray-100 rounded-xl p-5 transition dark:bg-white/5 dark:hover:bg-white/20 dark:focus:bg-white/10"
+                        className="group rounded-xl bg-gray-200/70 p-5 transition hover:bg-gray-300/70 focus:bg-gray-100 focus:outline-hidden dark:bg-white/5 dark:hover:bg-white/20 dark:focus:bg-white/10"
                         href={`/blog/${slug.current}`}
                         key={_id}
                       >
                         <div className="aspect-16/10">
                           <Image
-                            className="size-full object-cover rounded-xl"
+                            className="size-full rounded-xl object-cover"
                             width={400}
                             height={250}
                             src={urlFor(mainImage).width(400).height(250).url()}
                             alt={title}
                           />
                         </div>
-                        <span className="block mt-5 text-xl text-gray-800 dark:text-neutral-300 dark:hover:text-white">
+                        <span className="mt-5 block text-xl text-gray-800 dark:text-neutral-300 dark:hover:text-white">
                           {title}
                         </span>
                         <div className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-neutral-200">
                           {t("read-more")}
-                          <GoChevronRight className="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:-translate-x-1 rtl:group-hover:-translate-x-1 rtl:group-focus:translate-x-1 rtl:rotate-180" />
+                          <GoChevronRight className="size-4 shrink-0 transition ease-in-out group-hover:translate-x-1 group-focus:-translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1 rtl:group-focus:translate-x-1" />
                         </div>
                       </Link>
                       // End Card

@@ -37,7 +37,7 @@ const Author = ({
         className={cn(className, "h-fit bg-transparent px-3 py-2")}
         onPress={onOpen}
       >
-        <div className="flex w-full sm:items-center gap-x-5">
+        <div className="flex w-full gap-x-5 sm:items-center">
           <div className="shrink-0">
             {image ? (
               <Image
@@ -48,15 +48,15 @@ const Author = ({
                 alt={name}
               />
             ) : (
-              <div className="size-12 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center">
-                <span className="text-gray-700 dark:text-neutral-400 font-semibold text-2xl uppercase">
+              <div className="flex size-12 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800">
+                <span className="text-2xl font-semibold text-gray-700 uppercase dark:text-neutral-400">
                   {name.charAt(0)}
                 </span>
               </div>
             )}
           </div>
 
-          <div className="grow block text-start">
+          <div className="block grow text-start">
             <span className="font-semibold text-gray-800 dark:text-neutral-200">
               {name}
             </span>
@@ -75,7 +75,7 @@ const Author = ({
           {(onClose) => (
             <>
               <ModalHeader>
-                <div className="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
+                <div className="mb-2 flex w-full gap-x-5 sm:items-center sm:gap-x-3">
                   <div className="shrink-0">
                     {image ? (
                       <Image
@@ -86,8 +86,8 @@ const Author = ({
                         alt={name}
                       />
                     ) : (
-                      <div className="size-8 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center">
-                        <span className="text-gray-700 dark:text-neutral-400 font-semibold text-2xl uppercase">
+                      <div className="flex size-8 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800">
+                        <span className="text-2xl font-semibold text-gray-700 uppercase dark:text-neutral-400">
                           {name.charAt(0)}
                         </span>
                       </div>

@@ -3,8 +3,8 @@
 
 declare const messages: {
   "Metadata": {
-    "title": "Fine Edge",
-    "description": "Fine Edge"
+    "title": "Maxwell Steel",
+    "description": "Decades of Steel, Unmatched Quality."
   },
 
   "Header": {

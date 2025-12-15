@@ -40,16 +40,16 @@ const Header = () => {
             className="sm:hidden"
           />
           <NavbarBrand>
-            <Link href="/" className="font-bold text-lg text-teal-800">
-              Fine Edge
+            <Link href="/" className="text-lg font-bold text-blue-800">
+              Maxwell Steel
             </Link>
           </NavbarBrand>
         </NavbarContent>
 
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarContent className="hidden gap-4 sm:flex" justify="center">
           {items.map(({ name, link }, i) => (
             <NavbarItem key={i}>
-              <Link className="text-teal-900 text-lg" href={link}>
+              <Link className="text-lg text-blue-900" href={link}>
                 {name}
               </Link>
             </NavbarItem>
@@ -59,7 +59,7 @@ const Header = () => {
           <NavbarItem>
             <Button
               as={Link}
-              className="text-white text-md font-medium bg-linear-to-tr from-teal-400 to-teal-700"
+              className="text-md bg-linear-to-tr from-blue-400 to-blue-700 font-medium text-white"
               href="/contact"
               variant="shadow"
             >

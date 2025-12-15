@@ -14,7 +14,7 @@ const Loading = ({
   className?: string;
 }) => {
   return (
-    <Tag id={id} className={cn(className, "flex justify-center items-center")}>
+    <Tag id={id} className={cn(className, "flex items-center justify-center")}>
       <Spinner />
     </Tag>
   );

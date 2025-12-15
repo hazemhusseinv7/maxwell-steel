@@ -23,18 +23,18 @@ export default function index({
   return (
     <div ref={container}>
       <>
-        <div className="text-white h-[40vh]  w-full grid place-content-center ">
-          <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-size-[54px_54px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        <div className="grid h-[40vh] w-full place-content-center text-white">
+          <div className="absolute top-0 right-0 bottom-0 left-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[54px_54px]"></div>
 
           {title && (
-            <h2 className="2xl:text-7xl text-teal-950 text-5xl px-8 font-semibold text-center tracking-tight leading-[120%]">
+            <h2 className="px-8 text-center text-5xl leading-[120%] font-semibold tracking-tight text-blue-950 2xl:text-7xl">
               {title}
             </h2>
           )}
         </div>
       </>
 
-      <div className="text-white w-full">
+      <div className="w-full text-white">
         {list?.map(({ title, description, image }, i) => {
           const targetScale = 1 - (list.length - i) * 0.05;
           return (
@@ -84,30 +84,30 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-0"
+      className="sticky top-0 flex h-screen items-center justify-center"
     >
       <motion.div
         style={{
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`flex flex-col relative -top-[25%] h-[450px] w-[90%] lg:w-[70%] rounded-md lg:p-10 p-4 origin-top bg-linear-to-tr from-teal-700 to-teal-900`}
+        className={`relative -top-[25%] flex h-[450px] w-[90%] origin-top flex-col rounded-md bg-linear-to-tr from-blue-700 to-blue-900 p-4 lg:w-[70%] lg:p-10`}
       >
-        <h2 className="text-2xl text-center font-semibold max-lg:mt-2">
+        <h2 className="text-center text-2xl font-semibold max-lg:mt-2">
           {title}
         </h2>
-        <div className={`flex max-lg:flex-col h-full mt-1 lg:mt-5 gap-10`}>
-          <ul className={`flex flex-col gap-2 lg:w-[40%] relative top-[10%]`}>
+        <div className={`mt-1 flex h-full gap-10 max-lg:flex-col lg:mt-5`}>
+          <ul className={`relative top-[10%] flex flex-col gap-2 lg:w-[40%]`}>
             {description.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
 
           <div
-            className={`relative lg:w-[60%] h-full rounded-lg overflow-hidden `}
+            className={`relative h-full overflow-hidden rounded-lg lg:w-[60%]`}
           >
             <motion.div
-              className={`w-full h-full`}
+              className={`h-full w-full`}
               style={{ scale: imageScale }}
             >
               <Image fill src={image} alt="image" className="object-cover" />

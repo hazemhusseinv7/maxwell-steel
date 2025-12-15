@@ -164,7 +164,7 @@ export const LiquidGlassCard = ({
           `relative ${draggable ? "cursor-grab active:cursor-grabbing" : ""} ${
             expandable ? "cursor-pointer" : ""
           }`,
-          className
+          className,
         )}
         style={baseStyles}
         {...motionProps}

@@ -17,17 +17,17 @@ const Products = ({ products }: { products: ProductsType | null }) => {
             image: urlFor(product.image).url(),
             features: product.features,
             specifications: product.specifications,
-          })
+          }),
         ) || [],
     },
   ];
 
   return (
     <section id="products" className="py-40">
-      <h2 className="font-semibold text-2xl lg:text-7xl mx-auto w-fit text-teal-700 mb-4 z-200">
+      <h2 className="z-200 mx-auto mb-4 w-fit text-2xl font-semibold text-blue-700 lg:text-7xl">
         {t("title")}
       </h2>
-      <div className="max-w-300 mx-auto">
+      <div className="mx-auto max-w-300">
         <ExpandableCard items={productsData} />
       </div>
     </section>

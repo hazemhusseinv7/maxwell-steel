@@ -19,7 +19,7 @@ function ButtonActive({
   const buttonContent = (
     <>
       <span className="relative z-10">{children}</span>
-      <span className="absolute inset-0 bg-gradient-to-r dark:from-[#070e41] dark:to-[#263381] from-[#f6f7ff] to-[#f5f6ff] opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-md"></span>
+      <span className="absolute inset-0 rounded-md bg-gradient-to-r from-[#f6f7ff] to-[#f5f6ff] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:from-[#070e41] dark:to-[#263381]"></span>
     </>
   );
 

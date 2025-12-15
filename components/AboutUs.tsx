@@ -29,10 +29,10 @@ const portableTextComponents = {
             alt={value.alt || "Blog image"}
             width={800}
             height={600}
-            className="rounded-lg mx-auto"
+            className="mx-auto rounded-lg"
           />
           {value.caption && (
-            <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
               {value.caption}
             </p>
           )}
@@ -127,20 +127,20 @@ const AboutUs = ({
   return (
     <section
       id="about-us"
-      className="bg-linear-to-t from-emerald-50 relative mt-20"
+      className="relative mt-20 bg-linear-to-t from-blue-50"
       ref={heroRef}
     >
-      <div className="relative z-10 max-w-6xl mx-auto px-8 pt-20 pb-32">
+      <div className="relative z-10 mx-auto max-w-6xl px-8 pt-20 pb-32">
         <div className="relative">
           {/* Header with social icons */}
-          <div className="flex justify-between items-center mb-8 w-[85%] absolute left-0 lg:top-2 md:top-0 sm:-top-2 -top-3 z-10">
+          <div className="absolute -top-3 left-0 z-10 mb-8 flex w-[85%] items-center justify-between sm:-top-2 md:top-0 lg:top-2">
             <div className="flex items-center gap-2 text-xl">
               <TimelineContent
                 as="h2"
                 animationNum={0}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="text-sm lg:text-2xl font-medium text-gray-600 dark:text-gray-300"
+                className="text-sm font-medium text-gray-600 lg:text-2xl dark:text-gray-300"
               >
                 {aboutUs?.title}
               </TimelineContent>
@@ -157,7 +157,7 @@ const AboutUs = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="md:size-8 size-6 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 hover:bg-emerald-500 transition-colors duration-300 rounded-lg flex items-center justify-center cursor-pointer"
+                  className="flex size-6 cursor-pointer items-center justify-center rounded-lg border border-gray-200 bg-gray-100 transition-colors duration-300 hover:bg-blue-500 md:size-8 dark:border-gray-700 dark:bg-gray-800"
                 >
                   <Icon className="max-sm:size-3" />
                 </TimelineContent>
@@ -170,7 +170,7 @@ const AboutUs = ({
             animationNum={4}
             timelineRef={heroRef}
             customVariants={scaleVariants}
-            className="relative group"
+            className="group relative"
           >
             <svg
               className="w-full"
@@ -197,7 +197,7 @@ const AboutUs = ({
           </TimelineContent>
 
           {/* Stats */}
-          <div className="flex flex-wrap lg:justify-start justify-between items-center py-3 text-sm rtl:sm:flex-row-reverse">
+          <div className="flex flex-wrap items-center justify-between py-3 text-sm lg:justify-start rtl:sm:flex-row-reverse">
             <TimelineContent
               as="div"
               animationNum={5}
@@ -205,8 +205,8 @@ const AboutUs = ({
               customVariants={revealVariants}
               className="flex gap-4"
             >
-              <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-emerald-700 font-bold">
+              <div className="mb-2 flex items-center gap-2 text-xs sm:text-base">
+                <span className="font-bold text-blue-700">
                   {aboutUs?.leftTopStat.value}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
@@ -214,8 +214,8 @@ const AboutUs = ({
                 </span>
                 <span className="text-gray-300">|</span>
               </div>
-              <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                <span className="text-emerald-700 font-bold">
+              <div className="mb-2 flex items-center gap-2 text-xs sm:text-base">
+                <span className="font-bold text-blue-700">
                   {aboutUs?.leftBottomStat.value}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
@@ -223,15 +223,15 @@ const AboutUs = ({
                 </span>
               </div>
             </TimelineContent>
-            <div className="lg:absolute right-0 bottom-16 flex lg:flex-col lg:gap-0 gap-4 lg:ps-5">
+            <div className="right-0 bottom-16 flex gap-4 lg:absolute lg:flex-col lg:gap-0 lg:ps-5">
               <TimelineContent
                 as="div"
                 animationNum={6}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="flex sm:text-3xl text-2xl items-center gap-2 mb-2"
+                className="mb-2 flex items-center gap-2 text-2xl sm:text-3xl"
               >
-                <p className="text-emerald-700 font-semibold">
+                <p className="font-semibold text-blue-700">
                   {aboutUs?.rightTopStat.value}
                   {/* <span className="text-gray-600 dark:text-gray-300 font-normal"></span> */}
                 </p>
@@ -244,32 +244,32 @@ const AboutUs = ({
                 animationNum={7}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="flex items-center gap-2 mb-2 sm:text-base text-xs"
+                className="mb-2 flex items-center gap-2 text-xs sm:text-base"
               >
-                <span className="text-emerald-700 dark:text-gray-300 font-bold text-xl lg:text-2xl">
+                <span className="text-xl font-bold text-blue-700 lg:text-2xl dark:text-gray-300">
                   {aboutUs?.rightBottomStat.value}
                 </span>
                 <p className="text-gray-600">
                   {aboutUs?.rightBottomStat.label}
                 </p>
-                <span className="text-gray-300 lg:hidden block">|</span>
+                <span className="block text-gray-300 lg:hidden">|</span>
               </TimelineContent>
             </div>
           </div>
         </div>
         {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-8 md:grid-cols-2">
           <div className="md:col-span-2">
             <TimelineContent
               as="p"
               animationNum={8}
               timelineRef={heroRef}
               customVariants={revealVariants}
-              className="text-4xl md:text-5xl leading-[110%]! font-semibold text-emerald-800 mb-8"
+              className="mb-8 text-4xl leading-[110%]! font-semibold text-blue-800 md:text-5xl"
             >
               {aboutUs?.heading}
             </TimelineContent>
-            <p className="sm:text-3xl md:text-4xl text-xl leading-[170%]! font-semibold text-gray-900 dark:text-gray-300 mb-8 max-w-3xl">
+            <p className="mb-8 max-w-3xl text-xl leading-[170%]! font-semibold text-gray-900 sm:text-3xl md:text-4xl dark:text-gray-300">
               <VerticalCutReveal
                 splitBy="words"
                 staggerDuration={0.1}
@@ -298,7 +298,7 @@ const AboutUs = ({
                 animationNum={10}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="space-y-4"
+                className="space-y-4 text-center"
               >
                 <PortableText
                   value={aboutUs?.content}
@@ -324,7 +324,7 @@ const AboutUs = ({
                 animationNum={12}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="flex items-center gap-2 text-emerald-700 dark:text-emerald-700 text-2xl font-bold mb-2"
+                className="flex items-center gap-2 text-blue-700 dark:text-blue-700 text-2xl font-bold mb-2"
               ></TimelineContent>
               <TimelineContent
                 as="div"
@@ -350,7 +350,7 @@ const AboutUs = ({
                 animationNum={15}
                 timelineRef={heroRef}
                 customVariants={revealVariants}
-                className="bg-emerald-700 hover:bg-emerald-600 shadow-2xl shadow-emerald-800 hover:shadow-emerald-500 flex w-fit ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
+                className="bg-blue-700 hover:bg-blue-600 shadow-2xl shadow-blue-800 hover:shadow-blue-500 flex w-fit ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
               >
                 Contact Us
                 <GoArrowUpRight className="rtl:rotate-270" />

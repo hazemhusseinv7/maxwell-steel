@@ -45,7 +45,7 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
     <section
       id="testimonials"
       ref={sectionRef}
-      className="bg-linear-to-t from-teal-50 lg:min-h-180 relative flex flex-col justify-center items-center py-16"
+      className="relative flex flex-col items-center justify-center bg-linear-to-t from-blue-50 py-16 lg:min-h-180"
     >
       <TextEffect
         per="word"
@@ -54,7 +54,7 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
         speedReveal={0.3}
         speedSegment={0.3}
         trigger={inView}
-        className="text-5xl lg:text-7xl font-semibold mb-14 text-teal-700"
+        className="mb-14 text-5xl font-semibold text-blue-700 lg:text-7xl"
       >
         {t("title")}
       </TextEffect>
@@ -70,9 +70,9 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
               transition={{ type: "spring", duration: 0.5 }}
               className="text-foreground mb-8 text-center text-2xl leading-tight font-semibold md:text-4xl"
             >
-              <FaQuoteLeft className="inline size-4 -mt-4 rtl:rotate-180" />
+              <FaQuoteLeft className="-mt-4 inline size-4 rtl:rotate-180" />
               {testimonialsList[index].content}
-              <FaQuoteRight className="inline size-4 -mt-4 rtl:rotate-180" />
+              <FaQuoteRight className="-mt-4 inline size-4 rtl:rotate-180" />
             </motion.blockquote>
           </AnimatePresence>
         </div>
@@ -86,7 +86,7 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
               transition={{ type: "spring", duration: 0.5 }}
               className="flex items-center gap-4"
             >
-              <div className="bg-foreground/10 h-12 w-12 rounded-full border flex items-center justify-center">
+              <div className="bg-foreground/10 flex h-12 w-12 items-center justify-center rounded-full border">
                 <FaUser className="text-muted-foreground size-6" />
               </div>
 
@@ -133,7 +133,7 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
                     animate={{ width: "100%" }}
                     exit={{ width: 0 }}
                     transition={{ duration: DURATION / 1000, ease: "linear" }}
-                    className="bg-brand absolute top-0 left-0 rtl:right-0 h-full rounded-lg bg-teal-700"
+                    className="bg-brand absolute top-0 left-0 h-full rounded-lg bg-blue-700 rtl:right-0"
                   />
                 )}
               </motion.span>
