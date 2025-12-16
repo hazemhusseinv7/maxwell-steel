@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import ReactLenis from "lenis/react";
 
 import Hero from "@/components/Hero";
-import RiskAdvantageCards from "@/components/RiskAdvantageCards";
+import RiskAdvantage from "@/components/RiskAdvantage";
 import Products from "@/components/Products";
 import AboutUs from "@/components/AboutUs";
 import Clients from "@/components/Clients";
@@ -12,6 +12,7 @@ import Testimonials from "@/components/Testimonials";
 
 import {
   getSettingsData,
+  getRiskAdvantageData,
   getProductsData,
   getAboutUsData,
   getTestimonialsData,
@@ -23,18 +24,20 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   // Enable static rendering
   setRequestLocale(locale as Locale);
 
-  const [settings, products, aboutUs, testimonials] = await Promise.all([
-    getSettingsData(),
-    getProductsData(locale),
-    getAboutUsData(locale),
-    getTestimonialsData(locale),
-  ]);
+  const [settings, riskAdvantage, products, aboutUs, testimonials] =
+    await Promise.all([
+      getSettingsData(),
+      getRiskAdvantageData(locale),
+      getProductsData(locale),
+      getAboutUsData(locale),
+      getTestimonialsData(locale),
+    ]);
 
   return (
     <main>
       <ReactLenis root className="min-h-[200vh] overflow-hidden">
         <Hero />
-        <RiskAdvantageCards />
+        <RiskAdvantage riskAdvantage={riskAdvantage} />
         <Products products={products} />
         <AboutUs settings={settings} aboutUs={aboutUs} />
         <Testimonials testimonials={testimonials} />

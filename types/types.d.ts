@@ -29,7 +29,13 @@ interface HeroType {
 
 interface RiskAdvantageType {
   title: string;
-  cards: {
+  toggleLabel: string;
+  onCards: {
+    title: string;
+    description: string[];
+    image: ImageType;
+  }[];
+  offCards: {
     title: string;
     description: string[];
     image: ImageType;

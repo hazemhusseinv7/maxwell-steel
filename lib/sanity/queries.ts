@@ -27,9 +27,9 @@ export async function getSettingsData(): Promise<SettingsType | null> {
       {
         next: {
           revalidate: REVALIDATE_TIME,
-          tags: ["settings"],
+          tags: ["settings", "content"],
         },
-      }
+      },
     );
   } catch (error) {
     console.error("Error fetching settings data:", error);
@@ -38,7 +38,7 @@ export async function getSettingsData(): Promise<SettingsType | null> {
 }
 
 export async function getHeroData(
-  lang: string = "en"
+  lang: string = "en",
 ): Promise<HeroType | null> {
   const query = `*[_type == "main"][0]{
     "title": title[_key == $lang][0].value,
@@ -67,8 +67,8 @@ export async function getHeroData(
       query,
       { lang },
       {
-        next: { revalidate: REVALIDATE_TIME, tags: ["main"] },
-      }
+        next: { revalidate: REVALIDATE_TIME, tags: ["main", "content"] },
+      },
     );
   } catch (error) {
     console.error("Error fetching hero data:", error);
@@ -77,11 +77,12 @@ export async function getHeroData(
 }
 
 export async function getRiskAdvantageData(
-  lang: string = "en"
+  lang: string = "en",
 ): Promise<RiskAdvantageType | null> {
   const query = `*[_type == "riskAdvantage"][0]{
     "title": title[_key == $lang][0].value,
-    "cards": cards[] {
+    "toggleLabel": toggleLabel[_key == $lang][0].value,
+    "onCards": onCards[] {
       "title": title[_key == $lang][0].value,
       "description": description[].item[_key == $lang][0].value,
       image {
@@ -89,7 +90,30 @@ export async function getRiskAdvantageData(
           _id,
           url,
           metadata {
-            dimensions
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            },
+            lqip
+          }
+        }
+      }
+    },
+    "offCards": offCards[] {
+      "title": title[_key == $lang][0].value,
+      "description": description[].item[_key == $lang][0].value,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            },
+            lqip
           }
         }
       }
@@ -101,8 +125,11 @@ export async function getRiskAdvantageData(
       query,
       { lang },
       {
-        next: { revalidate: REVALIDATE_TIME, tags: ["riskAdvantage"] },
-      }
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["riskAdvantage", "content"],
+        },
+      },
     );
   } catch (error) {
     console.error("Error fetching risk advantage data:", error);
@@ -111,7 +138,7 @@ export async function getRiskAdvantageData(
 }
 
 export async function getProductsData(
-  lang: string = "en"
+  lang: string = "en",
 ): Promise<ProductsType | null> {
   const query = `*[_type == "products"][0]{
     "productsList": productsList[] {
@@ -136,8 +163,8 @@ export async function getProductsData(
       query,
       { lang },
       {
-        next: { revalidate: REVALIDATE_TIME, tags: ["products"] },
-      }
+        next: { revalidate: REVALIDATE_TIME, tags: ["products", "content"] },
+      },
     );
   } catch (error) {
     console.error("Error fetching products data:", error);
@@ -146,7 +173,7 @@ export async function getProductsData(
 }
 
 export async function getAboutUsData(
-  lang: string = "en"
+  lang: string = "en",
 ): Promise<AboutUsType | null> {
   const query = `*[_type == "aboutUs"][0]{
     "title": title[_key == $lang][0].value,
@@ -188,8 +215,8 @@ export async function getAboutUsData(
       query,
       { lang },
       {
-        next: { revalidate: REVALIDATE_TIME, tags: ["aboutUs"] },
-      }
+        next: { revalidate: REVALIDATE_TIME, tags: ["aboutUs", "content"] },
+      },
     );
   } catch (error) {
     console.error("Error fetching about us data:", error);
@@ -198,7 +225,7 @@ export async function getAboutUsData(
 }
 
 export async function getTestimonialsData(
-  lang: string = "en"
+  lang: string = "en",
 ): Promise<TestimonialsType | null> {
   const query = `*[_type == "testimonials"][0]{
     "testimonials": testimonials[] {
@@ -212,8 +239,11 @@ export async function getTestimonialsData(
       query,
       { lang },
       {
-        next: { revalidate: REVALIDATE_TIME, tags: ["testimonials"] },
-      }
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["testimonials", "content"],
+        },
+      },
     );
   } catch (error) {
     console.error("Error fetching testimonials data:", error);
@@ -241,9 +271,9 @@ export async function getClientsData(): Promise<ClientsType | null> {
       {
         next: {
           revalidate: REVALIDATE_TIME,
-          tags: ["clients"],
+          tags: ["clients", "content"],
         },
-      }
+      },
     );
   } catch (error) {
     console.error("Error fetching clients data:", error);
@@ -252,7 +282,7 @@ export async function getClientsData(): Promise<ClientsType | null> {
 }
 
 export async function getBlogPosts(
-  lang: string = "en"
+  lang: string = "en",
 ): Promise<BlogPost[] | null> {
   const query = `*[_type == "blog" && language == $lang] | order(publishedAt desc) {
     _id,
@@ -270,7 +300,7 @@ export async function getBlogPosts(
       { lang },
       {
         next: { revalidate: REVALIDATE_TIME, tags: ["blog", "content"] },
-      }
+      },
     );
   } catch (error) {
     console.error("Error fetching blog posts:", error);
@@ -280,7 +310,7 @@ export async function getBlogPosts(
 
 export async function getBlogPost(
   slug: string,
-  lang: string = "en"
+  lang: string = "en",
 ): Promise<BlogPost | null> {
   const query = `*[_type == "blog" && slug.current == $slug && language == $lang][0] {
     _id,
@@ -302,7 +332,7 @@ export async function getBlogPost(
           revalidate: REVALIDATE_TIME,
           tags: [`blog-post-${slug}`, "content"],
         },
-      }
+      },
     );
   } catch (error) {
     console.error("Error fetching blog post:", error);

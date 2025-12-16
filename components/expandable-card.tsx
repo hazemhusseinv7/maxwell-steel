@@ -137,12 +137,12 @@ export default function ExpandableCard({
                             {current.features.map((item, index) => (
                               <motion.li
                                 key={index}
-                                className="flex items-center gap-1 rounded-full bg-blue-600 px-2 py-1 text-sm text-nowrap text-blue-100"
+                                className="flex items-center gap-1 rounded-full bg-blue-600 px-2 py-1 text-sm text-nowrap text-white"
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.3 + index * 0.05 }}
                               >
-                                <RiVerifiedBadgeFill className="text-white" />
+                                <RiVerifiedBadgeFill />
                                 <span> {item}</span>
                               </motion.li>
                             ))}
@@ -192,13 +192,13 @@ export default function ExpandableCard({
                   </motion.div>
                   <div className="flex w-full flex-col items-center justify-between gap-0.5 lg:items-start">
                     <motion.div
-                      className="font-medium text-blue-800 max-lg:text-center max-lg:text-sm"
+                      className="font-medium text-slate-800 max-lg:text-center max-lg:text-sm"
                       layoutId={`cardItemName-${item.name}`}
                     >
                       {item.name}
                     </motion.div>
                     <motion.div
-                      className="text-sm font-light text-blue-900 max-lg:hidden"
+                      className="text-sm font-light text-slate-700 max-lg:hidden"
                       layoutId={`cardItemDescription-${item.description}`}
                     >
                       {truncateText(item.description)}

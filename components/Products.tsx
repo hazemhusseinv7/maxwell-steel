@@ -24,7 +24,7 @@ const Products = ({ products }: { products: ProductsType | null }) => {
 
   return (
     <section id="products" className="py-40">
-      <h2 className="z-200 mx-auto mb-4 w-fit text-2xl font-semibold text-blue-700 lg:text-7xl">
+      <h2 className="z-200 mx-auto mb-10 w-fit text-center text-4xl font-semibold text-blue-700 lg:text-7xl">
         {t("title")}
       </h2>
       <div className="mx-auto max-w-300">
