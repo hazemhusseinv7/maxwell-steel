@@ -172,6 +172,94 @@ export async function getProductsData(
   }
 }
 
+export async function getFeaturesData(
+  lang: string = "en",
+): Promise<FeaturesType | null> {
+  const query = `*[_type == "features"][0]{
+    "title": title[_key == $lang][0].value,
+    block1 {
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      },
+      "title": title[_key == $lang][0].value,
+      "description": description[_key == $lang][0].value,
+      items[] {
+        "title": title[_key == $lang][0].value,
+        "description": description[_key == $lang][0].value,
+        icon {
+          asset-> {
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          }
+        }
+      }
+    },
+    block2 {
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      },
+      "title": title[_key == $lang][0].value,
+      "heading": heading[_key == $lang][0].value,
+      "content": content[_key == $lang][0].value,
+      button1 {
+        "title": title[_key == $lang][0].value,
+        link
+      },
+      button2 {
+        "title": title[_key == $lang][0].value,
+        link
+      }
+    },
+    block3 {
+      "title": title[_key == $lang][0].value,
+      cards[] {
+        "title": title[_key == $lang][0].value,
+        "description": description[_key == $lang][0].value,
+        image {
+          asset-> {
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          }
+        }
+      }
+    }
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { lang },
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["features", "content"],
+        },
+      },
+    );
+  } catch (error) {
+    console.error("Error fetching features data:", error);
+    return null;
+  }
+}
+
 export async function getAboutUsData(
   lang: string = "en",
 ): Promise<AboutUsType | null> {

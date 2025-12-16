@@ -7,7 +7,7 @@ export default function Page() {
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `
-        radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #10b981 100%)
+        radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #1447e6 100%)
       `,
           backgroundSize: "100% 100%",
         }}

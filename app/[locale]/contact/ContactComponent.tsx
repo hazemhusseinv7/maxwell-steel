@@ -118,7 +118,7 @@ const ContactComponent = ({
             onChange={(e) => handleInputChange("message", e.target.value)}
             required
           />
-          <Button type="submit" color="primary" disabled={isLoading}>
+          <Button type="submit" className="bg-linear-to-tr from-blue-700 to-blue-500 text-white" disabled={isLoading}>
             {t("form.button")}
           </Button>
         </form>

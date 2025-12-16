@@ -6,6 +6,7 @@ import ReactLenis from "lenis/react";
 import Hero from "@/components/Hero";
 import RiskAdvantage from "@/components/RiskAdvantage";
 import Products from "@/components/Products";
+import Features from "@/components/Features";
 import AboutUs from "@/components/AboutUs";
 import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
@@ -38,8 +39,9 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <ReactLenis root className="min-h-[200vh] overflow-hidden">
         <Hero />
         <RiskAdvantage riskAdvantage={riskAdvantage} />
-        <Products products={products} />
+        <Products products={products} />{" "}
         <AboutUs settings={settings} aboutUs={aboutUs} />
+        <Features />
         <Testimonials testimonials={testimonials} />
         <Clients />
       </ReactLenis>

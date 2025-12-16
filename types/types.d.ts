@@ -52,21 +52,45 @@ interface ProductsType {
   }[];
 }
 
-interface AboutUsType {
+interface FeaturesType {
   title: string;
-  heroImage: {
-    asset: {
-      _id: string;
-      url: string;
-      metadata: {
-        dimensions: {
-          width: number;
-          height: number;
-          aspectRatio: number;
-        };
-      };
+  block1: {
+    image: ImageType;
+    title: string;
+    description: string;
+    items: {
+      title: string;
+      description: string;
+      icon: ImageType;
+    }[];
+  };
+  block2: {
+    image: ImageType;
+    title: string;
+    heading: string;
+    content: string;
+    button1: {
+      title: string;
+      link: string;
+    };
+    button2: {
+      title: string;
+      link: string;
     };
   };
+  block3: {
+    title: string;
+    cards: {
+      title: string;
+      description: string;
+      image: ImageType;
+    }[];
+  };
+}
+
+interface AboutUsType {
+  title: string;
+  heroImage: ImageType;
   heading: string;
   subheading: string;
   content?: any[];

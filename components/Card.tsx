@@ -6,12 +6,12 @@ import Image from "next/image";
 
 export default function index({
   title,
-  list,
+  cards,
 }: {
   title?: string;
-  list?: {
+  cards?: {
     title: string;
-    description: string[];
+    description: string;
     image: string;
   }[];
 }): JSX.Element {
@@ -35,8 +35,8 @@ export default function index({
       </>
 
       <div className="w-full text-white">
-        {list?.map(({ title, description, image }, i) => {
-          const targetScale = 1 - (list.length - i) * 0.05;
+        {cards?.map(({ title, description, image }, i) => {
+          const targetScale = 1 - (cards.length - i) * 0.05;
           return (
             <Card
               key={`p_${i}`}
@@ -57,7 +57,7 @@ export default function index({
 interface CardProps {
   i: number;
   title: string;
-  description: string[];
+  description: string;
   image: string;
   progress: MotionValue<number>;
   range: [number, number];
@@ -91,21 +91,15 @@ export const Card: React.FC<CardProps> = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`relative -top-[25%] flex h-[450px] w-[90%] origin-top flex-col rounded-md bg-linear-to-tr from-blue-700 to-blue-900 p-4 lg:w-[70%] lg:p-10`}
+        className={`relative -top-[25%] flex h-[350px] w-[90%] origin-top flex-col rounded-md bg-linear-to-tr from-blue-700 to-blue-900 p-4 lg:h-[450px] lg:w-[70%] lg:p-10`}
       >
         <h2 className="text-center text-2xl font-semibold max-lg:mt-2">
           {title}
         </h2>
-        <div className={`mt-1 flex h-full gap-10 max-lg:flex-col lg:mt-5`}>
-          <ul className={`relative top-[10%] flex flex-col gap-2 lg:w-[40%]`}>
-            {description.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
+        <div className="mt-1 flex h-full gap-10 max-lg:flex-col lg:mt-5">
+          <div className="relative top-[10%] w-[40%]">{description}</div>
 
-          <div
-            className={`relative h-full overflow-hidden rounded-lg lg:w-[60%]`}
-          >
+          <div className="relative h-full overflow-hidden rounded-lg lg:w-[60%]">
             <motion.div
               className={`h-full w-full`}
               style={{ scale: imageScale }}
