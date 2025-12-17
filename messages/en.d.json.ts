@@ -10,7 +10,7 @@ declare const messages: {
   "Header": {
     "links": {
       "link-1": "Products",
-      "link-2": "Features",
+      "link-2": "Why Us",
       "link-3": "About us",
       "link-4": "Blog"
     },
@@ -26,7 +26,7 @@ declare const messages: {
   "Footer": {
     "links": {
       "link-1": "Products",
-      "link-2": "Features",
+      "link-2": "Why Us",
       "link-3": "About us",
       "link-4": "Blog",
       "link-5": "Contact us"

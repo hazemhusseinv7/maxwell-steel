@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+
 import { useTranslations } from "next-intl";
 
 import {
@@ -23,7 +25,7 @@ const Header = () => {
 
   const items = [
     { name: t("links.link-1"), link: "/products" },
-    { name: t("links.link-2"), link: "/features" },
+    { name: t("links.link-2"), link: "/why-us" },
     { name: t("links.link-3"), link: "/about-us" },
     { name: t("links.link-4"), link: "/blog" },
   ];
@@ -42,7 +44,13 @@ const Header = () => {
           />
           <NavbarBrand>
             <Link href="/" className="text-lg font-bold text-blue-800">
-              Maxwell Steel
+              <Image
+                src="/logo/logo.png"
+                width={512}
+                height={187}
+                alt="Logo"
+                className="h-auto w-24 lg:w-26"
+              />
             </Link>
           </NavbarBrand>
         </NavbarContent>
@@ -60,7 +68,7 @@ const Header = () => {
           <NavbarItem>
             <Button
               as={Link}
-              className="text-md bg-linear-to-tr from-blue-400 to-blue-700 font-medium text-white"
+              className="text-md hidden bg-linear-to-tr from-blue-400 to-blue-700 font-medium text-white lg:flex"
               href="/contact"
               variant="shadow"
             >
@@ -79,6 +87,17 @@ const Header = () => {
               </Link>
             </NavbarMenuItem>
           ))}
+
+          <NavbarItem>
+            <Button
+              as={Link}
+              className="text-md w-full bg-linear-to-tr from-blue-400 to-blue-700 font-medium text-white"
+              href="/contact"
+              variant="shadow"
+            >
+              {t("button")}
+            </Button>
+          </NavbarItem>
         </NavbarMenu>
       </Navbar>
     </header>

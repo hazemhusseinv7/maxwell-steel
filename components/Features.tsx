@@ -132,7 +132,7 @@ const Features = async () => {
         {/* End Grid */}
       </div>
       <div className="relative mt-40">
-        <Card cards={cards} title={title} />
+        <Card cards={cards} title={block3?.title} />
       </div>
     </section>
   );

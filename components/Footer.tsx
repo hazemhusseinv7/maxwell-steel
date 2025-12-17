@@ -1,5 +1,5 @@
 import Link from "next/link";
-// import Image from "next/image";
+import Image from "next/image";
 
 import { getTranslations } from "next-intl/server";
 import { getSettingsData } from "@/lib/sanity/queries";
@@ -27,7 +27,7 @@ const Footer = async () => {
     },
     {
       title: t("links.link-2"),
-      href: "/features",
+      href: "/why-us",
     },
     {
       title: t("links.link-3"),
@@ -89,15 +89,15 @@ const Footer = async () => {
   return (
     <footer className="border-t py-16">
       <div className="mx-auto max-w-5xl px-6">
-        {/* <Link href="/" aria-label="go home" className="mx-auto block size-fit">
+        <Link href="/" className="mx-auto block size-fit">
           <Image
             src="/logo/logo.png"
-            width={80}
-            height={80}
+            width={512}
+            height={187}
             alt="Logo"
-            className="size-20"
+            className="h-auto w-32"
           />
-        </Link> */}
+        </Link>
 
         <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
           {links.map((link, index) => (

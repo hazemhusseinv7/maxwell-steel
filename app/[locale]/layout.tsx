@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Locale, hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+
 import { Providers } from "./providers";
 
 import Header from "@/components/Header";
@@ -33,6 +35,9 @@ export async function generateMetadata(
   return {
     title: t("title"),
     description: t("description"),
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+    },
   };
 }
 
@@ -51,6 +56,9 @@ export default async function RootLayout({
 
   const direction = locale === "ar" ? "rtl" : "ltr";
 
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID,
+    gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang={locale} dir={direction} className="scroll-smooth">
       <body className={cn(tajawal.variable, "font-tajawal antialiased")}>
@@ -62,6 +70,9 @@ export default async function RootLayout({
           </Providers>
         </NextIntlClientProvider>
       </body>
+
+      {gtmId && <GoogleTagManager gtmId={gtmId} />}
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

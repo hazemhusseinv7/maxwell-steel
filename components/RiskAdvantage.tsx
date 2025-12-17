@@ -117,7 +117,7 @@ const RiskAdvantageCards = ({
               >
                 <Card className="flex w-full flex-1 py-2">
                   <CardHeader className="flex-col items-start px-4 pt-2 pb-0">
-                    <h3 className="text-tiny font-bold uppercase">{title}</h3>
+                    <h3 className="font-bold uppercase">{title}</h3>
                     <p className="text-default-500">{description}</p>
                   </CardHeader>
                   <CardBody className="overflow-visible py-2">

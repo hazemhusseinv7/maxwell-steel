@@ -91,13 +91,15 @@ export const Card: React.FC<CardProps> = ({
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
-        className={`relative -top-[25%] flex h-[350px] w-[90%] origin-top flex-col rounded-md bg-linear-to-tr from-blue-700 to-blue-900 p-4 lg:h-[450px] lg:w-[70%] lg:p-10`}
+        className={`relative -top-[25%] flex h-[450px] w-[90%] origin-top flex-col rounded-md bg-linear-to-tr from-blue-700 to-blue-900 p-4 lg:h-[450px] lg:w-[70%] lg:p-10`}
       >
         <h2 className="text-center text-2xl font-semibold max-lg:mt-2">
           {title}
         </h2>
-        <div className="mt-1 flex h-full gap-10 max-lg:flex-col lg:mt-5">
-          <div className="relative top-[10%] w-[40%]">{description}</div>
+        <div className="mt-1 flex h-full gap-10 max-lg:flex-col lg:mt-8">
+          <div className="relative top-[10%] max-lg:mb-4 w-full lg:w-[40%] lg:text-xl">
+            {description}
+          </div>
 
           <div className="relative h-full overflow-hidden rounded-lg lg:w-[60%]">
             <motion.div
