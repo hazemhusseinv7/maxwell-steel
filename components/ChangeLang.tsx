@@ -43,7 +43,7 @@ const ChangeLang = ({ className }: { className?: string }) => {
         <Button
           className={cn(
             className,
-            "min-w-12 bg-linear-to-tr from-blue-400 to-blue-700 px-3",
+            "min-w-12 bg-linear-to-tr from-primary-blue/70 to-primary-blue px-3",
           )}
           variant="shadow"
           endContent={

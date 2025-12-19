@@ -27,7 +27,7 @@ export default function index({
           <div className="absolute top-0 right-0 bottom-0 left-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[40px_54px]" />
 
           {title && (
-            <h2 className="px-8 text-center text-5xl leading-[120%] font-semibold tracking-tight text-blue-950 2xl:text-7xl">
+            <h2 className="px-8 text-center text-5xl leading-[120%] font-semibold tracking-tight text-primary-blue 2xl:text-7xl">
               {title}
             </h2>
           )}

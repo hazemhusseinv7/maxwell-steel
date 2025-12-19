@@ -16,7 +16,7 @@ const Hero = async () => {
   return (
     <section className="relative mt-16">
       <Aurora
-        colorStops={["#51a2ff", "#2b7fff", "#155dfc"]}
+        colorStops={["#636566", "#828485", "#a1a3a4"]}
         blend={0.5}
         amplitude={1.0}
         speed={0.5}

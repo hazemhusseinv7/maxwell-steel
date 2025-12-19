@@ -1,17 +1,9 @@
-import { getProductsData } from "@/lib/sanity/queries";
-
 import Projects from "@/components/Projects";
 
-export default async function Page({ params }: PageProps<"/[locale]">) {
-  const { locale } = await params;
-
-  const products: ProductsType | null = await getProductsData(locale);
-
+export default async function Page() {
   return (
-    <main>
+    <main className="min-h-screen">
       <Projects />
-
-      {/* <Products products={products} /> */}
     </main>
   );
 }

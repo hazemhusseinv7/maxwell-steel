@@ -97,7 +97,7 @@ export default function ExpandableCard({
                     <div className="flex w-full flex-col gap-0.5">
                       <div className="flex w-full flex-row justify-between gap-0.5">
                         <motion.div
-                          className="font-medium text-blue-800"
+                          className="text-primary-blue font-medium"
                           layoutId={`cardItemName-${current.name}`}
                         >
                           {current.name}
@@ -105,7 +105,7 @@ export default function ExpandableCard({
                       </div>
                       <motion.p
                         layoutId={`cardItemDescription-${current.description}`}
-                        className="text-sm text-blue-900"
+                        className="text-primary-blue text-sm"
                       >
                         {current.description}
                       </motion.p>
@@ -116,7 +116,7 @@ export default function ExpandableCard({
                             layoutId={`cardItemSpecifications-${current.name}`}
                             className="mt-4 px-4"
                           >
-                            <h4 className="mb-2 text-blue-800">
+                            <h4 className="text-primary-blue mb-2">
                               {t("specifications")}:
                             </h4>
                             <motion.ul
@@ -128,7 +128,7 @@ export default function ExpandableCard({
                               {current.specifications.map((item, index) => (
                                 <motion.li
                                   key={index}
-                                  className="text-sm text-blue-900"
+                                  className="text-primary-blue text-sm"
                                   initial={{ opacity: 0, x: -10 }}
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ delay: 0.3 + index * 0.05 }}
@@ -145,7 +145,7 @@ export default function ExpandableCard({
                           layoutId={`cardItemFeatures-${current.name}`}
                           className="mt-4 px-4"
                         >
-                          <h4 className="mb-2 text-blue-800">
+                          <h4 className="text-primary-blue mb-2">
                             {t("features")}:
                           </h4>
                           <motion.ul
@@ -157,7 +157,7 @@ export default function ExpandableCard({
                             {current.features.map((item, index) => (
                               <motion.li
                                 key={index}
-                                className="flex items-center gap-1 rounded-full bg-blue-600 px-2 py-1 text-sm text-nowrap text-white"
+                                className="bg-primary-blue flex items-center gap-1 rounded-full px-2 py-1 text-sm text-nowrap text-white"
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.3 + index * 0.05 }}
@@ -196,7 +196,7 @@ export default function ExpandableCard({
                     layoutId={`cardItemImage-${item.name}`}
                     className="relative h-40 w-full overflow-hidden rounded-[0.7rem] lg:h-60"
                   >
-                    <div className="relative mx-auto size-full">
+                    <div className="relative mx-auto size-full" dir="ltr">
                       <Carousel className="size-full">
                         <CarouselContent className="h-full">
                           {item.images.map((image, index) => (
@@ -238,7 +238,7 @@ export default function ExpandableCard({
                     </motion.div>
 
                     <motion.div className="flex w-full justify-end">
-                      <HiMiniArrowTopRightOnSquare className="text-blue-900" />
+                      <HiMiniArrowTopRightOnSquare className="text-primary-blue rtl:rotate-270" />
                     </motion.div>
                   </div>
                 </motion.div>

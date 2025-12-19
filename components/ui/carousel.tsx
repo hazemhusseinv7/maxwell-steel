@@ -11,6 +11,7 @@ import {
 import { motion, Transition, useMotionValue } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocale } from "next-intl";
 
 export type CarouselContextType = {
   index: number;
@@ -126,6 +127,10 @@ function CarouselNavigation({
 }: CarouselNavigationProps) {
   const { index, setIndex, itemsCount } = useCarousel();
 
+  const locale = useLocale();
+  const direction = locale === "ar" ? "rtl" : "ltr";
+  const isRTL = direction === "rtl";
+
   return (
     <div
       className={cn(
@@ -153,7 +158,7 @@ function CarouselNavigation({
           }
         }}
       >
-        <ChevronLeft className="size-2 stroke-zinc-600 lg:size-4 rtl:rotate-180 dark:stroke-zinc-50" />
+        <ChevronLeft className="size-2 stroke-zinc-600 lg:size-4 dark:stroke-zinc-50" />
       </button>
       <button
         type="button"
@@ -175,7 +180,7 @@ function CarouselNavigation({
           }
         }}
       >
-        <ChevronRight className="size-2 stroke-zinc-600 lg:size-4 rtl:rotate-180 dark:stroke-zinc-50" />
+        <ChevronRight className="size-2 stroke-zinc-600 lg:size-4 dark:stroke-zinc-50" />
       </button>
     </div>
   );
@@ -208,8 +213,8 @@ function CarouselIndicator({
             className={cn(
               "size-2 rounded-full transition-opacity duration-300",
               index === i
-                ? "bg-blue-700 dark:bg-zinc-50"
-                : "bg-blue-700/50 dark:bg-zinc-100/50",
+                ? "bg-primary-blue dark:bg-zinc-50"
+                : "bg-primary-blue/50 dark:bg-zinc-100/50",
               classNameButton,
             )}
           />

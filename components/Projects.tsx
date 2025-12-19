@@ -14,6 +14,8 @@ const Projects = async () => {
 
   const title = projects?.title;
 
+  if (!images || images.length === 0) return;
+
   return (
     <section className="bg-linear-to-t from-blue-50 to-blue-100 pt-32 pb-50">
       <h2 className="z-20 mx-auto mb-10 w-fit text-center text-4xl font-semibold text-blue-700 lg:text-7xl">

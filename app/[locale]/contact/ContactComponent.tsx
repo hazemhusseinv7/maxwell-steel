@@ -85,7 +85,7 @@ const ContactComponent = ({
         preset="blur"
         speedReveal={0.3}
         speedSegment={0.3}
-        className="mx-auto text-4xl font-semibold text-blue-700 lg:text-7xl"
+        className="mx-auto text-4xl font-semibold text-primary-blue lg:text-7xl"
       >
         {t("title")}
       </TextEffect>
@@ -120,7 +120,7 @@ const ContactComponent = ({
           />
           <Button
             type="submit"
-            className="bg-linear-to-tr from-blue-700 to-blue-500 text-white"
+            className="bg-linear-to-tr from-primary-blue/70 to-primary-blue text-white"
             disabled={isLoading}
           >
             {t("form.button")}

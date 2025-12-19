@@ -21,7 +21,7 @@ const Features = async () => {
 
   return (
     <section className="py-20">
-      <h2 className="z-20 mx-auto mb-10 w-fit text-center text-4xl font-semibold text-blue-700 lg:text-7xl">
+      <h2 className="text-primary-blue z-20 mx-auto mb-10 w-fit text-center text-4xl font-semibold lg:text-7xl">
         {title}
       </h2>
 
@@ -53,7 +53,7 @@ const Features = async () => {
               {block1?.items.map(({ title, description, icon }, i) => (
                 <div className="flex gap-x-5" key={i}>
                   <Image
-                    className="mt-1 size-6 shrink-0 text-blue-600 dark:text-blue-500"
+                    className="text-primary-blue mt-1 size-6 shrink-0 dark:text-blue-500"
                     width={500}
                     height={800}
                     src={urlFor(icon).url()}
@@ -81,7 +81,7 @@ const Features = async () => {
           <div>
             <h2 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:leading-tight dark:text-white">
               <span>{block2?.title}</span>{" "}
-              <span className="text-blue-600">Maxwell Steel</span>
+              <span className="text-primary-blue">Maxwell Steel</span>
             </h2>
             <p className="mt-3 text-xl font-medium text-gray-800 dark:text-neutral-400">
               {block2?.heading}
@@ -94,7 +94,7 @@ const Features = async () => {
             <div className="mt-7 grid w-full gap-3 sm:inline-flex">
               {block2?.button1 && (
                 <Link
-                  className="inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-blue-700 focus:bg-blue-700 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+                  className="bg-primary-blue inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent px-4 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-blue-700 focus:bg-blue-700 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                   href={block2?.button1.link}
                 >
                   {block2?.button1.title}

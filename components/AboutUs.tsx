@@ -206,7 +206,7 @@ const AboutUs = ({
               className="flex gap-4"
             >
               <div className="mb-2 flex items-center gap-2 text-xs sm:text-base">
-                <span className="font-bold text-blue-700">
+                <span className="font-bold text-primary-blue">
                   {aboutUs?.leftTopStat.value}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
@@ -215,7 +215,7 @@ const AboutUs = ({
                 <span className="text-gray-300">|</span>
               </div>
               <div className="mb-2 flex items-center gap-2 text-xs sm:text-base">
-                <span className="font-bold text-blue-700">
+                <span className="font-bold text-primary-blue">
                   {aboutUs?.leftBottomStat.value}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
@@ -231,7 +231,7 @@ const AboutUs = ({
                 customVariants={revealVariants}
                 className="mb-2 flex items-center gap-2 text-2xl sm:text-3xl"
               >
-                <p className="font-semibold text-blue-700">
+                <p className="font-semibold text-primary-blue">
                   {aboutUs?.rightTopStat.value}
                   {/* <span className="text-gray-600 dark:text-gray-300 font-normal"></span> */}
                 </p>
@@ -246,7 +246,7 @@ const AboutUs = ({
                 customVariants={revealVariants}
                 className="mb-2 flex items-center gap-2 text-xs sm:text-base"
               >
-                <span className="text-xl font-bold text-blue-700 lg:text-2xl dark:text-gray-300">
+                <span className="text-xl font-bold text-primary-blue lg:text-2xl dark:text-gray-300">
                   {aboutUs?.rightBottomStat.value}
                 </span>
                 <p className="text-gray-600">
@@ -265,7 +265,7 @@ const AboutUs = ({
               animationNum={8}
               timelineRef={heroRef}
               customVariants={revealVariants}
-              className="mb-8 text-4xl leading-[110%]! font-semibold text-blue-800 md:text-5xl"
+              className="text-primary-blue mb-8 text-4xl leading-[110%]! font-semibold md:text-5xl"
             >
               {aboutUs?.heading}
             </TimelineContent>
