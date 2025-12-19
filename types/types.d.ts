@@ -48,8 +48,13 @@ interface ProductsType {
     description: string;
     features: string[];
     specifications: string[];
-    image: ImageType;
+    image: ImageType[];
   }[];
+}
+
+interface ProjectsType {
+  title: string;
+  images: ImageType[];
 }
 
 interface FeaturesType {

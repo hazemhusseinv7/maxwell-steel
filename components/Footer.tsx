@@ -27,18 +27,22 @@ const Footer = async () => {
     },
     {
       title: t("links.link-2"),
-      href: "/why-us",
+      href: "/projects",
     },
     {
       title: t("links.link-3"),
-      href: "/about-us",
+      href: "/why-us",
     },
     {
       title: t("links.link-4"),
-      href: "/blog",
+      href: "/about-us",
     },
     {
       title: t("links.link-5"),
+      href: "/blog",
+    },
+    {
+      title: t("links.link-6"),
       href: "/contact",
     },
   ];

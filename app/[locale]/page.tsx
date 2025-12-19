@@ -18,6 +18,7 @@ import {
   getAboutUsData,
   getTestimonialsData,
 } from "@/lib/sanity/queries";
+import Projects from "@/components/Projects";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -39,8 +40,9 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <ReactLenis root className="min-h-[200vh] overflow-hidden">
         <Hero />
         <RiskAdvantage riskAdvantage={riskAdvantage} />
-        <Products products={products} />{" "}
+        <Products products={products} />
         <AboutUs settings={settings} aboutUs={aboutUs} />
+        <Projects />
         <Features />
         <Testimonials testimonials={testimonials} />
         <Clients />

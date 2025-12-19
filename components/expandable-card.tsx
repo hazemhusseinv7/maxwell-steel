@@ -5,12 +5,20 @@ import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselNavigation,
+  CarouselIndicator,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 
 export interface CardItem {
   name: string;
   description: string;
-  image: string;
+  images: string[];
   features?: string[];
   specifications?: string[];
 }
@@ -33,7 +41,7 @@ export default function ExpandableCard({
   const [current, setCurrent] = useState<CardItem | null>(null);
   const ref = useOutsideClick(() => setCurrent(null));
 
-  const truncateText = (text: string, maxLength: number = 200) => {
+  const truncateText = (text: string, maxLength: number = 170) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength).trim() + "...";
   };
@@ -54,26 +62,38 @@ export default function ExpandableCard({
       <AnimatePresence>
         {current ? (
           <>
-            <div className="fixed inset-0 z-10 mx-4 grid place-items-center">
+            <div className="fixed inset-0 z-20 mx-4 grid place-items-center">
               <motion.div
-                className="bg-background flex h-fit w-full max-w-xl cursor-pointer flex-col items-start gap-4 rounded-md border p-4 max-lg:max-h-[70%] max-lg:overflow-x-hidden max-lg:overflow-y-scroll lg:overflow-hidden"
+                className="bg-background flex h-fit w-full max-w-2xl cursor-pointer flex-col items-start gap-4 rounded-md border p-4 max-lg:max-h-[70%] max-lg:overflow-x-hidden max-lg:overflow-y-scroll lg:overflow-hidden"
                 ref={ref}
                 layoutId={`cardItem-${current.name}`}
               >
                 <div className="flex w-full flex-col items-start gap-4">
                   <motion.div
                     layoutId={`cardItemImage-${current.name}`}
-                    className="h-20 w-full overflow-hidden rounded-[0.8rem] lg:h-40"
+                    className="h-40 w-full overflow-hidden rounded-[0.8rem] lg:h-60"
                   >
-                    <Image
-                      src={current.image}
-                      alt={current.name}
-                      width={400}
-                      height={400}
-                      className="size-full object-cover"
-                    />
+                    <Carousel className="size-full">
+                      <CarouselContent className="h-full">
+                        {current.images.map((image, index) => (
+                          <CarouselItem key={index}>
+                            <div className="flex h-full items-center justify-center border border-zinc-200 dark:border-zinc-800">
+                              <Image
+                                src={image}
+                                alt={`${current.name} - Image ${index + 1}`}
+                                width={400}
+                                height={400}
+                                className="pointer-events-none size-full object-cover"
+                              />
+                            </div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselNavigation alwaysShow />
+                      <CarouselIndicator />
+                    </Carousel>
                   </motion.div>
-                  <div className="flex grow items-center justify-between">
+                  <div className="flex max-w-[95%] grow items-center justify-between">
                     <div className="flex w-full flex-col gap-0.5">
                       <div className="flex w-full flex-row justify-between gap-0.5">
                         <motion.div
@@ -159,38 +179,51 @@ export default function ExpandableCard({
       </AnimatePresence>
 
       <div
-        className={cn(
-          "relative flex flex-col items-center gap-14 p-6",
-          className,
-        )}
+        className={cn("relative flex flex-col items-center gap-14", className)}
       >
         {items.map((list, i) => (
           <div key={i} className="w-full">
-            <div className="relative grid w-full grid-cols-2 gap-4 px-2 lg:grid-cols-2">
+            <div className="relative grid w-full gap-4 px-4 lg:grid-cols-2">
               {list.list.map((item) => (
                 <motion.div
                   layoutId={`cardItem-${item.name}`}
                   key={item.name}
                   initial={{ scale: 1 }}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-background flex w-full cursor-pointer flex-col items-center gap-4 rounded-md border p-2 text-xl font-semibold shadow-md md:p-4"
-                  onClick={() => {
-                    setCurrent(item);
-                  }}
+                  className="bg-background flex w-full cursor-pointer flex-col items-center gap-4 rounded-[8px] border p-2 text-xl font-semibold shadow-md md:p-4"
                 >
                   <motion.div
                     layoutId={`cardItemImage-${item.name}`}
-                    className="h-20 w-full overflow-hidden rounded-[0.8rem] lg:h-52"
+                    className="relative h-40 w-full overflow-hidden rounded-[0.7rem] lg:h-60"
                   >
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={400}
-                      height={400}
-                      className="size-full object-cover"
-                    />
+                    <div className="relative mx-auto size-full">
+                      <Carousel className="size-full">
+                        <CarouselContent className="h-full">
+                          {item.images.map((image, index) => (
+                            <CarouselItem key={index}>
+                              <div className="flex h-full items-center justify-center border border-zinc-200 dark:border-zinc-800">
+                                <Image
+                                  src={image}
+                                  alt={`${item.name} - Image ${index + 1}`}
+                                  width={400}
+                                  height={400}
+                                  className="pointer-events-none size-full object-cover"
+                                />
+                              </div>
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <CarouselNavigation alwaysShow />
+                        <CarouselIndicator />
+                      </Carousel>
+                    </div>
                   </motion.div>
-                  <div className="flex w-full flex-col items-center justify-between gap-0.5 lg:items-start">
+                  <div
+                    className="flex w-full flex-col items-center justify-between gap-0.5 lg:items-start"
+                    onClick={() => {
+                      setCurrent(item);
+                    }}
+                  >
                     <motion.div
                       className="font-medium text-slate-800 max-lg:text-center max-lg:text-sm"
                       layoutId={`cardItemName-${item.name}`}
@@ -198,10 +231,14 @@ export default function ExpandableCard({
                       {item.name}
                     </motion.div>
                     <motion.div
-                      className="text-sm font-light text-slate-700 max-lg:hidden"
+                      className="text-sm font-light text-slate-700"
                       layoutId={`cardItemDescription-${item.description}`}
                     >
                       {truncateText(item.description)}
+                    </motion.div>
+
+                    <motion.div className="flex w-full justify-end">
+                      <HiMiniArrowTopRightOnSquare className="text-blue-900" />
                     </motion.div>
                   </div>
                 </motion.div>

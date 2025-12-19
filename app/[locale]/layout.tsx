@@ -11,6 +11,7 @@ import { Providers } from "./providers";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ContactButton from "@/components/ContactButton/ContactButton";
 
 const tajawal = Tajawal({
   variable: "--font-tajawal",
@@ -66,6 +67,7 @@ export default async function RootLayout({
           <Providers>
             <Header />
             {children}
+            <ContactButton />
             <Footer />
           </Providers>
         </NextIntlClientProvider>

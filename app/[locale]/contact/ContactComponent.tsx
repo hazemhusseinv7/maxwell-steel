@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { TextEffect } from "@/components/motion-primitives/text-effect";
+import { TextEffect } from "@/components/ui/text-effect";
 import { addToast, Button, Card, Input, Textarea } from "@heroui/react";
 import { cn } from "@/lib/utils";
 
@@ -85,7 +85,7 @@ const ContactComponent = ({
         preset="blur"
         speedReveal={0.3}
         speedSegment={0.3}
-        className="mx-auto text-2xl lg:text-4xl"
+        className="mx-auto text-4xl font-semibold text-blue-700 lg:text-7xl"
       >
         {t("title")}
       </TextEffect>
@@ -118,7 +118,11 @@ const ContactComponent = ({
             onChange={(e) => handleInputChange("message", e.target.value)}
             required
           />
-          <Button type="submit" className="bg-linear-to-tr from-blue-700 to-blue-500 text-white" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="bg-linear-to-tr from-blue-700 to-blue-500 text-white"
+            disabled={isLoading}
+          >
             {t("form.button")}
           </Button>
         </form>

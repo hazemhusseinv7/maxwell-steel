@@ -24,7 +24,7 @@ export default function index({
     <div ref={container}>
       <>
         <div className="grid h-[40vh] w-full place-content-center text-white">
-          <div className="absolute top-0 right-0 bottom-0 left-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[54px_54px]"></div>
+          <div className="absolute top-0 right-0 bottom-0 left-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[40px_54px]" />
 
           {title && (
             <h2 className="px-8 text-center text-5xl leading-[120%] font-semibold tracking-tight text-blue-950 2xl:text-7xl">
@@ -97,7 +97,7 @@ export const Card: React.FC<CardProps> = ({
           {title}
         </h2>
         <div className="mt-1 flex h-full gap-10 max-lg:flex-col lg:mt-8">
-          <div className="relative top-[10%] max-lg:mb-4 w-full lg:w-[40%] lg:text-xl">
+          <div className="relative top-[10%] w-full max-lg:mb-4 lg:w-[40%] lg:text-xl">
             {description}
           </div>
 

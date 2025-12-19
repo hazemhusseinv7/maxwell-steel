@@ -146,7 +146,7 @@ export async function getProductsData(
       "description": description[_key == $lang][0].value,
       "features": features[].item[_key == $lang][0].value,
       "specifications": specifications[].item[_key == $lang][0].value,
-      image {
+      image[] {
         asset-> {
           _id,
           url,
@@ -168,6 +168,39 @@ export async function getProductsData(
     );
   } catch (error) {
     console.error("Error fetching products data:", error);
+    return null;
+  }
+}
+
+export async function getProjectsData(
+  lang: string = "en",
+): Promise<ProjectsType | null> {
+  const query = `*[_type == "projects"][0]{
+    "title": title[_key == $lang][0].value,
+    images[] {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      }
+    }
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { lang },
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["projects", "content"],
+        },
+      },
+    );
+  } catch (error) {
+    console.error("Error fetching projects data:", error);
     return null;
   }
 }

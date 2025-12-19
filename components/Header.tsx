@@ -25,9 +25,10 @@ const Header = () => {
 
   const items = [
     { name: t("links.link-1"), link: "/products" },
-    { name: t("links.link-2"), link: "/why-us" },
-    { name: t("links.link-3"), link: "/about-us" },
-    { name: t("links.link-4"), link: "/blog" },
+    { name: t("links.link-2"), link: "/projects" },
+    { name: t("links.link-3"), link: "/why-us" },
+    { name: t("links.link-4"), link: "/about-us" },
+    { name: t("links.link-5"), link: "/blog" },
   ];
 
   return (

@@ -1,7 +1,7 @@
 import { getHeroData } from "@/lib/sanity/queries";
 import Aurora from "./Aurora";
 import { LiquidGlassCard } from "./liquid-glass";
-import { TextEffect } from "./motion-primitives/text-effect";
+import { TextEffect } from "./ui/text-effect";
 import { getLocale } from "next-intl/server";
 import { urlFor } from "@/lib/sanity/image";
 import Image from "next/image";

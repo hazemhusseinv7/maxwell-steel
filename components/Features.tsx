@@ -21,7 +21,7 @@ const Features = async () => {
 
   return (
     <section className="py-20">
-      <h2 className="z-200 mx-auto mb-10 w-fit text-center text-4xl font-semibold text-blue-700 lg:text-7xl">
+      <h2 className="z-20 mx-auto mb-10 w-fit text-center text-4xl font-semibold text-blue-700 lg:text-7xl">
         {title}
       </h2>
 
