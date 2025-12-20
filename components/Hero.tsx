@@ -1,10 +1,13 @@
-import { getHeroData } from "@/lib/sanity/queries";
-import Aurora from "./Aurora";
-import { LiquidGlassCard } from "./liquid-glass";
-import { TextEffect } from "./ui/text-effect";
+import Image from "next/image";
+
 import { getLocale } from "next-intl/server";
 import { urlFor } from "@/lib/sanity/image";
-import Image from "next/image";
+
+import Aurora from "@/components/Aurora";
+import { LiquidGlassCard } from "@/components/liquid-glass";
+import { TextEffect } from "@/components/ui/text-effect";
+
+import { getHeroData } from "@/lib/sanity/queries";
 
 const Hero = async () => {
   const locale = await getLocale();
@@ -23,11 +26,21 @@ const Hero = async () => {
       />
       <div className="relative p-4 sm:p-6 lg:p-8">
         <div className="rounded-3xl bg-white/50 p-2 shadow-xl shadow-neutral-200">
-          <div
-            className="flex h-120 flex-col rounded-2xl bg-cover bg-center bg-no-repeat md:h-[80dvh]"
-            style={{ backgroundImage: `url(${img})` }}
-          >
-            <div className="mt-auto px-5 pb-22 md:px-10 md:pb-10 lg:pb-5">
+          <div className="relative h-120 overflow-hidden rounded-2xl md:h-[80dvh]">
+            {img && (
+              <Image
+                src={img}
+                alt={data?.title || "Hero image"}
+                width={1920}
+                height={1080}
+                priority
+                fetchPriority="high"
+                className="h-full w-full object-cover object-center"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+              />
+            )}
+
+            <div className="absolute right-0 bottom-0 left-0 px-5 pb-22 md:px-10 md:pb-10 lg:pb-5">
               <LiquidGlassCard
                 glowIntensity="sm"
                 shadowIntensity="sm"
@@ -50,6 +63,7 @@ const Hero = async () => {
             </div>
           </div>
         </div>
+
         {badge && (
           <Image
             className="absolute end-1 -bottom-8 z-20 size-32 lg:end-2 lg:size-50"

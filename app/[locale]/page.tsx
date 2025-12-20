@@ -1,8 +1,6 @@
 import { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 
-import ReactLenis from "lenis/react";
-
 import Hero from "@/components/Hero";
 import RiskAdvantage from "@/components/RiskAdvantage";
 import Products from "@/components/Products";
@@ -37,16 +35,14 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
 
   return (
     <main>
-      <ReactLenis root className="min-h-[200vh] overflow-hidden">
-        <Hero />
-        <RiskAdvantage riskAdvantage={riskAdvantage} />
-        <Products products={products} />
-        <AboutUs settings={settings} aboutUs={aboutUs} />
-        <Projects />
-        <Features />
-        <Testimonials testimonials={testimonials} />
-        <Clients />
-      </ReactLenis>
+      <Hero />
+      <RiskAdvantage riskAdvantage={riskAdvantage} />
+      <Products products={products} />
+      <AboutUs settings={settings} aboutUs={aboutUs} />
+      <Projects />
+      <Features />
+      <Testimonials testimonials={testimonials} />
+      <Clients />
     </main>
   );
 }
