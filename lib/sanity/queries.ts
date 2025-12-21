@@ -7,8 +7,9 @@ const REVALIDATE_TIME =
 
 export async function getSettingsData(): Promise<SettingsType | null> {
   const query = `*[_type == "settings"][0]{
-    email,
-    phone,
+    location,
+    phones,
+    emails,
     twitter,
     linkedin,
     tiktok,

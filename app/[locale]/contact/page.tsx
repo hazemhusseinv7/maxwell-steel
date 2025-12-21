@@ -1,8 +1,11 @@
+import { getSettingsData } from "@/lib/sanity/queries";
 import ContactComponent from "./ContactComponent";
 
-export default function Page() {
+export default async function Page() {
+  const settings: SettingsType | null = await getSettingsData();
+
   return (
-    <main>
+    <main className="relative">
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -12,9 +15,9 @@ export default function Page() {
           backgroundSize: "100% 100%",
         }}
       />
-      <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="relative z-10 mt-8 flex min-h-svh w-full items-center justify-center p-6 md:p-10">
         <div className="w-full">
-          <ContactComponent />
+          <ContactComponent settings={settings} />
         </div>
       </div>
     </main>

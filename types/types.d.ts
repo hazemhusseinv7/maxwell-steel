@@ -8,8 +8,9 @@ interface ImageType {
 }
 
 interface SettingsType {
-  phone?: string;
-  email?: string;
+  location?: string;
+  phones?: string[];
+  emails?: string[];
   twitter?: string;
   linkedin?: string;
   tiktok?: string;

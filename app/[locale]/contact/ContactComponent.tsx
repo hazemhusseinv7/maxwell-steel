@@ -5,6 +5,11 @@ import { useTranslations } from "next-intl";
 import { TextEffect } from "@/components/ui/text-effect";
 import { addToast, Button, Card, Input, Textarea } from "@heroui/react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { MdMarkEmailRead } from "react-icons/md";
+import { FaPhone } from "react-icons/fa6";
+import { FaMapLocationDot } from "react-icons/fa6";
+import Link from "next/link";
 
 interface FormDataType {
   name: string;
@@ -13,11 +18,17 @@ interface FormDataType {
   message: string;
 }
 
+interface ContactComponentProps extends React.ComponentProps<"div"> {
+  settings: SettingsType | null;
+}
+
 const ContactComponent = ({
   className,
+  settings,
   ...props
-}: React.ComponentProps<"div">) => {
+}: ContactComponentProps) => {
   const t = useTranslations("Contact");
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormDataType>({
@@ -62,6 +73,8 @@ const ContactComponent = ({
           phone: "",
           message: "",
         });
+
+        router.push("/thank-you");
       } else {
         throw new Error(t("messages.error.title"));
       }
@@ -85,10 +98,43 @@ const ContactComponent = ({
         preset="blur"
         speedReveal={0.3}
         speedSegment={0.3}
-        className="mx-auto text-4xl font-semibold text-primary-blue lg:text-7xl"
+        className="text-primary-blue mx-auto text-4xl font-semibold lg:text-7xl"
       >
         {t("title")}
       </TextEffect>
+
+      <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
+        <div className="grid grid-cols-2 gap-2 lg:gap-4">
+          <div className="flex flex-col items-start gap-1">
+            <FaPhone className="text-blue-700" />
+
+            <div className="flex flex-col">
+              {settings?.phones?.map((phone, i) => (
+                <Link href={`tel:${phone}`} key={i}>
+                  {phone}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start gap-1">
+            <MdMarkEmailRead className="text-blue-700" />
+
+            <div className="flex flex-col">
+              {settings?.emails?.map((email, i) => (
+                <Link href={`mailto:${email}`} key={i}>
+                  {email}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="col-span-2 flex items-center gap-1">
+            <FaMapLocationDot className="text-blue-700" />
+
+            <div>{settings?.location}</div>
+          </div>
+        </div>
+      </Card>
 
       <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -120,10 +166,11 @@ const ContactComponent = ({
           />
           <Button
             type="submit"
-            className="bg-linear-to-tr from-primary-blue/70 to-primary-blue text-white"
+            className="from-primary-blue/70 to-primary-blue bg-linear-to-tr text-white"
             disabled={isLoading}
+            isLoading={isLoading}
           >
-            {t("form.button")}
+            {!isLoading && t("form.button")}
           </Button>
         </form>
       </Card>

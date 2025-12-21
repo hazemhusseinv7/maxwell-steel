@@ -73,25 +73,27 @@ export default function ExpandableCard({
                     layoutId={`cardItemImage-${current.name}`}
                     className="h-40 w-full overflow-hidden rounded-[0.8rem] lg:h-60"
                   >
-                    <Carousel className="size-full">
-                      <CarouselContent className="h-full">
-                        {current.images.map((image, index) => (
-                          <CarouselItem key={index}>
-                            <div className="flex h-full items-center justify-center border border-zinc-200 dark:border-zinc-800">
-                              <Image
-                                src={image}
-                                alt={`${current.name} - Image ${index + 1}`}
-                                width={400}
-                                height={400}
-                                className="pointer-events-none size-full object-cover"
-                              />
-                            </div>
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                      <CarouselNavigation alwaysShow />
-                      <CarouselIndicator />
-                    </Carousel>
+                    <div className="relative mx-auto size-full" dir="ltr">
+                      <Carousel className="size-full">
+                        <CarouselContent className="h-full">
+                          {current.images.map((image, index) => (
+                            <CarouselItem key={index}>
+                              <div className="flex h-full items-center justify-center border border-zinc-200 dark:border-zinc-800">
+                                <Image
+                                  src={image}
+                                  alt={`${current.name} - Image ${index + 1}`}
+                                  width={400}
+                                  height={400}
+                                  className="pointer-events-none size-full object-cover"
+                                />
+                              </div>
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <CarouselNavigation alwaysShow />
+                        <CarouselIndicator />
+                      </Carousel>
+                    </div>
                   </motion.div>
                   <div className="flex max-w-[95%] grow items-center justify-between">
                     <div className="flex w-full flex-col gap-0.5">

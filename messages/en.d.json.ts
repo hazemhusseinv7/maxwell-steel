@@ -75,6 +75,12 @@ declare const messages: {
     },
 
     "close": "Close"
+  },
+
+  "ThankYou": {
+    "title": "Thank you for contacting us",
+    "description": "We will get back to you as soon as possible.",
+    "button": "Back to Homepage"
   }
 };
 export default messages;
