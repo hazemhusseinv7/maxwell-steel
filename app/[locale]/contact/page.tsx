@@ -5,7 +5,7 @@ export default async function Page() {
   const settings: SettingsType | null = await getSettingsData();
 
   return (
-    <main className="relative">
+    <main className="relative py-10">
       <div
         className="absolute inset-0 z-0"
         style={{

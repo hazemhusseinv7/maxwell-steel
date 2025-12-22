@@ -1,11 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IoChevronForward } from "react-icons/io5";
-import Card from "./Card";
-import { getFeaturesData } from "@/lib/sanity/queries";
+
 import { getLocale } from "next-intl/server";
 import { urlFor } from "@/lib/sanity/image";
+import { getFeaturesData } from "@/lib/sanity/queries";
+
+import Card from "@/components/Card";
+
 import { MdShoppingCart } from "react-icons/md";
+import { IoChevronForward } from "react-icons/io5";
 
 const Features = async () => {
   const locale = await getLocale();
@@ -40,7 +43,8 @@ const Features = async () => {
         <div className="mt-5 grid gap-8 lg:mt-16 lg:grid-cols-3 lg:gap-12">
           <div className="lg:col-span-1">
             <h2 className="text-2xl font-bold text-gray-800 md:text-3xl dark:text-neutral-200">
-              {block1?.title}
+              <span>{block1?.title} </span>
+              <span className="text-primary-blue">Maxwell Steel</span>
             </h2>
             <p className="mt-2 text-gray-500 md:mt-4 dark:text-neutral-500">
               {block1?.description}

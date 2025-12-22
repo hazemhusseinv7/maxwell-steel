@@ -104,39 +104,6 @@ const ContactComponent = ({
       </TextEffect>
 
       <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
-        <div className="grid grid-cols-2 gap-2 lg:gap-4">
-          <div className="flex flex-col items-start gap-1">
-            <FaPhone className="text-blue-700" />
-
-            <div className="flex flex-col">
-              {settings?.phones?.map((phone, i) => (
-                <Link href={`tel:${phone}`} key={i}>
-                  {phone}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-start gap-1">
-            <MdMarkEmailRead className="text-blue-700" />
-
-            <div className="flex flex-col">
-              {settings?.emails?.map((email, i) => (
-                <Link href={`mailto:${email}`} key={i}>
-                  {email}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="col-span-2 flex items-center gap-1">
-            <FaMapLocationDot className="text-blue-700" />
-
-            <div>{settings?.location}</div>
-          </div>
-        </div>
-      </Card>
-
-      <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <Input
             label={t("form.name")}
@@ -173,6 +140,42 @@ const ContactComponent = ({
             {!isLoading && t("form.button")}
           </Button>
         </form>
+      </Card>
+
+      <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="flex flex-col items-start gap-1">
+            <FaPhone className="text-blue-700" />
+
+            <div className="flex flex-col">
+              {settings?.phones?.map((phone, i) => (
+                <Link href={`tel:${phone}`} key={i}>
+                  {phone}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start gap-1">
+            <MdMarkEmailRead className="size-5 text-blue-700" />
+
+            <div className="flex flex-col">
+              {settings?.emails?.map((email, i) => (
+                <Link href={`mailto:${email}`} key={i}>
+                  {email}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-start gap-2 max-lg:flex-col lg:col-span-2">
+            <div>
+              <FaMapLocationDot className="size-5 text-blue-700" />
+            </div>
+
+            <p>{settings?.location}</p>
+          </div>
+        </div>
       </Card>
     </div>
   );

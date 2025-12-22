@@ -18,14 +18,16 @@ import {
 } from "@heroui/react";
 import ChangeLang from "./ChangeLang";
 
-const Header = () => {
+const Header = ({ projects }: { projects: ProjectsType | null }) => {
   const t = useTranslations("Header");
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
+  const hasProjects = projects?.images && projects.images.length > 0;
+
   const items = [
     { name: t("links.link-1"), link: "/products" },
-    { name: t("links.link-2"), link: "/projects" },
+    ...(hasProjects ? [{ name: t("links.link-2"), link: "/projects" }] : []),
     { name: t("links.link-3"), link: "/why-us" },
     { name: t("links.link-4"), link: "/about-us" },
     { name: t("links.link-5"), link: "/blog" },
@@ -59,7 +61,10 @@ const Header = () => {
         <NavbarContent className="hidden gap-4 sm:flex" justify="center">
           {items.map(({ name, link }, i) => (
             <NavbarItem key={i}>
-              <Link className="text-primary-blue text-lg font-medium" href={link}>
+              <Link
+                className="text-primary-blue text-lg font-medium"
+                href={link}
+              >
                 {name}
               </Link>
             </NavbarItem>

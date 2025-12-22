@@ -329,6 +329,38 @@ export async function getAboutUsData(
     rightBottomStat {
       "value": value[_key == $lang][0].value,
       "label": label[_key == $lang][0].value
+    },
+    ourVision {
+      "title": title[_key == $lang][0].value,
+      "content": select(
+        $lang == "en" => contentEn,
+        $lang == "ar" => contentAr
+      ),
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      }
+    },
+    ourMission {
+      "title": title[_key == $lang][0].value,
+      "content": select(
+        $lang == "en" => contentEn,
+        $lang == "ar" => contentAr
+      ),
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      }
     }
   }`;
 

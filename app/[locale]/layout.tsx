@@ -12,6 +12,7 @@ import { Providers } from "./providers";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactButton from "@/components/ContactButton/ContactButton";
+import { getProjectsData } from "@/lib/sanity/queries";
 
 const tajawal = Tajawal({
   variable: "--font-tajawal",
@@ -60,12 +61,14 @@ export default async function RootLayout({
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID,
     gaId = process.env.NEXT_PUBLIC_GA_ID;
 
+  const projects: ProjectsType | null = await getProjectsData();
+
   return (
     <html lang={locale} dir={direction} className="scroll-smooth">
       <body className={cn(tajawal.variable, "font-tajawal antialiased")}>
         <NextIntlClientProvider>
           <Providers>
-            <Header />
+            <Header projects={projects} />
             {children}
             <ContactButton />
             <Footer />

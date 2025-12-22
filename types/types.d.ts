@@ -116,6 +116,16 @@ interface AboutUsType {
     value: string;
     label: string;
   };
+  ourVision?: {
+    title: string;
+    content?: any[];
+    image: ImageType;
+  };
+  ourMission?: {
+    title: string;
+    content?: any[];
+    image: ImageType;
+  };
 }
 
 interface TestimonialsType {

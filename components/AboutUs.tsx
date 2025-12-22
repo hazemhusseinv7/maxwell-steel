@@ -130,7 +130,7 @@ const AboutUs = ({
       className="relative mt-20 bg-linear-to-t from-blue-50"
       ref={heroRef}
     >
-      <div className="relative z-10 mx-auto max-w-6xl px-8 pt-20 pb-32">
+      <div className="relative z-10 mx-auto max-w-6xl px-8 py-20">
         <div className="relative">
           {/* Header with social icons */}
           <div className="absolute -top-3 left-0 z-10 mb-8 flex w-[85%] items-center justify-between sm:-top-2 md:top-0 lg:top-2">
@@ -206,7 +206,7 @@ const AboutUs = ({
               className="flex gap-4"
             >
               <div className="mb-2 flex items-center gap-2 text-xs sm:text-base">
-                <span className="font-bold text-primary-blue">
+                <span className="text-primary-blue font-bold">
                   {aboutUs?.leftTopStat.value}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
@@ -215,7 +215,7 @@ const AboutUs = ({
                 <span className="text-gray-300">|</span>
               </div>
               <div className="mb-2 flex items-center gap-2 text-xs sm:text-base">
-                <span className="font-bold text-primary-blue">
+                <span className="text-primary-blue font-bold">
                   {aboutUs?.leftBottomStat.value}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
@@ -231,7 +231,7 @@ const AboutUs = ({
                 customVariants={revealVariants}
                 className="mb-2 flex items-center gap-2 text-2xl sm:text-3xl"
               >
-                <p className="font-semibold text-primary-blue">
+                <p className="text-primary-blue font-semibold">
                   {aboutUs?.rightTopStat.value}
                   {/* <span className="text-gray-600 dark:text-gray-300 font-normal"></span> */}
                 </p>
@@ -246,7 +246,7 @@ const AboutUs = ({
                 customVariants={revealVariants}
                 className="mb-2 flex items-center gap-2 text-xs sm:text-base"
               >
-                <span className="text-xl font-bold text-primary-blue lg:text-2xl dark:text-gray-300">
+                <span className="text-primary-blue text-xl font-bold lg:text-2xl dark:text-gray-300">
                   {aboutUs?.rightBottomStat.value}
                 </span>
                 <p className="text-gray-600">
@@ -305,58 +305,107 @@ const AboutUs = ({
                   components={portableTextComponents}
                 />
               </TimelineContent>
-              {/* <TimelineContent
-                as="div"
-                animationNum={11}
-                timelineRef={heroRef}
-                customVariants={revealVariants}
-                className="sm:text-base text-xs"
-              >
-                <p className="leading-relaxed text-justify"></p>
-              </TimelineContent> */}
             </TimelineContent>
           </div>
+        </div>
+      </div>
 
-          {/* <div className="md:col-span-1 lg:pt-8">
-            <div className="text-right">
-              <TimelineContent
-                as="div"
-                animationNum={12}
-                timelineRef={heroRef}
-                customVariants={revealVariants}
-                className="flex items-center gap-2 text-blue-700 dark:text-blue-700 text-2xl font-bold mb-2"
-              ></TimelineContent>
-              <TimelineContent
-                as="div"
-                animationNum={13}
-                timelineRef={heroRef}
-                customVariants={revealVariants}
-                className="text-gray-600 dark:text-gray-400 text-sm mb-8 ltr:text-left"
-              ></TimelineContent>
-
-              <TimelineContent
-                as="div"
-                animationNum={14}
-                timelineRef={heroRef}
-                customVariants={revealVariants}
-                className="mb-6"
-              >
-                <p className="text-gray-900 dark:text-gray-400 font-medium mb-4"></p>
-              </TimelineContent>
-
-              <TimelineContent
-                as="a"
-                href="#"
-                animationNum={15}
-                timelineRef={heroRef}
-                customVariants={revealVariants}
-                className="bg-blue-700 hover:bg-blue-600 shadow-2xl shadow-blue-800 hover:shadow-blue-500 flex w-fit ml-auto gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-white px-5 py-3 rounded-lg cursor-pointer font-semibold"
-              >
-                Contact Us
-                <GoArrowUpRight className="rtl:rotate-270" />
-              </TimelineContent>
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-20 px-8 pt-20 pb-32 max-lg:text-center lg:gap-32">
+        <div className="flex items-center justify-between gap-4 max-lg:flex-col">
+          <div className="max-w-xl max-lg:order-2">
+            <h2 className="text-primary-blue mb-8 text-4xl leading-[110%]! font-semibold md:text-5xl">
+              {aboutUs?.ourVision?.title}
+            </h2>
+            <div className="text-gray-600 dark:text-gray-400">
+              <PortableText
+                value={aboutUs?.ourVision?.content}
+                components={portableTextComponents}
+              />
             </div>
-          </div> */}
+          </div>
+          <div className="relative w-70 max-lg:order-1 lg:w-100">
+            <TimelineContent
+              as="figure"
+              animationNum={11}
+              timelineRef={heroRef}
+              customVariants={scaleVariants}
+              className="group relative"
+            >
+              <svg
+                className="w-full"
+                width="100%"
+                height="100%"
+                viewBox="0 0 100 100"
+              >
+                <defs>
+                  <clipPath
+                    id="clip-inverted-2"
+                    clipPathUnits="objectBoundingBox"
+                  >
+                    <path
+                      d="M0.0249688 0C0.0111789 0 0 0.0112775 0 0.0251889V0.851385C0 0.865297 0.0111789 0.876574 0.0249688 0.876574H0.179775V0.974811C0.179775 0.988723 0.190954 1 0.204744 1H0.975031C0.988821 1 1 0.988723 1 0.974811V0.157431C1 0.143519 0.988821 0.132242 0.975031 0.132242H0.810237V0.0251889C0.810237 0.0112775 0.799058 0 0.785268 0H0.0249688Z"
+                      fill="#D9D9D9"
+                    />
+                  </clipPath>
+                </defs>
+                <image
+                  clipPath="url(#clip-inverted-2)"
+                  preserveAspectRatio="xMidYMid slice"
+                  width="100%"
+                  height="100%"
+                  href={urlFor(aboutUs?.heroImage).url()}
+                />
+              </svg>
+            </TimelineContent>
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-4 max-lg:flex-col">
+          <div className="relative w-70 lg:w-100">
+            <TimelineContent
+              as="figure"
+              animationNum={12}
+              timelineRef={heroRef}
+              customVariants={scaleVariants}
+              className="group relative"
+            >
+              <svg
+                className="w-full"
+                width="100%"
+                height="100%"
+                viewBox="0 0 100 100"
+              >
+                <defs>
+                  <clipPath
+                    id="clip-inverted-2"
+                    clipPathUnits="objectBoundingBox"
+                  >
+                    <path
+                      d="M0.0249688 0C0.0111789 0 0 0.0112775 0 0.0251889V0.851385C0 0.865297 0.0111789 0.876574 0.0249688 0.876574H0.179775V0.974811C0.179775 0.988723 0.190954 1 0.204744 1H0.975031C0.988821 1 1 0.988723 1 0.974811V0.157431C1 0.143519 0.988821 0.132242 0.975031 0.132242H0.810237V0.0251889C0.810237 0.0112775 0.799058 0 0.785268 0H0.0249688Z"
+                      fill="#D9D9D9"
+                    />
+                  </clipPath>
+                </defs>
+                <image
+                  clipPath="url(#clip-inverted-2)"
+                  preserveAspectRatio="xMidYMid slice"
+                  width="100%"
+                  height="100%"
+                  href={urlFor(aboutUs?.heroImage).url()}
+                />
+              </svg>
+            </TimelineContent>
+          </div>
+          <div className="max-w-xl">
+            <h2 className="text-primary-blue mb-8 text-4xl leading-[110%]! font-semibold md:text-5xl">
+              {aboutUs?.ourMission?.title}
+            </h2>
+            <div className="text-gray-600 dark:text-gray-400">
+              <PortableText
+                value={aboutUs?.ourMission?.content}
+                components={portableTextComponents}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
