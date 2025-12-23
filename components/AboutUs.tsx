@@ -311,102 +311,107 @@ const AboutUs = ({
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-20 px-8 pt-20 pb-32 max-lg:text-center lg:gap-32">
-        <div className="flex items-center justify-between gap-4 max-lg:flex-col">
-          <div className="max-w-xl max-lg:order-2">
-            <h2 className="text-primary-blue mb-8 text-4xl leading-[110%]! font-semibold md:text-5xl">
-              {aboutUs?.ourVision?.title}
-            </h2>
-            <div className="text-gray-600 dark:text-gray-400">
-              <PortableText
-                value={aboutUs?.ourVision?.content}
-                components={portableTextComponents}
-              />
+        {aboutUs?.ourVision && (
+          <div className="flex items-center justify-between gap-4 max-lg:flex-col">
+            <div className="max-w-xl max-lg:order-2">
+              <h2 className="text-primary-blue mb-8 text-4xl leading-[110%]! font-semibold md:text-5xl">
+                {aboutUs?.ourVision.title}
+              </h2>
+              <div className="text-gray-600 dark:text-gray-400">
+                <PortableText
+                  value={aboutUs?.ourVision.content}
+                  components={portableTextComponents}
+                />
+              </div>
             </div>
-          </div>
-          <div className="relative w-70 max-lg:order-1 lg:w-100">
-            <TimelineContent
-              as="figure"
-              animationNum={11}
-              timelineRef={heroRef}
-              customVariants={scaleVariants}
-              className="group relative"
-            >
-              <svg
-                className="w-full"
-                width="100%"
-                height="100%"
-                viewBox="0 0 100 100"
+            <div className="relative w-70 max-lg:order-1 lg:w-100">
+              <TimelineContent
+                as="figure"
+                animationNum={11}
+                timelineRef={heroRef}
+                customVariants={scaleVariants}
+                className="group relative"
               >
-                <defs>
-                  <clipPath
-                    id="clip-inverted-2"
-                    clipPathUnits="objectBoundingBox"
-                  >
-                    <path
-                      d="M0.0249688 0C0.0111789 0 0 0.0112775 0 0.0251889V0.851385C0 0.865297 0.0111789 0.876574 0.0249688 0.876574H0.179775V0.974811C0.179775 0.988723 0.190954 1 0.204744 1H0.975031C0.988821 1 1 0.988723 1 0.974811V0.157431C1 0.143519 0.988821 0.132242 0.975031 0.132242H0.810237V0.0251889C0.810237 0.0112775 0.799058 0 0.785268 0H0.0249688Z"
-                      fill="#D9D9D9"
-                    />
-                  </clipPath>
-                </defs>
-                <image
-                  clipPath="url(#clip-inverted-2)"
-                  preserveAspectRatio="xMidYMid slice"
+                <svg
+                  className="w-full"
                   width="100%"
                   height="100%"
-                  href={urlFor(aboutUs?.heroImage).url()}
-                />
-              </svg>
-            </TimelineContent>
-          </div>
-        </div>
-        <div className="flex items-center justify-between gap-4 max-lg:flex-col">
-          <div className="relative w-70 lg:w-100">
-            <TimelineContent
-              as="figure"
-              animationNum={12}
-              timelineRef={heroRef}
-              customVariants={scaleVariants}
-              className="group relative"
-            >
-              <svg
-                className="w-full"
-                width="100%"
-                height="100%"
-                viewBox="0 0 100 100"
-              >
-                <defs>
-                  <clipPath
-                    id="clip-inverted-2"
-                    clipPathUnits="objectBoundingBox"
-                  >
-                    <path
-                      d="M0.0249688 0C0.0111789 0 0 0.0112775 0 0.0251889V0.851385C0 0.865297 0.0111789 0.876574 0.0249688 0.876574H0.179775V0.974811C0.179775 0.988723 0.190954 1 0.204744 1H0.975031C0.988821 1 1 0.988723 1 0.974811V0.157431C1 0.143519 0.988821 0.132242 0.975031 0.132242H0.810237V0.0251889C0.810237 0.0112775 0.799058 0 0.785268 0H0.0249688Z"
-                      fill="#D9D9D9"
-                    />
-                  </clipPath>
-                </defs>
-                <image
-                  clipPath="url(#clip-inverted-2)"
-                  preserveAspectRatio="xMidYMid slice"
-                  width="100%"
-                  height="100%"
-                  href={urlFor(aboutUs?.heroImage).url()}
-                />
-              </svg>
-            </TimelineContent>
-          </div>
-          <div className="max-w-xl">
-            <h2 className="text-primary-blue mb-8 text-4xl leading-[110%]! font-semibold md:text-5xl">
-              {aboutUs?.ourMission?.title}
-            </h2>
-            <div className="text-gray-600 dark:text-gray-400">
-              <PortableText
-                value={aboutUs?.ourMission?.content}
-                components={portableTextComponents}
-              />
+                  viewBox="0 0 100 100"
+                >
+                  <defs>
+                    <clipPath
+                      id="clip-inverted-2"
+                      clipPathUnits="objectBoundingBox"
+                    >
+                      <path
+                        d="M0.0249688 0C0.0111789 0 0 0.0112775 0 0.0251889V0.851385C0 0.865297 0.0111789 0.876574 0.0249688 0.876574H0.179775V0.974811C0.179775 0.988723 0.190954 1 0.204744 1H0.975031C0.988821 1 1 0.988723 1 0.974811V0.157431C1 0.143519 0.988821 0.132242 0.975031 0.132242H0.810237V0.0251889C0.810237 0.0112775 0.799058 0 0.785268 0H0.0249688Z"
+                        fill="#D9D9D9"
+                      />
+                    </clipPath>
+                  </defs>
+                  <image
+                    clipPath="url(#clip-inverted-2)"
+                    preserveAspectRatio="xMidYMid slice"
+                    width="100%"
+                    height="100%"
+                    href={urlFor(aboutUs?.ourVision.image).url()}
+                  />
+                </svg>
+              </TimelineContent>
             </div>
           </div>
-        </div>
+        )}
+
+        {aboutUs?.ourMission && (
+          <div className="flex items-center justify-between gap-4 max-lg:flex-col">
+            <div className="relative w-70 lg:w-100">
+              <TimelineContent
+                as="figure"
+                animationNum={12}
+                timelineRef={heroRef}
+                customVariants={scaleVariants}
+                className="group relative"
+              >
+                <svg
+                  className="w-full"
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 100 100"
+                >
+                  <defs>
+                    <clipPath
+                      id="clip-inverted-2"
+                      clipPathUnits="objectBoundingBox"
+                    >
+                      <path
+                        d="M0.0249688 0C0.0111789 0 0 0.0112775 0 0.0251889V0.851385C0 0.865297 0.0111789 0.876574 0.0249688 0.876574H0.179775V0.974811C0.179775 0.988723 0.190954 1 0.204744 1H0.975031C0.988821 1 1 0.988723 1 0.974811V0.157431C1 0.143519 0.988821 0.132242 0.975031 0.132242H0.810237V0.0251889C0.810237 0.0112775 0.799058 0 0.785268 0H0.0249688Z"
+                        fill="#D9D9D9"
+                      />
+                    </clipPath>
+                  </defs>
+                  <image
+                    clipPath="url(#clip-inverted-2)"
+                    preserveAspectRatio="xMidYMid slice"
+                    width="100%"
+                    height="100%"
+                    href={urlFor(aboutUs?.ourMission.image).url()}
+                  />
+                </svg>
+              </TimelineContent>
+            </div>
+            <div className="max-w-xl">
+              <h2 className="text-primary-blue mb-8 text-4xl leading-[110%]! font-semibold md:text-5xl">
+                {aboutUs?.ourMission.title}
+              </h2>
+              <div className="text-gray-600 dark:text-gray-400">
+                <PortableText
+                  value={aboutUs?.ourMission.content}
+                  components={portableTextComponents}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
