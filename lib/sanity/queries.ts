@@ -5,9 +5,11 @@ const REVALIDATE_TIME =
     ? Number(process.env.REVALIDATE_TIME) || 3600
     : 0;
 
-export async function getSettingsData(): Promise<SettingsType | null> {
+export async function getSettingsData(
+  lang: string = "en",
+): Promise<SettingsType | null> {
   const query = `*[_type == "settings"][0]{
-    location,
+    "location": location[_key == $lang][0].value,
     phones,
     emails,
     twitter,
@@ -24,7 +26,7 @@ export async function getSettingsData(): Promise<SettingsType | null> {
   try {
     return await sanityClient.fetch(
       query,
-      {},
+      { lang },
       {
         next: {
           revalidate: REVALIDATE_TIME,

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { getTranslations } from "next-intl/server";
-import { getSettingsData } from "@/lib/sanity/queries";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getSettingsData, getProjectsData } from "@/lib/sanity/queries";
 import {
   FaXTwitter,
   FaInstagram,
@@ -16,19 +16,22 @@ import {
 import { RiWhatsappLine } from "react-icons/ri";
 
 const Footer = async () => {
+  const locale = await getLocale();
   const t = await getTranslations("Footer");
 
-  const settings: SettingsType | null = await getSettingsData();
+  const [settings, projects] = await Promise.all([
+    getSettingsData(),
+    getProjectsData(locale),
+  ]);
+
+  const hasProjects = projects?.images && projects.images.length > 0;
 
   const links = [
     {
       title: t("links.link-1"),
       href: "/products",
     },
-    {
-      title: t("links.link-2"),
-      href: "/projects",
-    },
+    ...(hasProjects ? [{ title: t("links.link-2"), href: "/projects" }] : []),
     {
       title: t("links.link-3"),
       href: "/why-us",

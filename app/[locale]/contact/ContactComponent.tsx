@@ -103,7 +103,7 @@ const ContactComponent = ({
         {t("title")}
       </TextEffect>
 
-      <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
+      <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-blue-300 dark:shadow-blue-900">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <Input
             label={t("form.name")}
@@ -142,12 +142,12 @@ const ContactComponent = ({
         </form>
       </Card>
 
-      <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
+      <Card className="mx-auto w-full max-w-120 p-4 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900 text-blue-950">
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="flex flex-col items-start gap-1">
             <FaPhone className="text-blue-700" />
 
-            <div className="flex flex-col">
+            <div className="flex flex-col" dir="ltr">
               {settings?.phones?.map((phone, i) => (
                 <Link href={`tel:${phone}`} key={i}>
                   {phone}

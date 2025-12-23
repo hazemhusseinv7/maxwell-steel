@@ -1,8 +1,10 @@
 import { getSettingsData } from "@/lib/sanity/queries";
 import ContactComponent from "./ContactComponent";
 
-export default async function Page() {
-  const settings: SettingsType | null = await getSettingsData();
+export default async function Page({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+
+  const settings: SettingsType | null = await getSettingsData(locale);
 
   return (
     <main className="relative py-10">
