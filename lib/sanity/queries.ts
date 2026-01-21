@@ -312,10 +312,7 @@ export async function getAboutUsData(
     },
     "heading": heading[_key == $lang][0].value,
     "subheading": subheading[_key == $lang][0].value,
-    "content": select(
-      $lang == "en" => contentEn,
-      $lang == "ar" => contentAr
-    ),
+    "content": content[_key == $lang][0].value,
     leftTopStat {
       "value": value[_key == $lang][0].value,
       "label": label[_key == $lang][0].value
@@ -334,10 +331,7 @@ export async function getAboutUsData(
     },
     ourVision {
       "title": title[_key == $lang][0].value,
-      "content": select(
-        $lang == "en" => contentEn,
-        $lang == "ar" => contentAr
-      ),
+      "content": content[_key == $lang][0].value,
       image {
         asset-> {
           _id,
@@ -350,10 +344,7 @@ export async function getAboutUsData(
     },
     ourMission {
       "title": title[_key == $lang][0].value,
-      "content": select(
-        $lang == "en" => contentEn,
-        $lang == "ar" => contentAr
-      ),
+      "content": content[_key == $lang][0].value,
       image {
         asset-> {
           _id,
@@ -440,14 +431,22 @@ export async function getClientsData(): Promise<ClientsType | null> {
 export async function getBlogPosts(
   lang: string = "en",
 ): Promise<BlogPost[] | null> {
-  const query = `*[_type == "blog" && language == $lang] | order(publishedAt desc) {
+  const query = `*[_type == "blog"] | order(publishedAt desc) {
     _id,
-    title,
+    "title": title[][_key == $lang][0].value,
     slug,
     mainImage,
     publishedAt,
-    "author": author->{name, image, bio},
-    "categories": categories[]->{title, description}
+    "author": author->{
+      "name": name[][_key == $lang][0].value,
+      image, 
+      bio
+    },
+    "categories": categories[]->{
+      "title": title[][_key == $lang][0].value,
+      description
+    },
+    "content": content[_key == $lang][0].value
   }`;
 
   try {
@@ -468,15 +467,22 @@ export async function getBlogPost(
   slug: string,
   lang: string = "en",
 ): Promise<BlogPost | null> {
-  const query = `*[_type == "blog" && slug.current == $slug && language == $lang][0] {
+  const query = `*[_type == "blog" && slug.current == $slug][0] {
     _id,
-    title,
+    "title": title[][_key == $lang][0].value,
     slug,
     mainImage,
     publishedAt,
-    body,
-    "author": author->{name, image, bio},
-    "categories": categories[]->{title, description}
+    "author": author->{
+      "name": name[][_key == $lang][0].value,
+      image, 
+      bio
+    },
+    "categories": categories[]->{
+      "title": title[][_key == $lang][0].value,
+      description
+    },
+    "content": content[_key == $lang][0].value
   }`;
 
   try {

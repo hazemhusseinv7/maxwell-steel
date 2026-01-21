@@ -151,13 +151,13 @@ interface AuthorType {
 }
 interface BlogPost {
   _id: string;
-  title: string;
+  title?: string;
   slug: {
     current: string;
   };
   mainImage: any;
   publishedAt?: string;
-  body: any[];
+  content: any[];
   author?: AuthorType;
   categories?: CategoryType[];
 }

@@ -26,7 +26,7 @@ const portableTextComponents = {
         <div className="my-8">
           <Image
             src={urlFor(value).width(800).height(600).url()}
-            alt={value.alt || "Blog image"}
+            alt={value.alt || "image"}
             width={800}
             height={600}
             className="mx-auto rounded-lg"

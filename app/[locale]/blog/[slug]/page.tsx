@@ -1,40 +1,15 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { getLocale, getTranslations } from "next-intl/server";
 
-import { PortableText } from "@portabletext/react";
+import { PortableText } from "@/lib/PortableTextComponents";
 
 import Category from "../Category";
 import Author from "../Author";
 
 import { getBlogPost, getBlogPosts } from "@/lib/sanity/queries";
-import { urlFor } from "@/lib/sanity/image";
 
 import { GoChevronLeft } from "react-icons/go";
-
-const portableTextComponents = {
-  types: {
-    image: ({ value }: any) => {
-      return (
-        <div className="my-8">
-          <Image
-            src={urlFor(value).width(800).height(600).url()}
-            alt={value.alt || "Blog image"}
-            width={800}
-            height={600}
-            className="mx-auto rounded-lg"
-          />
-          {value.caption && (
-            <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-              {value.caption}
-            </p>
-          )}
-        </div>
-      );
-    },
-  },
-};
 
 // Generate static params for SSG
 export async function generateStaticParams() {
@@ -75,7 +50,7 @@ export default async function Page({
           </h1>
           <Link
             href="/blog"
-            className="mt-4 inline-flex items-center text-blue-600 hover:underline"
+            className="mt-4 inline-flex items-center text-blue-600 hover:underline transition"
           >
             {t("return")}
           </Link>
@@ -105,7 +80,7 @@ export default async function Page({
 
               {post.publishedAt && (
                 <span className="block text-xs text-gray-800 sm:text-sm dark:text-neutral-200">
-                  {new Date(post.publishedAt).toLocaleDateString("ar-EG", {
+                  {new Date(post.publishedAt).toLocaleDateString("ar", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -114,10 +89,7 @@ export default async function Page({
               )}
 
               <article className="prose prose-lg dark:prose-invert max-w-none">
-                <PortableText
-                  value={post.body}
-                  components={portableTextComponents}
-                />
+                <PortableText value={post.content} />
               </article>
 
               {post.author && (

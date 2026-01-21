@@ -30,7 +30,11 @@ export default function Page() {
     async function fetchPosts() {
       try {
         const posts = await getBlogPosts(locale);
-        setAllPosts(posts || []);
+
+        const filteredPosts =
+          posts?.filter((post) => post.title && post.title.trim() !== "") || [];
+
+        setAllPosts(filteredPosts || []);
       } catch (error) {
         console.error("Error fetching posts:", error);
         setAllPosts([]);
