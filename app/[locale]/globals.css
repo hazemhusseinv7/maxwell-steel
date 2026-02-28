@@ -207,6 +207,7 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
 /* Text Selection */
 ::-moz-selection {
   @apply bg-primary-blue text-white;

@@ -200,7 +200,7 @@ function CarouselIndicator({
   return (
     <div
       className={cn(
-        "absolute bottom-4 z-10 flex w-full items-center justify-center",
+        "absolute bottom-4 flex w-full items-center justify-center",
         className,
       )}
     >

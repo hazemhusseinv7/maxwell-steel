@@ -2,11 +2,11 @@ import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { routing } from "@/i18n/routing";
 import { Locale, hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
-
 import { Providers } from "./providers";
 
 import Header from "@/components/Header";
@@ -59,7 +59,8 @@ export default async function RootLayout({
   const direction = locale === "ar" ? "rtl" : "ltr";
 
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID,
-    gaId = process.env.NEXT_PUBLIC_GA_ID;
+    gaId = process.env.NEXT_PUBLIC_GA_ID,
+    googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
   const projects: ProjectsType | null = await getProjectsData();
 
@@ -74,10 +75,27 @@ export default async function RootLayout({
             <Footer />
           </Providers>
         </NextIntlClientProvider>
-      </body>
 
-      {gtmId && <GoogleTagManager gtmId={gtmId} />}
-      {gaId && <GoogleAnalytics gaId={gaId} />}
+        {gtmId && <GoogleTagManager gtmId={gtmId} />}
+        {gaId && <GoogleAnalytics gaId={gaId} />}
+
+        {googleAdsId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-ads-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${googleAdsId}');
+              `}
+            </Script>
+          </>
+        )}
+      </body>
     </html>
   );
 }
