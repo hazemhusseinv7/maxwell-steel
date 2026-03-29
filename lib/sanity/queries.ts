@@ -501,3 +501,77 @@ export async function getBlogPost(
     return null;
   }
 }
+
+export async function getPageData(
+  slug: string,
+  lang: string = "en",
+): Promise<PageType | null> {
+  const query = `*[_type == "page" && slug.current == $slug][0]{
+    "title": title[_key == $lang][0].value,
+    slug,
+    "content": content[_key == $lang][0].value
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { slug, lang },
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["page", "content"],
+        },
+      },
+    );
+  } catch (error) {
+    console.error("Error fetching page data:", error);
+    return null;
+  }
+}
+
+export async function getAllPageSlugs(): Promise<{ slug: string }[] | null> {
+  const query = `*[_type == "page"]{
+    "slug": slug.current
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      {},
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["page", "content"],
+        },
+      },
+    );
+  } catch (error) {
+    console.error("Error fetching page slugs:", error);
+    return null;
+  }
+}
+
+export async function getFooterPagesData(
+  lang: string = "en",
+): Promise<{ title: string; slug: string }[] | null> {
+  const query = `*[_type == "page"]{
+    "title": title[_key == $lang][0].value,
+    "slug": slug.current
+  }`;
+
+  try {
+    return await sanityClient.fetch(
+      query,
+      { lang },
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["page", "content"],
+        },
+      },
+    );
+  } catch (error) {
+    console.error("Error fetching footer pages data:", error);
+    return null;
+  }
+}

@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import Link from "next/link";
+import { ReactNode } from "react";
+import { Link } from "@/i18n/navigation";
 
 interface ButtonActiveProps {
   href?: string;
@@ -19,7 +19,7 @@ function ButtonActive({
   const buttonContent = (
     <>
       <span className="relative z-10">{children}</span>
-      <span className="absolute inset-0 rounded-md bg-gradient-to-r from-[#f6f7ff] to-[#f5f6ff] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:from-[#070e41] dark:to-[#263381]"></span>
+      <span className="absolute inset-0 rounded-md bg-linear-to-r from-[#f6f7ff] to-[#f5f6ff] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:from-[#070e41] dark:to-[#263381]"></span>
     </>
   );
 

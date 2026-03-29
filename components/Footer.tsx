@@ -1,8 +1,12 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
 import { getLocale, getTranslations } from "next-intl/server";
-import { getSettingsData, getProjectsData } from "@/lib/sanity/queries";
+import {
+  getSettingsData,
+  getProjectsData,
+  getFooterPagesData,
+} from "@/lib/sanity/queries";
 import {
   FaXTwitter,
   FaInstagram,
@@ -19,12 +23,18 @@ const Footer = async () => {
   const locale = await getLocale();
   const t = await getTranslations("Footer");
 
-  const [settings, projects] = await Promise.all([
+  const [settings, projects, pages] = await Promise.all([
     getSettingsData(),
     getProjectsData(locale),
+    getFooterPagesData(locale),
   ]);
 
   const hasProjects = projects?.images && projects.images.length > 0;
+
+  const dynamicPageLinks = (pages || []).map((page) => ({
+    title: page.title,
+    href: `/${page.slug}`,
+  }));
 
   const links = [
     {
@@ -48,6 +58,7 @@ const Footer = async () => {
       title: t("links.link-6"),
       href: "/contact",
     },
+    ...dynamicPageLinks,
   ];
 
   const socialMedia = [
@@ -119,7 +130,7 @@ const Footer = async () => {
         </div>
         <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
           {socialMedia.map(({ name, link, icon: Icon }, i) => (
-            <Link
+            <a
               key={i}
               href={link!}
               target="_blank"
@@ -128,7 +139,7 @@ const Footer = async () => {
               className="text-muted-foreground transition-colors duration-300 hover:text-blue-700"
             >
               <Icon className="size-6" />
-            </Link>
+            </a>
           ))}
         </div>
 

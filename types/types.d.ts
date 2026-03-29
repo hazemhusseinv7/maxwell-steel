@@ -161,3 +161,12 @@ interface BlogPost {
   author?: AuthorType;
   categories?: CategoryType[];
 }
+
+// Pages
+interface PageType {
+  title: string;
+  slug: {
+    current: string;
+  };
+  content: any[];
+}

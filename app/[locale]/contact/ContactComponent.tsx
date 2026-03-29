@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { MdMarkEmailRead } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
 import { FaMapLocationDot } from "react-icons/fa6";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 interface FormDataType {
   name: string;
