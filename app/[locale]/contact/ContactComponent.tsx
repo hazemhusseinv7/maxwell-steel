@@ -7,8 +7,7 @@ import { addToast, Button, Card, Input, Textarea } from "@heroui/react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { MdMarkEmailRead } from "react-icons/md";
-import { FaPhone } from "react-icons/fa6";
-import { FaMapLocationDot } from "react-icons/fa6";
+import { FaPhone,FaMapLocationDot } from "react-icons/fa6";
 import { Link } from "@/i18n/navigation";
 
 interface FormDataType {
@@ -149,9 +148,9 @@ const ContactComponent = ({
 
             <div className="flex flex-col" dir="ltr">
               {settings?.phones?.map((phone, i) => (
-                <Link href={`tel:${phone}`} key={i}>
+                <a href={`tel:${phone}`} key={i}>
                   {phone}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -161,9 +160,9 @@ const ContactComponent = ({
 
             <div className="flex flex-col">
               {settings?.emails?.map((email, i) => (
-                <Link href={`mailto:${email}`} key={i}>
+                <a href={`mailto:${email}`} key={i}>
                   {email}
-                </Link>
+                </a>
               ))}
             </div>
           </div>

@@ -40,6 +40,10 @@ export async function generateMetadata(
     verification: {
       google: process.env.GOOGLE_SITE_VERIFICATION,
     },
+    other: {
+      "facebook-domain-verification":
+        process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION,
+    },
   };
 }
 
