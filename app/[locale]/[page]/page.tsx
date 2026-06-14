@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { getPageData } from "@/lib/sanity/queries";
+import { buildAlternates } from "@/lib/seo";
 import { PortableText } from "@/lib/PortableTextComponents";
 
 export async function generateMetadata({
@@ -20,6 +21,7 @@ export async function generateMetadata({
 
   return {
     title: pageData.title,
+    alternates: buildAlternates(locale, `/${page}`),
   };
 }
 

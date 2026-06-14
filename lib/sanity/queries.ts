@@ -20,7 +20,22 @@ export async function getSettingsData(
     whatsapp,
     facebook,
     youtube,
-    instagram
+    instagram,
+    "seoTitle": seoTitle[_key == $lang][0].value,
+    "seoDescription": seoDescription[_key == $lang][0].value,
+    "seoKeywords": seoKeywords[_key == $lang][0].value,
+    ogImage {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      }
+    },
+    twitterCardType,
+    "productsSeoTitle": productsSeoTitle[_key == $lang][0].value,
+    "productsSeoDescription": productsSeoDescription[_key == $lang][0].value
   }`;
 
   try {
@@ -142,20 +157,25 @@ export async function getRiskAdvantageData(
 
 export async function getProductsData(
   lang: string = "en",
-): Promise<ProductsType | null> {
-  const query = `*[_type == "products"][0]{
-    "productsList": productsList[] {
-      "name": name[_key == $lang][0].value,
-      "description": description[_key == $lang][0].value,
-      "features": features[].item[_key == $lang][0].value,
-      "specifications": specifications[].item[_key == $lang][0].value,
-      image[] {
-        asset-> {
-          _id,
-          url,
-          metadata {
-            dimensions
-          }
+): Promise<ProductItem[] | null> {
+  const query = `*[_type == "product"] | order(name[_key == "en"][0].value asc) {
+    "name": name[_key == $lang][0].value,
+    "nameEn": name[_key == "en"][0].value,
+    "slug": slug.current,
+    "description": description[_key == $lang][0].value,
+    "features": features[].item[_key == $lang][0].value,
+    "specifications": specifications[].item[_key == $lang][0].value,
+    "categories": categories[].item[_key == $lang][0].value,
+    "applications": applications[].item[_key == $lang][0].value,
+    "industries": industries[].item[_key == $lang][0].value,
+    "manufacturing": manufacturing[].item[_key == $lang][0].value,
+    "advantages": advantages[].item[_key == $lang][0].value,
+    image[] {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions
         }
       }
     }
@@ -573,5 +593,146 @@ export async function getFooterPagesData(
   } catch (error) {
     console.error("Error fetching footer pages data:", error);
     return null;
+  }
+}
+
+export async function getBlogSlugs(): Promise<string[]> {
+  const query = `*[_type == "blog" && defined(slug.current)].slug.current`;
+
+  try {
+    const result = await sanityClient.fetch(
+      query,
+      {},
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["blog", "content"],
+        },
+      },
+    );
+    return result?.filter(Boolean) || [];
+  } catch (error) {
+    console.error("Error fetching blog slugs:", error);
+    return [];
+  }
+}
+
+export async function getProductSlugs(): Promise<string[]> {
+  const query = `*[_type == "product" && defined(slug.current)].slug.current`;
+
+  try {
+    const result = await sanityClient.fetch(
+      query,
+      {},
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["products", "content"],
+        },
+      },
+    );
+    return result?.filter(Boolean) || [];
+  } catch (error) {
+    console.error("Error fetching product slugs:", error);
+    return [];
+  }
+}
+
+export async function getProductBySlug(
+  slug: string,
+  lang: string = "en",
+): Promise<ProductDetailResult> {
+  const query = `{
+    "product": *[_type == "product" && slug.current == $slug][0] {
+      "name": name[_key == $lang][0].value,
+      "nameEn": name[_key == "en"][0].value,
+      "slug": slug.current,
+      "description": description[_key == $lang][0].value,
+      "features": features[].item[_key == $lang][0].value,
+      "specifications": specifications[].item[_key == $lang][0].value,
+      "categories": categories[].item[_key == $lang][0].value,
+      "applications": applications[].item[_key == $lang][0].value,
+      "industries": industries[].item[_key == $lang][0].value,
+      "manufacturing": manufacturing[].item[_key == $lang][0].value,
+      "advantages": advantages[].item[_key == $lang][0].value,
+      image[] {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      },
+      "seoTitle": seoTitle[_key == $lang][0].value,
+      "seoDescription": seoDescription[_key == $lang][0].value,
+      "seoKeywords": seoKeywords[_key == $lang][0].value,
+      canonicalUrl,
+      noIndex,
+      "ogTitle": ogTitle[_key == $lang][0].value,
+      "ogDescription": ogDescription[_key == $lang][0].value,
+      ogImage {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      },
+      twitterCardType,
+      "twitterTitle": twitterTitle[_key == $lang][0].value,
+      "twitterDescription": twitterDescription[_key == $lang][0].value,
+      twitterImage {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      },
+      "material": material[_key == $lang][0].value,
+      "category": category[_key == $lang][0].value,
+      sku,
+      mpn,
+      brandName
+    },
+    "allProducts": *[_type == "product" && slug.current != $slug] {
+      "name": name[_key == $lang][0].value,
+      "nameEn": name[_key == "en"][0].value,
+      "slug": slug.current,
+      "description": description[_key == $lang][0].value,
+      image[] {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        }
+      }
+    }
+  }`;
+
+  try {
+    const result = await sanityClient.fetch(
+      query,
+      { slug, lang },
+      {
+        next: {
+          revalidate: REVALIDATE_TIME,
+          tags: ["products", "content"],
+        },
+      },
+    );
+
+    return {
+      product: result?.product || null,
+      allProducts: result?.allProducts || [],
+    };
+  } catch (error) {
+    console.error("Error fetching product by slug:", error);
+    return { product: null, allProducts: [] };
   }
 }

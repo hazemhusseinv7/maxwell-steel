@@ -2,11 +2,6 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  "Metadata": {
-    "title": "Maxwell Steel",
-    "description": "Decades of Steel, Unmatched Quality."
-  },
-
   "Header": {
     "links": {
       "link-1": "Products",
@@ -21,7 +16,37 @@ declare const messages: {
   "Products": {
     "title": "Products",
     "features": "Features",
-    "specifications": "Specifications"
+    "specifications": "Specifications",
+    "viewDetails": "View Details"
+  },
+
+  "ProductPage": {
+    "breadcrumb": {
+      "home": "Home",
+      "products": "Products"
+    },
+    "specifications": "Technical Specifications",
+    "applications": "Applications",
+    "advantages": "Advantages",
+    "material": "Material",
+    "categories": "Categories",
+    "industries": "Industries",
+    "manufacturing": "Manufacturing Capabilities",
+    "standards": "Standards & Certifications",
+    "relatedProducts": "Related Products",
+    "requestQuote": {
+      "title": "Request a Quote",
+      "description": "Get competitive pricing and fast delivery for your project needs.",
+      "button": "Get a Quote"
+    },
+    "viewDetails": "View Details",
+    "viewAllProducts": "View All Products",
+    "backToProducts": "Back to Products",
+    "notFound": "Product not found",
+    "trust": {
+      "haccp": "HACCP Compliant",
+      "stainless": "304 Stainless Steel"
+    }
   },
 
   "Footer": {

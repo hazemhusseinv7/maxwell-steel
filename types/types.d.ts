@@ -20,6 +20,13 @@ interface SettingsType {
   whatsapp?: string;
   facebook?: string;
   youtube?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: ResolvedImage;
+  twitterCardType?: string;
+  productsSeoTitle?: string;
+  productsSeoDescription?: string;
 }
 
 interface HeroType {
@@ -43,14 +50,49 @@ interface RiskAdvantageType {
   }[];
 }
 
-interface ProductsType {
-  productsList: {
-    name: string;
-    description: string;
-    features: string[];
-    specifications: string[];
-    image: ImageType[];
-  }[];
+interface ResolvedImage {
+  asset: { _id: string; url: string; metadata?: { dimensions?: { width: number; height: number } } }
+}
+
+interface ProductItem {
+  name: string
+  nameEn: string
+  slug: string
+  description: string
+  features: string[]
+  specifications: string[]
+  categories?: string[]
+  applications?: string[]
+  industries?: string[]
+  manufacturing?: string[]
+  advantages?: string[]
+  image: ResolvedImage[]
+  // SEO: Meta
+  seoTitle?: string
+  seoDescription?: string
+  seoKeywords?: string
+  canonicalUrl?: string
+  noIndex?: boolean
+  // SEO: Open Graph
+  ogTitle?: string
+  ogDescription?: string
+  ogImage?: ResolvedImage
+  // SEO: Twitter
+  twitterCardType?: string
+  twitterTitle?: string
+  twitterDescription?: string
+  twitterImage?: ResolvedImage
+  // Structured Data
+  material?: string
+  category?: string
+  sku?: string
+  mpn?: string
+  brandName?: string
+}
+
+interface ProductDetailResult {
+  product: ProductItem | null
+  allProducts: ProductItem[]
 }
 
 interface ProjectsType {

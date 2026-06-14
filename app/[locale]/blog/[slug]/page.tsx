@@ -5,6 +5,7 @@ import { PortableText } from "@/lib/PortableTextComponents";
 import Category from "../Category";
 import Author from "../Author";
 import { getBlogPost, getBlogPosts } from "@/lib/sanity/queries";
+import { buildAlternates } from "@/lib/seo";
 import { GoChevronLeft } from "react-icons/go";
 import { urlFor } from "@/lib/sanity/image";
 
@@ -81,13 +82,7 @@ export async function generateMetadata({
       description: description,
       images: imageUrl ? [imageUrl] : [],
     },
-    alternates: {
-      canonical: `/blog/${slug}`,
-      languages: {
-        en: `/en/blog/${slug}`,
-        ar: `/ar/blog/${slug}`,
-      },
-    },
+    alternates: buildAlternates(locale, `/blog/${slug}`),
   };
 }
 

@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { routing } from "@/i18n/routing";
-import { Locale, hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { Providers } from "./providers";
 
@@ -20,6 +20,8 @@ const tajawal = Tajawal({
   weight: ["200", "300", "400", "500", "700", "800", "900"],
 });
 
+const SITE_NAME = "Maxwell Steel";
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -29,14 +31,14 @@ export async function generateMetadata(
 ) {
   const { locale } = await props.params;
 
-  const t = await getTranslations({
-    locale: locale as Locale,
-    namespace: "Metadata",
-  });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   return {
-    title: t("title"),
-    description: t("description"),
+    metadataBase: baseUrl ? new URL(baseUrl) : undefined,
+    title: {
+      default: SITE_NAME,
+      template: `%s | ${SITE_NAME}`,
+    },
     verification: {
       google: process.env.GOOGLE_SITE_VERIFICATION,
     },

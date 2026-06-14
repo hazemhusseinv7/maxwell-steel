@@ -1,5 +1,16 @@
 import { getSettingsData } from "@/lib/sanity/queries";
+import { buildAlternates } from "@/lib/seo";
+import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import ContactComponent from "./ContactComponent";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: "Contact",
+    alternates: buildAlternates(locale, "/contact"),
+  };
+}
 
 export default async function Page({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;

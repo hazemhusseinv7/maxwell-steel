@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { MdMarkEmailRead } from "react-icons/md";
 import { FaPhone,FaMapLocationDot } from "react-icons/fa6";
-import { Link } from "@/i18n/navigation";
 
 interface FormDataType {
   name: string;

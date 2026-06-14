@@ -1,9 +1,4 @@
 {
-  "Metadata": {
-    "title": "Maxwell Steel",
-    "description": "Decades of Steel, Unmatched Quality."
-  },
-
   "Header": {
     "links": {
       "link-1": "المنتجات",
@@ -18,7 +13,37 @@
   "Products": {
     "title": "المنتجات",
     "features": "المميزات",
-    "specifications": "الخصائص"
+    "specifications": "الخصائص",
+    "viewDetails": "عرض التفاصيل"
+  },
+
+  "ProductPage": {
+    "breadcrumb": {
+      "home": "الرئيسية",
+      "products": "المنتجات"
+    },
+    "specifications": "المواصفات الفنية",
+    "applications": "التطبيقات",
+    "advantages": "المميزات",
+    "material": "الخامة",
+    "categories": "التصنيفات",
+    "industries": "القطاعات",
+    "manufacturing": "قدرات التصنيع",
+    "standards": "المعايير والشهادات",
+    "relatedProducts": "منتجات ذات صلة",
+    "requestQuote": {
+      "title": "اطلب عرض سعر",
+      "description": "احصل على أسعار تنافسية وتوصيل سريع لاحتياجات مشروعك.",
+      "button": "اطلب عرض سعر"
+    },
+    "viewDetails": "عرض التفاصيل",
+    "viewAllProducts": "عرض جميع المنتجات",
+    "backToProducts": "الرجوع للمنتجات",
+    "notFound": "المنتج غير موجود",
+    "trust": {
+      "haccp": "مطابق لمعايير HACCP",
+      "stainless": "استانلس ستيل 304"
+    }
   },
 
   "Testimonials": {
