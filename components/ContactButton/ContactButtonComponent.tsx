@@ -11,8 +11,8 @@ const ContactButtonComponent = ({ whatsapp }: { whatsapp: string }) => {
       href={whatsapp}
       target="_blank"
       rel="noopener noreferrer"
-      endContent={<FaWhatsapp className="size-8 text-white" />}
-      className="fixed start-4 bottom-4 z-50 min-w-0 bg-[#25D366] px-2"
+      endContent={<FaWhatsapp className="size-9 text-white" />}
+      className="fixed start-4 bottom-4 z-50 min-w-0 bg-[#25D366] p-0 w-14 h-13"
       aria-label="Contact us on WhatsApp"
     />
   );

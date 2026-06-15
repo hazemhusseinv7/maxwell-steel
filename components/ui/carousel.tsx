@@ -142,7 +142,7 @@ function CarouselNavigation({
         type="button"
         aria-label="Previous slide"
         className={cn(
-          "pointer-events-auto size-fit rounded-full bg-zinc-50 p-2 transition-opacity duration-300 dark:bg-zinc-950",
+          "pointer-events-auto size-fit rounded-full bg-zinc-50/90 p-2 backdrop-blur-sm transition-opacity duration-300 dark:bg-zinc-950/90",
           alwaysShow
             ? "opacity-100"
             : "opacity-0 group-hover/hover:opacity-100",
@@ -158,12 +158,12 @@ function CarouselNavigation({
           }
         }}
       >
-        <ChevronLeft className="size-2 stroke-zinc-600 lg:size-4 dark:stroke-zinc-50" />
+        <ChevronLeft className="size-4 stroke-zinc-600 sm:size-5 lg:size-5 dark:stroke-zinc-50" />
       </button>
       <button
         type="button"
         className={cn(
-          "pointer-events-auto size-fit rounded-full bg-zinc-50 p-2 transition-opacity duration-300 dark:bg-zinc-950",
+          "pointer-events-auto size-fit rounded-full bg-zinc-50/90 p-2 backdrop-blur-sm transition-opacity duration-300 dark:bg-zinc-950/90",
           alwaysShow
             ? "opacity-100"
             : "opacity-0 group-hover/hover:opacity-100",
@@ -180,7 +180,7 @@ function CarouselNavigation({
           }
         }}
       >
-        <ChevronRight className="size-2 stroke-zinc-600 lg:size-4 dark:stroke-zinc-50" />
+        <ChevronRight className="size-4 stroke-zinc-600 sm:size-5 lg:size-5 dark:stroke-zinc-50" />
       </button>
     </div>
   );

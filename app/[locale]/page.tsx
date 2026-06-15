@@ -7,6 +7,7 @@ import RiskAdvantage from "@/components/RiskAdvantage";
 import Products from "@/components/Products";
 import Features from "@/components/Features";
 import AboutUs from "@/components/AboutUs";
+import CTA from "@/components/CTA";
 import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
 
@@ -80,6 +81,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <Projects />
       <Features />
       <Testimonials testimonials={testimonials} />
+      <CTA />
       <Clients />
     </main>
   );

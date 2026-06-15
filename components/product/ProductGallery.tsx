@@ -32,12 +32,12 @@ export default function ProductGallery({
   const slides = images.map((src) => ({ src }));
 
   return (
-    <div className="w-full" dir="ltr">
-      <Carousel className="w-full">
+    <div className="w-full min-w-0" dir="ltr">
+      <Carousel className="w-full" index={activeIndex} onIndexChange={setActiveIndex}>
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index}>
-              <div className="group relative aspect-square w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
+              <div className="group relative aspect-16/10 w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
                 <Image
                   src={image}
                   alt={`${productName} - Image ${index + 1}`}

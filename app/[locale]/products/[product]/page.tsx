@@ -1,9 +1,12 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { getProductBySlug, getProductSlugs } from "@/lib/sanity/queries";
+import {
+  getProductBySlug,
+  getProductSlugs,
+  getSettingsData,
+} from "@/lib/sanity/queries";
 import { Link } from "@/i18n/navigation";
-import Image from "next/image";
 import { GoChevronLeft } from "react-icons/go";
 import { RiVerifiedBadgeFill, RiPriceTagFill } from "react-icons/ri";
 import {
@@ -18,6 +21,8 @@ import {
 } from "react-icons/hi2";
 import ProductGallery from "@/components/product/ProductGallery";
 import Breadcrumbs from "@/components/product/Breadcrumbs";
+import ProductCard from "@/components/product/ProductCard";
+import ContactComponent from "@/app/[locale]/contact/ContactComponent";
 import { buildAlternates } from "@/lib/seo";
 
 export async function generateStaticParams() {
@@ -68,11 +73,9 @@ export async function generateMetadata({
       images: twitterImageUrl ? [twitterImageUrl] : [],
     },
     alternates: {
-        ...buildAlternates(locale, `/products/${productSlug}`),
-        ...(product.canonicalUrl
-          ? { canonical: product.canonicalUrl }
-          : {}),
-      },
+      ...buildAlternates(locale, `/products/${productSlug}`),
+      ...(product.canonicalUrl ? { canonical: product.canonicalUrl } : {}),
+    },
   };
 
   if (product.seoKeywords) {
@@ -96,6 +99,7 @@ export default async function ProductDetailPage({
   const t = await getTranslations("ProductPage");
   const tProducts = await getTranslations("Products");
   const { product, allProducts } = await getProductBySlug(productSlug, locale);
+  const settings = await getSettingsData(locale);
 
   if (!product) notFound();
 
@@ -160,7 +164,7 @@ export default async function ProductDetailPage({
       />
 
       {/* ─────────── Hero Section ─────────── */}
-      <section className="bg-gradient-to-b from-blue-50/60 to-transparent pt-24 dark:from-blue-950/20">
+      <section className="overflow-hidden bg-gradient-to-b from-blue-50/60 to-transparent pt-24 dark:from-blue-950/20">
         <div className="mx-auto max-w-300 px-4 sm:px-6 lg:px-20">
           <Breadcrumbs
             items={[
@@ -180,7 +184,7 @@ export default async function ProductDetailPage({
 
           <div className="grid gap-10 pb-12 lg:grid-cols-2 lg:gap-16">
             {/* Gallery with decorative gradient wrapper */}
-            <div className="relative">
+            <div className="relative min-w-0">
               <div className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-blue-200/40 via-transparent to-transparent dark:from-blue-900/20" />
               <div className="lg:sticky lg:top-28 lg:h-fit">
                 <ProductGallery images={imageUrls} productName={product.name} />
@@ -229,13 +233,13 @@ export default async function ProductDetailPage({
 
               {/* CTA */}
               <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={`/contact?product=${encodeURIComponent(product.name)}`}
+                <a
+                  href="#contact"
                   className="bg-primary-blue inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:scale-[1.02] hover:shadow-xl"
                 >
                   {t("requestQuote.button")}
                   <HiArrowRight className="size-4 rtl:rotate-180" />
-                </Link>
+                </a>
               </div>
 
               {/* Trust badges */}
@@ -304,6 +308,30 @@ export default async function ProductDetailPage({
           )}
         </div>
       </section>
+
+      {/* ─────────── CTA Banner ─────────── */}
+      <div className="mx-auto max-w-300 px-4 sm:px-6 lg:px-20">
+        <section className="relative my-8 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 px-8 py-12 text-white shadow-xl shadow-blue-600/20 lg:px-16">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[40px_54px]" />
+          <div className="relative z-10 flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-start">
+            <div className="max-w-2xl">
+              <h2 className="mb-3 text-2xl font-bold lg:text-3xl">
+                {t("requestQuote.title")}
+              </h2>
+              <p className="opacity-90 lg:text-lg">
+                {t("requestQuote.description")}
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-10 py-4 font-semibold text-blue-600 shadow-xl transition hover:scale-[1.02] hover:bg-gray-100"
+            >
+              {t("requestQuote.button")}
+              <HiArrowRight className="size-4 rtl:rotate-180" />
+            </a>
+          </div>
+        </section>
+      </div>
 
       {/* ─────────── Content Sections ─────────── */}
       <div className="mx-auto max-w-300 px-4 sm:px-6 lg:px-20">
@@ -412,7 +440,7 @@ export default async function ProductDetailPage({
             <div className="relative">
               {/* Vertical connecting line */}
               <div className="from-primary-blue/40 via-primary-blue/20 absolute start-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b to-transparent" />
-              <div className="flex flex-col gap-6">
+            <div className="flex min-w-0 flex-col gap-6">
                 {product.manufacturing.map((capability, i) => (
                   <div key={i} className="flex items-start gap-5">
                     <div className="bg-primary-blue relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4 shadow-blue-600/20 ring-white dark:ring-gray-900">
@@ -460,7 +488,7 @@ export default async function ProductDetailPage({
           </section>
         )}
 
-        {/* ─────────── Related Products — Enhanced cards ─────────── */}
+        {/* ─────────── Related Products ─────────── */}
         {relatedProducts.length > 0 && (
           <section className="py-20">
             <div className="mb-10">
@@ -469,66 +497,28 @@ export default async function ProductDetailPage({
                 {t("relatedProducts")}
               </h2>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2">
               {relatedProducts.map((related) => {
-                const relImageUrl = related.image?.[0]?.asset?.url;
+                const relImages =
+                  related.image?.map((img) => img.asset?.url).filter(Boolean) ||
+                  [];
                 return (
-                  <Link
+                  <ProductCard
                     key={related.slug}
-                    href={`/products/${related.slug}`}
-                    className="group bg-background overflow-hidden rounded-2xl border shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
-                  >
-                    <div className="relative h-52 w-full overflow-hidden">
-                      {relImageUrl && (
-                        <Image
-                          src={relImageUrl}
-                          alt={related.name}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                    </div>
-                    <div className="flex flex-1 flex-col gap-2 p-5">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">
-                        {related.name}
-                      </h3>
-                      <p className="line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
-                        {related.description}
-                      </p>
-                      <div className="text-primary-blue mt-2 flex items-center gap-1.5 pt-1 text-sm font-medium">
-                        {t("viewDetails")}
-                        <HiArrowRight className="size-4 rtl:rotate-180" />
-                      </div>
-                    </div>
-                  </Link>
+                    name={related.name}
+                    slug={related.slug}
+                    description={related.description}
+                    images={relImages}
+                  />
                 );
               })}
             </div>
           </section>
         )}
 
-        {/* ─────────── CTA Section ─────────── */}
-        <section className="relative my-16 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 px-8 py-16 text-white shadow-xl shadow-blue-600/20 lg:px-16">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[40px_54px]" />
-          <div className="relative z-10 flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-start">
-            <div className="max-w-2xl">
-              <h2 className="mb-3 text-3xl font-bold lg:text-4xl">
-                {t("requestQuote.title")}
-              </h2>
-              <p className="text-lg opacity-90">
-                {t("requestQuote.description")}
-              </p>
-            </div>
-            <Link
-              href={`/contact?product=${encodeURIComponent(product.name)}`}
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-10 py-4 font-semibold text-blue-600 shadow-xl transition hover:scale-[1.02] hover:bg-gray-100"
-            >
-              {t("requestQuote.button")}
-              <HiArrowRight className="size-4 rtl:rotate-180" />
-            </Link>
-          </div>
+        {/* ─────────── Contact Form ─────────── */}
+        <section id="contact" className="scroll-mt-20 py-20">
+          <ContactComponent settings={settings} />
         </section>
       </div>
     </main>
