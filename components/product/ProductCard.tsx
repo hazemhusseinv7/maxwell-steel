@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { GoChevronRight } from "react-icons/go";
 import {
   Carousel,
@@ -28,6 +28,8 @@ export default function ProductCard({
   categories,
 }: ProductCardProps) {
   const t = useTranslations("Products");
+  const locale = useLocale();
+  const dir = locale === "ar" ? "rtl" : "ltr";
 
   return (
     <Link
@@ -63,7 +65,7 @@ export default function ProductCard({
           </Carousel>
         )}
         {categories && categories.length > 0 && (
-          <div className="absolute top-3 start-3 z-10 flex flex-wrap gap-1.5">
+          <div dir={dir} className="absolute top-3 start-3 z-10 flex flex-wrap gap-1.5">
             {categories.slice(0, 2).map((cat, i) => (
               <span
                 key={i}

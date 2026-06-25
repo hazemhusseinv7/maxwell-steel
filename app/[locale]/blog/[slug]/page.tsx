@@ -1,5 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { PortableText } from "@/lib/PortableTextComponents";
 import Category from "../Category";
@@ -97,21 +98,7 @@ export default async function Page({
   const t = await getTranslations("Blog.post");
 
   if (!post) {
-    return (
-      <main>
-        <div className="mx-auto max-w-340 p-4 text-center sm:p-6 lg:p-20">
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-            {t("not-found")}
-          </h1>
-          <Link
-            href="/blog"
-            className="mt-4 inline-flex items-center text-blue-600 transition hover:underline"
-          >
-            {t("return")}
-          </Link>
-        </div>
-      </main>
-    );
+    notFound();
   }
 
   const description = toPlainText(post.content);

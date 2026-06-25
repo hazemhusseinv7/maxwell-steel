@@ -67,6 +67,7 @@ interface ProductItem {
   manufacturing?: string[]
   advantages?: string[]
   image: ResolvedImage[]
+  youtubeUrl?: string
   // SEO: Meta
   seoTitle?: string
   seoDescription?: string

@@ -13,9 +13,9 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
   Button,
 } from "@heroui/react";
+import { Link } from "@/i18n/navigation";
 import ChangeLang from "./ChangeLang";
 
 const Header = ({ projects }: { projects: ProjectsType | null }) => {

@@ -655,6 +655,7 @@ export async function getProductBySlug(
       "industries": industries[].item[_key == $lang][0].value,
       "manufacturing": manufacturing[].item[_key == $lang][0].value,
       "advantages": advantages[].item[_key == $lang][0].value,
+      youtubeUrl,
       image[] {
         asset-> {
           _id,

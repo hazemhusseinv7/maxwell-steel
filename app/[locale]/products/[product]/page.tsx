@@ -107,7 +107,13 @@ export default async function ProductDetailPage({
     product.image?.map((img) => img.asset?.url).filter(Boolean) || [];
   const relatedProducts = allProducts.filter((p) => p.slug !== productSlug);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const productUrl = `${baseUrl}/products/${productSlug}`;
+  const productUrl = `${baseUrl}/${locale}/products/${productSlug}`;
+
+  const youtubeId = product.youtubeUrl
+    ? product.youtubeUrl.match(
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/,
+      )?.[1]
+    : null;
 
   const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
@@ -141,7 +147,7 @@ export default async function ProductDetailPage({
         "@type": "ListItem",
         position: 2,
         name: t("breadcrumb.products"),
-        item: `${baseUrl}/products`,
+        item: `${baseUrl}/${locale}/products`,
       },
       {
         "@type": "ListItem",
@@ -164,7 +170,7 @@ export default async function ProductDetailPage({
       />
 
       {/* ─────────── Hero Section ─────────── */}
-      <section className="overflow-hidden bg-gradient-to-b from-blue-50/60 to-transparent pt-24 dark:from-blue-950/20">
+      <section className="overflow-hidden bg-linear-to-b from-blue-50/60 to-transparent pt-24 dark:from-blue-950/20">
         <div className="mx-auto max-w-300 px-4 sm:px-6 lg:px-20">
           <Breadcrumbs
             items={[
@@ -185,8 +191,19 @@ export default async function ProductDetailPage({
           <div className="grid gap-10 pb-12 lg:grid-cols-2 lg:gap-16">
             {/* Gallery with decorative gradient wrapper */}
             <div className="relative min-w-0">
-              <div className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-tr from-blue-200/40 via-transparent to-transparent dark:from-blue-900/20" />
+              <div className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-linear-to-tr from-blue-200/40 via-transparent to-transparent dark:from-blue-900/20" />
               <div className="lg:sticky lg:top-28 lg:h-fit">
+                {youtubeId && (
+                  <div className="mb-4 aspect-video w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${youtubeId}`}
+                      title={`${product.name} video`}
+                      className="size-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
                 <ProductGallery images={imageUrls} productName={product.name} />
               </div>
             </div>
@@ -222,7 +239,7 @@ export default async function ProductDetailPage({
                   {product.features.map((feature, i) => (
                     <span
                       key={i}
-                      className="text-primary-blue inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/60 px-4 py-2 text-sm font-medium dark:from-blue-950/40 dark:to-blue-900/20 dark:text-blue-300"
+                      className="text-primary-blue inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-blue-50 to-blue-100/60 px-4 py-2 text-sm font-medium dark:from-blue-950/40 dark:to-blue-900/20 dark:text-blue-300"
                     >
                       <RiVerifiedBadgeFill className="size-4 shrink-0" />
                       {feature}
@@ -260,8 +277,8 @@ export default async function ProductDetailPage({
           {(product.material || product.category || product.sku) && (
             <div className="mb-20 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {product.material && (
-                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-blue-50/40 p-5 dark:border-gray-800 dark:from-gray-900 dark:to-blue-950/10">
-                  <div className="from-primary-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br to-blue-700 text-white shadow-md shadow-blue-600/20">
+                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-linear-to-br from-white to-blue-50/40 p-5 dark:border-gray-800 dark:from-gray-900 dark:to-blue-950/10">
+                  <div className="from-primary-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br to-blue-700 text-white shadow-md shadow-blue-600/20">
                     <HiCube className="size-5" />
                   </div>
                   <div className="min-w-0">
@@ -275,8 +292,8 @@ export default async function ProductDetailPage({
                 </div>
               )}
               {product.category && (
-                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-blue-50/40 p-5 dark:border-gray-800 dark:from-gray-900 dark:to-blue-950/10">
-                  <div className="from-primary-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br to-blue-700 text-white shadow-md shadow-blue-600/20">
+                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-linear-to-br from-white to-blue-50/40 p-5 dark:border-gray-800 dark:from-gray-900 dark:to-blue-950/10">
+                  <div className="from-primary-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br to-blue-700 text-white shadow-md shadow-blue-600/20">
                     <HiSquares2X2 className="size-5" />
                   </div>
                   <div className="min-w-0">
@@ -290,8 +307,8 @@ export default async function ProductDetailPage({
                 </div>
               )}
               {product.sku && (
-                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-gradient-to-br from-white to-blue-50/40 p-5 dark:border-gray-800 dark:from-gray-900 dark:to-blue-950/10">
-                  <div className="from-primary-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br to-blue-700 text-white shadow-md shadow-blue-600/20">
+                <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-linear-to-br from-white to-blue-50/40 p-5 dark:border-gray-800 dark:from-gray-900 dark:to-blue-950/10">
+                  <div className="from-primary-blue flex size-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br to-blue-700 text-white shadow-md shadow-blue-600/20">
                     <HiQrCode className="size-5" />
                   </div>
                   <div className="min-w-0">
@@ -311,8 +328,8 @@ export default async function ProductDetailPage({
 
       {/* ─────────── CTA Banner ─────────── */}
       <div className="mx-auto max-w-300 px-4 sm:px-6 lg:px-20">
-        <section className="relative my-8 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 px-8 py-12 text-white shadow-xl shadow-blue-600/20 lg:px-16">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[40px_54px]" />
+        <section className="relative my-8 overflow-hidden rounded-3xl bg-linear-to-br from-blue-600 to-blue-800 px-8 py-12 text-white shadow-xl shadow-blue-600/20 lg:px-16">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] mask-[radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[40px_54px]" />
           <div className="relative z-10 flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-start">
             <div className="max-w-2xl">
               <h2 className="mb-3 text-2xl font-bold lg:text-3xl">
@@ -384,7 +401,7 @@ export default async function ProductDetailPage({
                   <div className="absolute -top-6 left-[-1.5rem] size-24 rounded-full bg-blue-200/40 transition-transform group-hover:scale-150 rtl:right-[-1.5rem] rtl:left-auto dark:bg-blue-900/20" />
                   <div className="relative z-10 flex flex-col gap-4">
                     <div className="flex items-center justify-between">
-                      <div className="from-primary-blue flex size-12 items-center justify-center rounded-xl bg-gradient-to-br to-blue-700 text-white shadow-md shadow-blue-600/20 transition-transform group-hover:scale-110">
+                      <div className="from-primary-blue flex size-12 items-center justify-center rounded-xl bg-linear-to-br to-blue-700 text-white shadow-md shadow-blue-600/20 transition-transform group-hover:scale-110">
                         <HiCog6Tooth className="size-6" />
                       </div>
                       <span className="text-3xl font-bold text-blue-100 dark:text-blue-900/40">
@@ -416,7 +433,7 @@ export default async function ProductDetailPage({
                   key={i}
                   className="flex w-28 flex-col items-center gap-3 sm:w-32"
                 >
-                  <div className="from-primary-blue flex size-20 items-center justify-center rounded-full bg-gradient-to-br to-blue-700 text-white shadow-lg shadow-blue-600/20 transition-transform hover:scale-105 sm:size-24">
+                  <div className="from-primary-blue flex size-20 items-center justify-center rounded-full bg-linear-to-br to-blue-700 text-white shadow-lg shadow-blue-600/20 transition-transform hover:scale-105 sm:size-24">
                     <HiBuildingStorefront className="size-9 sm:size-10" />
                   </div>
                   <span className="text-center text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -439,8 +456,8 @@ export default async function ProductDetailPage({
             </div>
             <div className="relative">
               {/* Vertical connecting line */}
-              <div className="from-primary-blue/40 via-primary-blue/20 absolute start-[19px] top-2 bottom-2 w-0.5 bg-gradient-to-b to-transparent" />
-            <div className="flex min-w-0 flex-col gap-6">
+              <div className="from-primary-blue/40 via-primary-blue/20 absolute start-[19px] top-2 bottom-2 w-0.5 bg-linear-to-b to-transparent" />
+              <div className="flex min-w-0 flex-col gap-6">
                 {product.manufacturing.map((capability, i) => (
                   <div key={i} className="flex items-start gap-5">
                     <div className="bg-primary-blue relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4 shadow-blue-600/20 ring-white dark:ring-gray-900">
@@ -471,7 +488,7 @@ export default async function ProductDetailPage({
               {product.advantages.map((advantage, i) => (
                 <div
                   key={i}
-                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 text-white shadow-lg shadow-blue-600/20 transition-transform hover:-translate-y-1"
+                  className="group relative overflow-hidden rounded-2xl bg-linear-to-br from-blue-600 to-blue-800 p-6 text-white shadow-lg shadow-blue-600/20 transition-transform hover:-translate-y-1"
                 >
                   <div className="absolute -top-4 left-[-1rem] size-24 rounded-full bg-white/5 transition-transform group-hover:scale-150 rtl:right-[-1rem] rtl:left-auto" />
                   <div className="relative z-10 flex items-start gap-4">
