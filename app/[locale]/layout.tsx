@@ -23,7 +23,7 @@ const tajawal = Tajawal({
 const SITE_NAME = "Maxwell Steel";
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return [{ locale: "ar" }];
 }
 
 export async function generateMetadata(

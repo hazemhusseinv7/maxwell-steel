@@ -107,7 +107,7 @@ export default async function ProductDetailPage({
     product.image?.map((img) => img.asset?.url).filter(Boolean) || [];
   const relatedProducts = allProducts.filter((p) => p.slug !== productSlug);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const productUrl = `${baseUrl}/${locale}/products/${productSlug}`;
+  const productUrl = `${baseUrl}/products/${productSlug}`;
 
   const youtubeId = product.youtubeUrl
     ? product.youtubeUrl.match(
@@ -147,7 +147,7 @@ export default async function ProductDetailPage({
         "@type": "ListItem",
         position: 2,
         name: t("breadcrumb.products"),
-        item: `${baseUrl}/${locale}/products`,
+        item: `${baseUrl}/products`,
       },
       {
         "@type": "ListItem",

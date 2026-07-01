@@ -1,7 +1,24 @@
 import createMiddleware from "next-intl/middleware";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
+
+export default function middleware(req: NextRequest) {
+  const path = req.nextUrl.pathname;
+
+  if (
+    path === "/ar" ||
+    path.startsWith("/ar/") ||
+    path === "/en" ||
+    path.startsWith("/en/")
+  ) {
+    return new NextResponse(null, { status: 410 });
+  }
+
+  return intlMiddleware(req);
+}
 
 export const config = {
   // Match all pathnames except for

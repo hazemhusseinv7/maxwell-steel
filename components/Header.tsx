@@ -16,7 +16,6 @@ import {
   Button,
 } from "@heroui/react";
 import { Link } from "@/i18n/navigation";
-import ChangeLang from "./ChangeLang";
 
 const Header = ({ projects }: { projects: ProjectsType | null }) => {
   const t = useTranslations("Header");
@@ -80,9 +79,6 @@ const Header = ({ projects }: { projects: ProjectsType | null }) => {
             >
               {t("button")}
             </Button>
-          </NavbarItem>
-          <NavbarItem>
-            <ChangeLang />
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>
