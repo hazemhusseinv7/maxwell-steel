@@ -10,6 +10,7 @@ export async function getSettingsData(
 ): Promise<SettingsType | null> {
   const query = `*[_type == "settings"][0]{
     "location": location[_key == $lang][0].value,
+    mapUrl,
     phones,
     emails,
     twitter,
@@ -655,6 +656,10 @@ export async function getProductBySlug(
       "industries": industries[].item[_key == $lang][0].value,
       "manufacturing": manufacturing[].item[_key == $lang][0].value,
       "advantages": advantages[].item[_key == $lang][0].value,
+      "reviews": reviews[] {
+        "name": name[_key == $lang][0].value,
+        "content": content[_key == $lang][0].value
+      },
       youtubeUrl,
       image[] {
         asset-> {

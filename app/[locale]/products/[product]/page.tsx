@@ -23,6 +23,7 @@ import ProductGallery from "@/components/product/ProductGallery";
 import Breadcrumbs from "@/components/product/Breadcrumbs";
 import ProductCard from "@/components/product/ProductCard";
 import ContactComponent from "@/app/[locale]/contact/ContactComponent";
+import Testimonials from "@/components/Testimonials";
 import { buildAlternates } from "@/lib/seo";
 
 export async function generateStaticParams() {
@@ -100,6 +101,9 @@ export default async function ProductDetailPage({
   const tProducts = await getTranslations("Products");
   const { product, allProducts } = await getProductBySlug(productSlug, locale);
   const settings = await getSettingsData(locale);
+  const productTestimonials = product?.reviews?.length
+    ? { testimonials: product.reviews }
+    : null;
 
   if (!product) notFound();
 
@@ -132,6 +136,14 @@ export default async function ProductDetailPage({
   if (product.category) jsonLd.category = product.category;
   if (product.sku) jsonLd.sku = product.sku;
   if (product.mpn) jsonLd.mpn = product.mpn;
+
+  if (productTestimonials?.testimonials?.length) {
+    jsonLd.review = productTestimonials.testimonials.map((t) => ({
+      "@type": "Review",
+      reviewBody: t.content,
+      author: { "@type": "Person", name: t.name },
+    }));
+  }
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -504,6 +516,9 @@ export default async function ProductDetailPage({
             </div>
           </section>
         )}
+
+        {/* ─────────── Testimonials ─────────── */}
+        <Testimonials testimonials={productTestimonials} />
 
         {/* ─────────── Related Products ─────────── */}
         {relatedProducts.length > 0 && (

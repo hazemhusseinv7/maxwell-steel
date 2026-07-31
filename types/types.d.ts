@@ -9,6 +9,7 @@ interface ImageType {
 
 interface SettingsType {
   location?: string;
+  mapUrl?: string;
   phones?: string[];
   emails?: string[];
   twitter?: string;
@@ -83,6 +84,7 @@ interface ProductItem {
   twitterTitle?: string
   twitterDescription?: string
   twitterImage?: ResolvedImage
+  reviews?: { name: string; content: string }[]
   // Structured Data
   material?: string
   category?: string

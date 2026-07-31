@@ -158,7 +158,7 @@ function CarouselNavigation({
           }
         }}
       >
-        <ChevronLeft className="size-4 stroke-zinc-600 sm:size-5 lg:size-5 dark:stroke-zinc-50" />
+        <ChevronLeft className="size-4 cursor-pointer stroke-zinc-600 sm:size-5 lg:size-5 dark:stroke-zinc-50" />
       </button>
       <button
         type="button"
@@ -180,7 +180,7 @@ function CarouselNavigation({
           }
         }}
       >
-        <ChevronRight className="size-4 stroke-zinc-600 sm:size-5 lg:size-5 dark:stroke-zinc-50" />
+        <ChevronRight className="size-4 cursor-pointer stroke-zinc-600 sm:size-5 lg:size-5 dark:stroke-zinc-50" />
       </button>
     </div>
   );

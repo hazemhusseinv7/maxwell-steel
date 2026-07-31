@@ -33,11 +33,15 @@ export default function ProductGallery({
 
   return (
     <div className="w-full min-w-0" dir="ltr">
-      <Carousel className="w-full" index={activeIndex} onIndexChange={setActiveIndex}>
+      <Carousel
+        className="w-full"
+        index={activeIndex}
+        onIndexChange={setActiveIndex}
+      >
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index}>
-              <div className="group relative aspect-16/10 w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
+              <div className="group from-primary-blue/10 to-primary-gray/10 relative aspect-16/10 w-full overflow-hidden rounded-xl border border-zinc-200 bg-linear-to-br dark:border-zinc-800">
                 <Image
                   src={image}
                   alt={`${productName} - Image ${index + 1}`}
@@ -52,7 +56,7 @@ export default function ProductGallery({
                     setActiveIndex(index);
                     setLightboxOpen(true);
                   }}
-                  className="absolute right-3 top-3 z-10 flex size-9 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur-sm transition hover:bg-black/70 group-hover:opacity-100"
+                  className="absolute top-3 right-3 z-10 flex size-9 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100 hover:bg-black/70"
                   aria-label="Open fullscreen"
                 >
                   <HiMiniArrowsPointingOut className="size-4" />
@@ -77,7 +81,7 @@ export default function ProductGallery({
               type="button"
               onClick={() => setActiveIndex(index)}
               className={cn(
-                "relative size-16 shrink-0 overflow-hidden rounded-lg border-2 transition",
+                "from-primary-blue/10 to-primary-gray/10 relative size-16 shrink-0 overflow-hidden rounded-lg border-2 bg-linear-to-br transition",
                 activeIndex === index
                   ? "border-blue-500"
                   : "border-transparent opacity-60 hover:opacity-100",

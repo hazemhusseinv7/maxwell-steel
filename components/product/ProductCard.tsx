@@ -36,7 +36,10 @@ export default function ProductCard({
       href={`/products/${slug}`}
       className="group rounded-xl bg-gray-200/70 p-5 transition hover:bg-gray-300/70 focus:bg-gray-100 focus:outline-hidden dark:bg-white/5 dark:hover:bg-white/20 dark:focus:bg-white/10"
     >
-      <div className="relative aspect-16/10" dir="ltr">
+      <div
+        className="from-primary-blue/10 to-primary-gray/10 relative aspect-16/10 overflow-hidden rounded-xl bg-linear-to-br"
+        dir="ltr"
+      >
         {images.length > 0 && (
           <Carousel className="size-full">
             <CarouselContent className="h-full">
@@ -54,10 +57,20 @@ export default function ProductCard({
             </CarouselContent>
             {images.length > 1 && (
               <>
-                <div onClick={(e) => e.stopPropagation()}>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                  }}
+                >
                   <CarouselNavigation alwaysShow />
                 </div>
-                <div onClick={(e) => e.stopPropagation()}>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                  }}
+                >
                   <CarouselIndicator />
                 </div>
               </>
@@ -65,7 +78,10 @@ export default function ProductCard({
           </Carousel>
         )}
         {categories && categories.length > 0 && (
-          <div dir={dir} className="absolute top-3 start-3 z-10 flex flex-wrap gap-1.5">
+          <div
+            dir={dir}
+            className="absolute start-3 top-3 z-10 flex flex-wrap gap-1.5"
+          >
             {categories.slice(0, 2).map((cat, i) => (
               <span
                 key={i}

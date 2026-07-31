@@ -174,8 +174,20 @@ const ContactComponent = ({
             <p>{settings?.location}</p>
           </div>
         </div>
-      </Card>
-    </div>
+        </Card>
+
+        {settings?.mapUrl && (
+          <Card className="mx-auto w-full max-w-120 overflow-hidden p-0 shadow-2xl shadow-zinc-300 dark:shadow-zinc-900">
+            <iframe
+              src={settings.mapUrl}
+              className="h-72 w-full border-0 lg:h-80"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </Card>
+        )}
+      </div>
   );
 };
 
