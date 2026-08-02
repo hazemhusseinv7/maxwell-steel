@@ -84,7 +84,7 @@ interface ProductItem {
   twitterTitle?: string
   twitterDescription?: string
   twitterImage?: ResolvedImage
-  reviews?: { name: string; content: string }[]
+  reviews?: { name: string; content: string; rating?: number }[]
   // Structured Data
   material?: string
   category?: string

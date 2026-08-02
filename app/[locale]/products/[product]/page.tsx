@@ -141,8 +141,26 @@ export default async function ProductDetailPage({
     jsonLd.review = productTestimonials.testimonials.map((t) => ({
       "@type": "Review",
       reviewBody: t.content,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: t.rating ?? 5,
+        bestRating: 5,
+      },
       author: { "@type": "Person", name: t.name },
     }));
+
+    const average =
+      productTestimonials.testimonials.reduce(
+        (sum, t) => sum + (t.rating ?? 5),
+        0,
+      ) / productTestimonials.testimonials.length;
+    jsonLd.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: Math.round(average * 10) / 10,
+      reviewCount: productTestimonials.testimonials.length,
+      bestRating: 5,
+      worstRating: 1,
+    };
   }
 
   const breadcrumbJsonLd = {
@@ -516,11 +534,13 @@ export default async function ProductDetailPage({
             </div>
           </section>
         )}
+      </div>
 
-        {/* ─────────── Testimonials ─────────── */}
-        <Testimonials testimonials={productTestimonials} />
+      {/* ─────────── Testimonials ─────────── */}
+      <Testimonials testimonials={productTestimonials} />
 
-        {/* ─────────── Related Products ─────────── */}
+      {/* ─────────── Related Products ─────────── */}
+      <div className="mx-auto max-w-300 px-4 sm:px-6 lg:px-20">
         {relatedProducts.length > 0 && (
           <section className="py-20">
             <div className="mb-10">

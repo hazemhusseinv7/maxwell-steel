@@ -658,7 +658,8 @@ export async function getProductBySlug(
       "advantages": advantages[].item[_key == $lang][0].value,
       "reviews": reviews[] {
         "name": name[_key == $lang][0].value,
-        "content": content[_key == $lang][0].value
+        "content": content[_key == $lang][0].value,
+        rating
       },
       youtubeUrl,
       image[] {
