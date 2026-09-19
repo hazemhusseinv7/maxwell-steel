@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="406" viewBox="0 0 135.47 107.38" role="img" aria-label="maqrat">
+  <g id="symbol" fill="#00743d">
+    <path id="symbol-left" d="M0 0H30.878L63.75 36.856 31.874 67.736V106.585H0Z"/>
+    <path id="symbol-right" d="M135.472 0H104.592L71.718 36.856 103.594 67.736v38.849h31.878z"/>
+    <path id="symbol-center" d="M59.866 107.382V82.678q0-1.993 1.991-1.992h14.344q1.993 0 1.993 1.992v24.704z"/>
+  </g>
+</svg>

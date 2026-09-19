@@ -1,26 +1,247 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --background: oklch(0.94 0.018 84);
+  --foreground: oklch(0.27 0.02 75);
+  --accent: oklch(0.47 0.16 162);
+  --accent-hover: color-mix(in oklab, var(--accent) 80%, white);
+  --link: var(--accent);
+  --surface-secondary: oklch(0.93 0.028 85);
+  --surface-tertiary: oklch(0.9 0.025 85);
+  --surface: oklch(0.97 0.02 85);
+  --overlay: var(--surface);
+  --field-background: var(--surface);
+  --border: oklch(0.8 0.02 85);
+  --muted: oklch(0.45 0.02 85);
+  --danger: oklch(0.52 0.2 25);
+  --default: oklch(0.9 0.025 85);
+  --separator: oklch(0.82 0.02 85);
+  --radius: 0;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-field: 6px;
+  --surface-shadow:
+    0 1px 2px 0 rgba(120, 90, 40, 0.06), 0 4px 14px 0 rgba(120, 90, 40, 0.1),
+    0 0 1px 0 rgba(120, 90, 40, 0.08);
+  --chart-1: var(--accent);
+  --chart-2: var(--gold);
+  --chart-3: var(--bronze);
+  --chart-4: var(--accent-hover);
+  --chart-5: var(--muted);
+  --gold: oklch(0.7 0.15 80);
+  --bronze: oklch(0.48 0.12 80);
+  --warning-soft: color-mix(in oklab, var(--gold) 18%, transparent);
+  --warning-soft-foreground: var(--bronze);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-thmanyah);
+  --font-display: var(--font-thmanyah);
+  --shadow-surface: var(--surface-shadow);
+  --color-gold: var(--gold);
+  --color-bronze: var(--bronze);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-foreground);
+  --color-secondary: var(--surface-secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted);
+  --color-destructive: var(--danger);
+  --color-destructive-foreground: var(--snow);
+  --color-input: var(--border);
+  --color-ring: var(--accent);
+  --color-chart-1: var(--accent);
+  --color-chart-2: var(--color-gold);
+  --color-chart-3: var(--color-bronze);
+  --color-chart-4: var(--accent-hover);
+  --color-chart-5: var(--muted);
+  --color-sidebar: var(--surface);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-accent: oklch(0.88 0.03 83);
+  --color-sidebar-accent-foreground: var(--foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--accent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-feature-settings:
+    "salt" 1,
+    "ss01" 1;
 }
 
-body {
-  background: var(--background);
+.site-shell {
+  background-color: oklch(0.865 0.035 79);
+  background-image:
+    var(--grain),
+    radial-gradient(
+      1300px 620px at 50% -10%,
+      oklch(0.84 0.075 74 / 0.7),
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg in oklch,
+      oklch(0.87 0.04 80) 0%,
+      oklch(0.945 0.016 84) 32%,
+      oklch(0.91 0.028 81) 68%,
+      oklch(0.865 0.035 79) 100%
+    );
+  background-size: 160px, auto, auto;
+  background-attachment: fixed, fixed, fixed;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.texture-band,
+.texture-panel,
+.texture-wash {
+  @apply relative isolate;
+}
+
+.texture-band::before,
+.texture-panel::before,
+.texture-wash::before {
+  @apply pointer-events-none absolute inset-0 -z-10 rounded-[inherit];
+  content: "";
+  background-image: var(--grain);
+  background-size: 180px;
+}
+
+.texture-band::before {
+  opacity: 0.85;
+}
+
+.texture-panel::before {
+  opacity: 0.45;
+}
+
+.texture-wash::before {
+  opacity: 0.75;
+}
+
+[dir="rtl"] .date-picker__popover .calendar__nav-button-icon {
+  rotate: 180deg;
+}
+
+.date-picker__trigger {
+  @apply w-auto flex-none;
+}
+
+.like-button:hover,
+.like-button[data-hovered="true"] {
+  background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+  color: var(--accent);
+}
+
+.avatar--circle,
+.avatar--circle .avatar__image {
+  border-radius: 9999px;
+}
+.avatar--circle {
+  @apply overflow-hidden;
+}
+
+.accordion__trigger:hover:not([aria-expanded="true"]),
+.accordion__trigger[data-hovered="true"]:not([aria-expanded="true"]) {
+  background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+}
+
+@utility card-gradient {
+  background-image: linear-gradient(
+    180deg in oklch,
+    rgb(255 255 255 / 0.32) 0%,
+    rgb(255 255 255 / 0) 45%,
+    rgb(120 90 40 / 0.1) 100%
+  );
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-surface;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply from-bronze/50 to-gold/80 hover:from-accent hover:to-accent/80 bg-linear-to-t;
+}
+
+.yarl__container {
+  --yarl__color_backdrop: oklch(0.25 0.03 75 / 0.94);
+  --yarl__color_button_active: color-mix(in oklab, var(--accent) 55%, white);
+}
+
+.yarl__slide_title_container {
+  display: none;
+}
+
+.site-shell .cl-userButtonPopoverCard {
+  border-radius: 0;
+}
+.site-shell .cl-userButtonPopoverCard button,
+.site-shell .cl-userButtonPopoverCard a {
+  color: var(--bronze);
+}
+.site-shell .cl-userButtonPopoverCard svg {
+  color: oklch(0.44 0.095 65);
+}
+.site-shell .cl-userButtonPopoverCard button:hover,
+.site-shell .cl-userButtonPopoverCard a:hover {
+  background-color: color-mix(in oklab, var(--accent) 12%, transparent);
+  color: var(--accent);
+}
+.site-shell .cl-userButtonPopoverCard button:hover svg,
+.site-shell .cl-userButtonPopoverCard a:hover svg {
+  color: var(--accent);
+}
+
+.site-shell .cl-badge {
+  border-radius: 0;
+  background-color: var(--warning-soft);
+  color: var(--foreground);
+}
+
+.pagination__link {
+  border-radius: 0;
+}
+.pagination__link[data-active="true"] {
+  --pagination-link-bg: var(--accent);
+  --pagination-link-bg-hover: var(--accent);
+  --pagination-link-bg-pressed: var(--accent);
+  --pagination-link-fg: var(--accent-foreground);
+}
+.pagination__link:not([data-active="true"]):hover,
+.pagination__link:not([data-active="true"])[data-hovered="true"] {
+  --pagination-link-bg-hover: var(--accent);
+  --pagination-link-fg: var(--accent-foreground);
+}
+
+.button--outline:hover:not(:disabled),
+.button--outline[data-hovered="true"] {
+  --button-bg-hover: color-mix(in oklab, var(--bronze) 14%, transparent);
+}
+
+pre {
+  direction: ltr;
+  text-align: left;
+}
+
+pre code {
+  direction: ltr;
+  unicode-bidi: embed;
 }

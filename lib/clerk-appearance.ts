@@ -1,0 +1,21 @@
+export const clerkAppearance = {
+  variables: {
+    colorPrimary: "oklch(0.47 0.16 162)",
+    colorPrimaryForeground: "#fff",
+    colorForeground: "oklch(0.27 0.02 75)",
+    colorMutedForeground: "oklch(0.45 0.02 85)",
+    colorMuted: "oklch(0.9 0.025 85)",
+    colorBackground: "oklch(0.97 0.02 85)",
+    colorInput: "oklch(0.97 0.02 85)",
+    colorInputForeground: "oklch(0.27 0.02 75)",
+    colorBorder: "oklch(0.8 0.02 85)",
+    colorNeutral: "oklch(0.48 0.12 80)",
+    colorDanger: "oklch(0.52 0.2 25)",
+    colorSuccess: "oklch(0.47 0.16 162)",
+    colorWarning: "oklch(0.7 0.15 80)",
+    colorRing: "oklch(0.47 0.16 162)",
+    colorShadow: "oklch(0.5 0.06 75)",
+    colorModalBackdrop: "oklch(0.25 0.03 75 / 0.6)",
+    borderRadius: "6px",
+  },
+};
