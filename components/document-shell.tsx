@@ -48,7 +48,7 @@ export function DocumentShell({ children }: { children: ReactNode }) {
       <body
         className={`${thmanyah.variable} site-shell relative flex min-h-screen flex-col font-sans`}
       >
-        <LogoPattern className="fixed inset-0 -z-10 opacity-[0.3]" />
+        <LogoPattern className="fixed inset-0 -z-10 opacity-[0.05]" />
         <ClerkProvider localization={arSA} appearance={clerkAppearance}>
           <AppProviders>{children}</AppProviders>
         </ClerkProvider>

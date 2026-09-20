@@ -60,7 +60,7 @@ export function PostSearch({ index }: { index: PostIndex[] }) {
         type="button"
         onClick={() => setOpen(true)}
         className={cn(
-          "border-border bg-surface text-muted shadow-surface mx-auto flex w-full max-w-xl cursor-pointer items-center gap-3 rounded-none border px-5 py-4 text-base",
+          "border-border bg-surface text-muted shadow-surface mx-auto flex w-full max-w-2xl cursor-pointer items-center gap-3 rounded-none border px-5 py-4 text-base",
           "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-[250ms] duration-500 ease-out",
         )}
       >

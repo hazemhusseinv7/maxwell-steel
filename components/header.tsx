@@ -71,7 +71,7 @@ export function Header() {
             variant="primary"
             onPress={() => router.push("/support/submit")}
           >
-            أرسل تذكرة
+            فتح تذكرة
           </Button>
         </div>
         <MobileNav />

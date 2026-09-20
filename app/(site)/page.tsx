@@ -11,6 +11,7 @@ import { LogosSection } from "@/components/logos-section";
 import { ArPagination } from "@/components/pagination";
 import { PostCard } from "@/components/post-card";
 import { SeriesCard } from "@/components/series-card";
+import { ShowcaseImage } from "@/components/showcase-image";
 import { SupportCta } from "@/components/support-cta";
 import {
   getCategories,
@@ -191,7 +192,9 @@ export default async function Home({ searchParams }: Props) {
               <CornerFrame>
                 <EmptyState className="border-border text-muted flex flex-col items-center gap-2 rounded-none border border-dashed px-4 py-12 text-center">
                   <HiDocumentSearch className="size-8" aria-hidden="true" />
-                  <p>لا توجد مقالات مطابقة. جرّب كلمات مختلفة أو أزل التصفية.</p>
+                  <p>
+                    لا توجد مقالات مطابقة. جرّب كلمات مختلفة أو أزل التصفية.
+                  </p>
                 </EmptyState>
               </CornerFrame>
             ) : (
@@ -220,6 +223,7 @@ export default async function Home({ searchParams }: Props) {
             />
           </>
         )}
+        <ShowcaseImage />
         <SupportCta />
       </main>
     </>

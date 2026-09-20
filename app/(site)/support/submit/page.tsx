@@ -14,7 +14,7 @@ export default async function SubmitPage({ searchParams }: Props) {
           className="text-foreground size-7 shrink-0"
           aria-hidden="true"
         />
-        إرسال تذكرة دعم
+        فتح تذكرة دعم
       </h1>
       <p className="text-muted mt-2 leading-8">
         املأ النموذج التالي وسنرد عليك. ستحصل على رقم مرجع لتتبع طلبك برقم

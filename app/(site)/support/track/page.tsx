@@ -8,7 +8,7 @@ interface Props {
 export default async function TrackPage({ searchParams }: Props) {
   const { ref } = await searchParams;
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-10">
+    <main className="mx-auto min-h-150 w-full max-w-2xl flex-1 px-4 py-10">
       <h1 className="font-display flex items-center gap-2 text-3xl font-extrabold">
         <HiMagnifyingGlass
           className="text-foreground size-7 shrink-0"

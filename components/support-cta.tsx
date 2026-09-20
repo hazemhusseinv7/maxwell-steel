@@ -20,7 +20,7 @@ export function SupportCta() {
         <NextLink href="/support/submit">
           <Button variant="primary">
             <FaPaperPlane className="size-4" aria-hidden="true" />
-            إرسال تذكرة
+            فتح تذكرة
           </Button>
         </NextLink>
         <NextLink href="/support/track">

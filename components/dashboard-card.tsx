@@ -16,7 +16,7 @@ export function DashboardCard({
       )}
       {...props}
     >
-      <LogoPattern className="-z-10 opacity-[0.10]" />
+      <LogoPattern className="-z-10 opacity-[0.05]" />
       {children}
     </Card>
   );
