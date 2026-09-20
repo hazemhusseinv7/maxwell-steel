@@ -98,6 +98,7 @@ export default async function Home({ searchParams }: Props) {
               titleLines={heroTitleLines}
               descriptionLines={heroDescriptionLines}
               index={postIndex}
+              socialLinks={settings?.socialLinks ?? []}
             />
           </main>
         </div>
@@ -108,7 +109,7 @@ export default async function Home({ searchParams }: Props) {
             <section aria-label="السلاسل" className="texture-wash pt-24">
               <h2 className="text-foreground font-display ms-4 mb-4 flex items-center gap-1.5 text-xl font-bold">
                 <HiQueueList className="size-5 shrink-0" aria-hidden="true" />
-                سلاسل المقالات
+                سلسلة المقالات
               </h2>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {showcase.map((s) => (

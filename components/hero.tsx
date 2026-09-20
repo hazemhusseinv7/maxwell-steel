@@ -4,9 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { HiArrowLeft } from "react-icons/hi2";
 import { MdMarkChatRead } from "react-icons/md";
+import { AnimatedLogo } from "@/components/animated-logo";
 import { DecorIcon } from "@/components/decor-icon";
 import { FullWidthDivider } from "@/components/full-width-divider";
 import { PostSearch } from "@/components/post-search";
+import { SocialButtons, type SocialLink } from "@/components/social-buttons";
 import type { PostIndex } from "@/lib/blog";
 import { cn } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
@@ -65,11 +67,13 @@ export function HeroSection({
   titleLines,
   descriptionLines,
   index,
+  socialLinks,
 }: {
   post: HeroPost | null;
   titleLines: string[];
   descriptionLines: string[];
   index: PostIndex[];
+  socialLinks: SocialLink[];
 }) {
   const router = useRouter();
   const titleContent =
@@ -87,7 +91,7 @@ export function HeroSection({
 
   return (
     <section>
-      <div className="texture-band bg-accent-soft border-border relative flex flex-col items-center justify-center gap-5 rounded-none border px-4 py-12 md:py-24 lg:py-28">
+      <div className="texture-band bg-accent-soft border-border relative flex flex-col items-center justify-center gap-5 rounded-none border px-4 py-12">
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-1 size-full overflow-hidden"
@@ -129,7 +133,7 @@ export function HeroSection({
         {titleContent ? (
           <h1
             className={cn(
-              "font-display text-foreground max-w-2xl text-center text-3xl font-bold text-balance md:text-5xl lg:text-6xl",
+              "font-display text-foreground text-center text-3xl font-bold text-balance md:text-5xl",
               "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-100 duration-500 ease-out",
             )}
           >
@@ -155,7 +159,7 @@ export function HeroSection({
             variant="secondary"
             onPress={() => router.push("/support/submit")}
           >
-            <MdMarkChatRead data-icon="inline-start" /> استشارة عقارية
+            <MdMarkChatRead data-icon="inline-start" /> فتح تذكرة
           </Button>
           <Button
             variant="primary"
@@ -166,6 +170,20 @@ export function HeroSection({
             {post ? "اقرأ المقال" : "أرسل طلب"}{" "}
             <HiArrowLeft data-icon="inline-end" />
           </Button>
+        </div>
+
+        <SocialButtons
+          links={socialLinks}
+          stagger
+          plain
+          className="justify-center pt-2"
+        />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none relative -mb-12 h-12 w-full max-w-lg overflow-hidden select-none md:h-20"
+        >
+          <AnimatedLogo className="absolute inset-x-0 top-0 mx-auto w-full" />
         </div>
       </div>
     </section>

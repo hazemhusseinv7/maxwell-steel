@@ -5,8 +5,10 @@
   color-scheme: light;
   --background: oklch(0.94 0.018 84);
   --foreground: oklch(0.27 0.02 75);
-  --accent: oklch(0.47 0.16 162);
+  --accent: #03122c;
   --accent-hover: color-mix(in oklab, var(--accent) 80%, white);
+  --accent-foreground: #fff;
+  --snow: oklch(0.98 0.015 85);
   --link: var(--accent);
   --surface-secondary: oklch(0.93 0.028 85);
   --surface-tertiary: oklch(0.9 0.025 85);
@@ -70,12 +72,6 @@
   --color-sidebar-accent-foreground: var(--foreground);
   --color-sidebar-border: var(--border);
   --color-sidebar-ring: var(--accent);
-}
-
-html {
-  font-feature-settings:
-    "salt" 1,
-    "ss01" 1;
 }
 
 .site-shell {

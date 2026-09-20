@@ -33,8 +33,8 @@ export const STATUS_ORDER = [
 ] as const;
 
 export const STATUS_META = {
-  open: { label: "مفتوحة", color: "var(--chart-2)" },
-  inProgress: { label: "قيد المعالجة", color: "var(--chart-1)" },
+  open: { label: "مفتوحة", color: "var(--chart-1)" },
+  inProgress: { label: "قيد المعالجة", color: "var(--chart-2)" },
   resolved: { label: "تم الحل", color: "var(--chart-3)" },
-  closed: { label: "مغلقة", color: "var(--danger)" },
+  closed: { label: "مغلقة", color: "var(--muted)" },
 } as const;

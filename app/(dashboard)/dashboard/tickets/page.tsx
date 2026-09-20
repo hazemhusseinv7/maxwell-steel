@@ -1,7 +1,7 @@
 import { EmptyState } from "@heroui/react";
 import NextLink from "next/link";
+import { BsCalendar2RangeFill } from "react-icons/bs";
 import {
-  HiCalendarDays,
   HiCheckCircle,
   HiFlag,
   HiInbox,
@@ -154,7 +154,7 @@ export default async function TicketsPage({ searchParams }: Props) {
                 </TableHead>
                 <TableHead>
                   <span className="inline-flex items-center gap-1.5">
-                    <HiCalendarDays
+                    <BsCalendar2RangeFill
                       className="text-bronze size-4 shrink-0"
                       aria-hidden="true"
                     />

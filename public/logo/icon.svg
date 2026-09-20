@@ -1,8 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="406" viewBox="0 0 135.47 107.38" role="img" aria-label="maqrat">
-  <g id="symbol" fill="#00743d">
-    <path id="symbol-left" d="M0 0H30.878L63.75 36.856 31.874 67.736V106.585H0Z"/>
-    <path id="symbol-right" d="M135.472 0H104.592L71.718 36.856 103.594 67.736v38.849h31.878z"/>
-    <path id="symbol-center" d="M59.866 107.382V82.678q0-1.993 1.991-1.992h14.344q1.993 0 1.993 1.992v24.704z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="512"
+   height="405.83728"
+   viewBox="0 0 135.47 107.33696"
+   role="img"
+   aria-label="maqrat"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="symbol"
+     fill="#03122c"
+     transform="matrix(0.99998524,0,0,0.99998524,0,-0.02173828)">
+    <path
+       id="symbol-left"
+       d="M 0,0 H 30.878 L 63.75,36.856 31.874,67.736 v 38.849 H 0 Z" />
+    <path
+       id="symbol-right"
+       d="m 135.472,0 h -30.88 l -32.874,36.856 31.876,30.88 v 38.849 h 31.878 z" />
+    <path
+       id="symbol-center"
+       d="M 59.866,107.382 V 82.678 q 0,-1.993 1.991,-1.992 h 14.344 q 1.993,0 1.993,1.992 v 24.704 z" />
   </g>
 </svg>

@@ -1,13 +1,8 @@
 "use client";
 
 import NextLink from "next/link";
-import {
-  HiArrowLeft,
-  HiCalendarDays,
-  HiCheckCircle,
-  HiTag,
-  HiTicket,
-} from "react-icons/hi2";
+import { BsCalendar2RangeFill } from "react-icons/bs";
+import { HiArrowLeft, HiCheckCircle, HiTag, HiTicket } from "react-icons/hi2";
 import { DashboardCard } from "@/components/dashboard-card";
 import { TicketStatusBadge } from "@/components/ticket-badge";
 import { TicketTableRow } from "@/components/ticket-table-row";
@@ -79,7 +74,7 @@ export function RecentTickets({ items }: { items: TicketRow[] }) {
               </TableHead>
               <TableHead className="pe-6">
                 <span className="inline-flex items-center gap-1.5">
-                  <HiCalendarDays
+                  <BsCalendar2RangeFill
                     className="text-bronze size-4 shrink-0"
                     aria-hidden="true"
                   />

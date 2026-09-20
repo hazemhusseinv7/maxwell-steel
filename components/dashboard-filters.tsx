@@ -2,8 +2,8 @@
 
 import { Button } from "@heroui/react";
 import type { ReactNode } from "react";
+import { BsCalendar2RangeFill } from "react-icons/bs";
 import {
-  HiCalendarDays,
   HiCheckCircle,
   HiFlag,
   HiFunnel,
@@ -153,7 +153,9 @@ export function DashboardFilters({
         ariaLabel="من تاريخ"
         label={
           <FilterLabel
-            icon={<HiCalendarDays className={LABEL_ICON} aria-hidden="true" />}
+            icon={
+              <BsCalendar2RangeFill className={LABEL_ICON} aria-hidden="true" />
+            }
           >
             من تاريخ
           </FilterLabel>
@@ -165,7 +167,9 @@ export function DashboardFilters({
         ariaLabel="إلى تاريخ"
         label={
           <FilterLabel
-            icon={<HiCalendarDays className={LABEL_ICON} aria-hidden="true" />}
+            icon={
+              <BsCalendar2RangeFill className={LABEL_ICON} aria-hidden="true" />
+            }
           >
             إلى تاريخ
           </FilterLabel>

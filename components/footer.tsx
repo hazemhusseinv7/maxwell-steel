@@ -1,15 +1,11 @@
 "use client";
-import { Button, Tooltip } from "@heroui/react";
 import NextLink from "next/link";
 import { FaCopyright } from "react-icons/fa6";
 import { AnimatedLogo } from "@/components/animated-logo";
 import { FullWidthDivider } from "@/components/full-width-divider";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+import { SocialButtons } from "@/components/social-buttons";
 import { formatYearAr } from "@/lib/formatters";
-import {
-  getPlatformFallbackIcon,
-  SOCIAL_PLATFORMS,
-} from "@/lib/social-platforms";
 import { cn } from "@/lib/utils";
 
 const siteLinks = [
@@ -30,14 +26,6 @@ export function Footer({
   propertiesUrl?: string | null;
   socialLinks?: { platform?: string | null; url?: string | null }[];
 }) {
-  const socials = (socialLinks ?? []).flatMap((s, i) => {
-    const meta = s?.platform ? SOCIAL_PLATFORMS[s.platform] : undefined;
-    const Icon = meta?.icon ?? getPlatformFallbackIcon();
-    const label = meta?.title ?? s?.platform ?? `رابط ${i + 1}`;
-    return s?.url
-      ? [{ key: `${s.platform}-${i}`, label, url: s.url, Icon }]
-      : [];
-  });
   return (
     <footer className="mx-auto w-full max-w-6xl px-4">
       <div
@@ -68,28 +56,7 @@ export function Footer({
                 ))}
               </p>
             ) : null}
-            {socials.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {socials.map(({ key, label, url, Icon }) => (
-                  <Tooltip key={key}>
-                    <Tooltip.Trigger aria-label={label}>
-                      <Button
-                        className="hover:bg-accent transition-colors duration-300"
-                        variant="outline"
-                        isIconOnly
-                        aria-label={label}
-                        onPress={() =>
-                          window.open(url, "_blank", "noopener,noreferrer")
-                        }
-                      >
-                        <Icon className="size-4" />
-                      </Button>
-                    </Tooltip.Trigger>
-                    <Tooltip.Content>{label}</Tooltip.Content>
-                  </Tooltip>
-                ))}
-              </div>
-            ) : null}
+            <SocialButtons links={socialLinks ?? []} />
             <NewsletterSignup />
           </div>
           <div className="col-span-2 w-full md:col-span-1">
@@ -147,7 +114,7 @@ export function Footer({
           </div>
           {series.length > 0 ? (
             <div className="col-span-2 w-full md:col-span-1">
-              <span className="text-muted text-xs">سلاسل المقالات</span>
+              <span className="text-muted text-xs">سلسلة المقالات</span>
               <div className="mt-2 flex flex-col gap-2">
                 {series.map(({ slug, title }) => (
                   <NextLink

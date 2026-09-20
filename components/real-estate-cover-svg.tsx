@@ -13,7 +13,7 @@ export function RealEstateCoverSvg({
   const idPrefix = isSeries ? "ser" : "pst";
 
   // Blog posts: Architectural bronze and gold with warm desert sand undertones
-  // Series: Visual identity accent green palette (var(--accent) and var(--accent-hover))
+  // Series: Visual identity navy accent palette (var(--accent) and var(--accent-hover))
   const primaryStroke = isSeries ? "var(--accent)" : "#845f20";
   const secondaryStroke = isSeries
     ? "color-mix(in oklab, var(--accent) 80%, white)"

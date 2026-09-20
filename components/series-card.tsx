@@ -15,7 +15,7 @@ export function SeriesCard({ series }: { series: SeriesShowcase }) {
       <Tooltip.Trigger aria-label={series.title}>
         <NextLink
           href={`/blog/series/${series.slug}`}
-          className="texture-panel border-border bg-surface shadow-surface card-gradient group hover:border-accent block rounded-none border p-5 transition-all duration-300 hover:-translate-y-1"
+          className="texture-panel border-border bg-surface shadow-surface card-gradient group hover:bg-surface-secondary block rounded-none border p-5 transition-all duration-300 hover:-translate-y-1"
         >
           <PostCover
             cover={series.cover}
