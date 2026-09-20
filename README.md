@@ -267,7 +267,7 @@ Conventions below: **S** = static/ISR, **D** = dynamic (`searchParams`,
 | URL | File | Mode | Data | Renders |
 |---|---|---|---|---|
 | `/` (+ `?q=&category=&tag=&page=`) | `(site)/page.tsx` | D (`searchParams`) | `getPosts(pageSize 9)`, conditional `getPinnedPost`/`getFeaturedPosts`/`getSeriesShowcase`, always `getCategories`/`getTags`, conditional `getSiteSettings` | `HeroSection` + `LogosSection` (first page, unfiltered), `FeaturedBento`, `SeriesCard` showcase, `BlogFilters` + `PostCard` grid + `ArPagination`, `SupportCta` |
-| `/blog/:slug` | `(site)/blog/[slug]/page.tsx` | S | `getPostBySlug` (also in `generateMetadata`), `getRelatedPosts`, `headingsFromBody`, reading-time helpers, JSON-LD via `lib/seo` | Breadcrumbs, cover `next/image`, `LikeButton`, `PortableContent` + `Toc`, `PostVideo`, series prev/next, author card, related `PostCard`s, `SupportCta` |
+| `/blog/:slug` | `(site)/blog/[slug]/page.tsx` | S | `getPostBySlug` (also in `generateMetadata`), `getRelatedPosts`, `headingsFromBody`, reading-time helpers, JSON-LD via `lib/seo` | Breadcrumbs, cover `next/image`, `LikeButton`, `PortableContent` in a reading panel + `Toc`, `PostVideo`, series prev/next cards, in-body author card, related `PostCard`s, `SupportCta` |
 | `/blog/:slug/opengraph-image` | `(site)/blog/[slug]/opengraph-image.tsx` | D per slug | `getPostBySlug`, reads `public/fonts/Cairo.ttf` | 1200×630 `ImageResponse` (RTL title + site URL) |
 | `/blog/category/:slug` | `(site)/blog/category/[slug]/page.tsx` | S | `getCategoryBySlug`, `getPosts({category, pageSize:100})` | `ArchiveLayout` (kicker تصنيف) |
 | `/blog/tag/:slug` | `(site)/blog/tag/[slug]/page.tsx` | S | `getTagBySlug`, `getPosts({tag, pageSize:100})` | `ArchiveLayout` (kicker وسم) |
@@ -288,7 +288,8 @@ Conventions below: **S** = static/ISR, **D** = dynamic (`searchParams`,
 
 | URL | File | Data | Renders |
 |---|---|---|---|
-| `/dashboard` | `(dashboard)/dashboard/page.tsx` | `getTicketStats()`, `getAdminTickets({pageSize:10})`, `getRecentActivity()`; aggregation in-component (tiles, per-day series, deltas, priority/category slices) | `Dashboard` grid: `DashboardStats`, 4 charts, `RecentTickets`, `TicketAlerts`, `DashboardActivity` |
+| `/dashboard` | `(dashboard)/dashboard/page.tsx` | `getTicketStats()`, `getAdminTickets({pageSize:10})`, `getRecentActivity()`, `getSubscriberStats()`, `getAdminSubscribers({pageSize:10})`; aggregation in-component (tiles, per-day series, deltas, priority/category slices) | `Dashboard` grid: `DashboardStats` (incl. subscribers tile), 4 charts, `RecentTickets`, `TicketAlerts`, `DashboardActivity`, full-width `RecentSubscribers` last |
+| `/dashboard/subscribers?…` | `(dashboard)/dashboard/subscribers/page.tsx` | `getAdminSubscribers(filters, default pageSize 20)` | `SubscriberFilters` (email search, status), table (`SubscriberStatusBadge`), `ArPagination` |
 | `/dashboard/tickets?…` | `(dashboard)/dashboard/tickets/page.tsx` | `getAdminTickets(filters, default pageSize 20)` | `DashboardFilters`, table (`TicketTableRow`, `TicketStatusBadge`), `ArPagination` |
 | `/dashboard/tickets/:id` | `(dashboard)/dashboard/tickets/[id]/page.tsx` | `getTicketDetail` (+ `notFound()`), `getAdminUsers()` | Breadcrumb, detail grid, `AttachmentGallery`, status/assign forms, timeline, reply/note forms |
 | Studio | `app/admin/[[...tool]]/page.tsx` | none | `NextStudio` (`force-static`) |
@@ -329,9 +330,9 @@ sequenceDiagram
   (`REF_EXISTS_QUERY`) before create.
 - **Spam trap:** a honeypot field redirects to a fake confirmation without
   creating anything.
-- **Attachments:** up to `MAX_SCREENSHOTS` (10) images ≤
+- **Attachments:** up to `MAX_SCREENSHOTS` (2) images ≤
   `MAX_SCREENSHOT_BYTES` (10 MB) each - hence
-  `serverActions.bodySizeLimit: "110mb"` in `next.config.ts`. Viewed via
+  `serverActions.bodySizeLimit: "25mb"` in `next.config.ts`. Viewed via
   `AttachmentGallery` (YARL) for admins and `ImageLightbox` for requesters.
 - **Timeline:** creation seeds a `created` event; every admin action
   (status/assign/reply/note) appends typed events with the admin's name from
@@ -346,10 +347,11 @@ sequenceDiagram
 ## 7. Admin dashboard
 
 - **Tiles** (`DashboardStats`): total / open / unassigned / resolved with
-  week-over-week `TrendBadge`s. All four data reads (`getTicketStats`,
-  `getAdminTickets`, `getTicketDetail`, `getRecentActivity`) re-check
-  `requireAdmin()`; the two full-scan queries are capped at the 2000 most
-  recent tickets (`MAX_DASHBOARD_SCAN` - recency is all the feeds need).
+  week-over-week `TrendBadge`s, plus confirmed newsletter subscribers. All
+  data reads (`getTicketStats`, `getAdminTickets`, `getTicketDetail`,
+  `getRecentActivity`, `getSubscriberStats`, `getAdminSubscribers`) re-check
+  `requireAdmin()`; the two full-scan ticket queries are capped at the 2000
+  most recent tickets (`MAX_DASHBOARD_SCAN` - recency is all the feeds need).
 - **Charts** (recharts, the only charting library; wrappers in `dir="ltr"`
   so time flows left-to-right while chrome stays RTL):
   - `TicketsStatusChart` / `TicketsTrendChart`: 90-day interactive multi-line
@@ -367,6 +369,12 @@ sequenceDiagram
 - **Detail page:** reference copy button, spec grid, status/assign forms,
   public replies vs staff-only internal notes, full timeline, admin user
   picker sourced live from Clerk (`getAdminUsers`, role-filtered).
+- **Subscribers:** `RecentSubscribers` card (latest 10, full-width last on the
+  overview) and a
+  full `/dashboard/subscribers` list (email search, status filter, 20/page).
+  Sanity is the source of truth - no Resend calls; list rows exclude secret
+  confirm tokens. Status badges: confirmed = navy accent chip, pending = gold
+  soft, unsubscribed = muted.
 
 ---
 
@@ -455,7 +463,7 @@ registered in `sanity.config.ts` for `post` only - **zero webhooks**):
   Vision is a GROQ console over the private dataset: manage who can reach
   it in the Sanity dashboard, not in `proxy.ts`.
 - **Uploads:** screenshots validated client- and server-side (count, bytes,
-  MIME); the 110 MB action limit exists only for the 10×10 MB worst case.
+  MIME); the 25 MB action limit exists only for the 2×10 MB worst case.
 
 ---
 
@@ -465,12 +473,17 @@ registered in `sanity.config.ts` for `post` only - **zero webhooks**):
   `app/globals.css` as oklch variables -
   `--background: oklch(0.94 0.018 84)` (warm sand),
   `--foreground: oklch(0.27 0.02 75)`,
-  `--accent: oklch(0.47 0.16 162)` (emerald),
+  `--accent: #03122c` (deep navy), `--accent-foreground: #fff`,
   `--gold: oklch(0.7 0.15 80)`, `--bronze: oklch(0.48 0.12 80)`,
   `--chart-1..5`, `--warning-soft` (gold color-mix). Mapped via `@theme inline`
   to `--color-*`, plus `card-gradient`, `texture-band/panel/wash`, `grain`
   utilities. **No gray outside warm tokens** (chart muted steps are the
-  deliberate exception).
+  deliberate exception). Brand navy lives in three places - keep them in sync
+  on any rebrand: `app/globals.css` (`--accent`), `emails/_components/theme.ts`
+  (`mailTheme.accent`), `lib/clerk-appearance.ts` (`colorPrimary`/`colorRing`).
+  Dashboard status colors are navy-centric (`lib/chart-meta.ts` STATUS_META:
+  open = accent, inProgress = gold, resolved = bronze, closed = muted);
+  priority keeps its muted/bronze/gold/danger ramp.
 - **Geometry:** page layout is square (`rounded-none`); interactive controls
   use 6px radius (`--radius-field`). Pagination links are the sharp-corner
   exception.

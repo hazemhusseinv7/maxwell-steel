@@ -42,7 +42,7 @@ export const TICKET_STATUS_VALUES = TICKET_STATUSES.map((s) => s.value) as [
   ...TicketStatus[],
 ];
 
-export const MAX_SCREENSHOTS = 10;
+export const MAX_SCREENSHOTS = 2;
 export const MAX_SCREENSHOT_BYTES = 10 * 1024 * 1024;
 
 export const BLOG_CACHE_TAG = "blog";

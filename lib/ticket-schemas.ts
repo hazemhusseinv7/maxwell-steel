@@ -104,7 +104,7 @@ export function fieldErrorsFromIssues(
 }
 
 export function validateScreenshotCount(count: number): string | null {
-  if (count > MAX_SCREENSHOTS) return "الحد الأقصى ١٠ صور";
+  if (count > MAX_SCREENSHOTS) return "الحد الأقصى صورتان";
   return null;
 }
 

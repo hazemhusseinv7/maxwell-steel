@@ -1,7 +1,8 @@
 "use client";
 
 import { Command as CommandPrimitive } from "cmdk";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { cn } from "@/lib/utils";
 
@@ -31,6 +32,10 @@ function CommandDialog({
   children: React.ReactNode;
   label: string;
 }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -44,8 +49,8 @@ function CommandDialog({
       document.body.style.overflow = prev;
     };
   }, [open, onOpenChange]);
-  if (!open) return null;
-  return (
+  if (!open || !mounted) return null;
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[15vh]"
       role="presentation"
@@ -60,7 +65,8 @@ function CommandDialog({
       <div className="border-border bg-surface shadow-surface relative w-full max-w-xl border">
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

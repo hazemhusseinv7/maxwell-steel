@@ -45,7 +45,7 @@ export function ScreenshotUploader({ formPending }: { formPending: boolean }) {
     if (incoming.length > room) {
       setError(
         validateScreenshotCount(picks.length + incoming.length) ??
-          "الحد الأقصى ١٠ صور",
+          "الحد الأقصى صورتان",
       );
     }
     const accepted: Pick[] = [];
@@ -111,7 +111,7 @@ export function ScreenshotUploader({ formPending }: { formPending: boolean }) {
         <HiPhoto className="size-6" aria-hidden="true" />
         <span>اسحب الصور هنا أو اضغط للاختيار</span>
         <span className="text-xs">
-          حتى {formatNumberAr(MAX_SCREENSHOTS)} صور، ١٠ م.ب لكل صورة
+          حتى صورتين، ١٠ م.ب لكل صورة
           {picks.length > 0
             ? ` - تم اختيار ${formatNumberAr(picks.length)}`
             : null}

@@ -292,7 +292,7 @@ export function SubmitForm({ fresh }: { fresh?: boolean }) {
             <FieldLabel
               icon={<HiPhoto className={LABEL_ICON} aria-hidden="true" />}
             >
-              لقطات شاشة (حتى ١٠ صور، ١٠ م.ب لكل صورة)
+              لقطات شاشة (حتى صورتين، ١٠ م.ب لكل صورة)
             </FieldLabel>
           </Label>
           <div className="mt-2">
