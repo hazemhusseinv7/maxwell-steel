@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 import { FaPaperPlane } from "react-icons/fa6";
-import { HiHome, HiNewspaper, HiSquares2X2, HiTicket } from "react-icons/hi2";
+import {
+  HiEnvelope,
+  HiHome,
+  HiNewspaper,
+  HiSquares2X2,
+  HiTicket,
+} from "react-icons/hi2";
 
 export type SidebarNavItem = {
   title: string;
@@ -28,6 +34,11 @@ export const navGroups: SidebarNavGroup[] = [
         title: "التذاكر",
         path: "/dashboard/tickets",
         icon: <HiTicket />,
+      },
+      {
+        title: "المشتركون",
+        path: "/dashboard/subscribers",
+        icon: <HiEnvelope />,
       },
     ],
   },

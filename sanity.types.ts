@@ -631,6 +631,31 @@ export type RECENT_EVENTS_QUERY_RESULT = Array<{
   }> | null;
 }>;
 
+// Source: lib/subscribers.ts
+// Variable: SUBSCRIBER_STATS_QUERY
+// Query: {  "total": count(*[_type == "subscriber"]),  "confirmed": count(*[_type == "subscriber" && status == "confirmed"]),  "pending": count(*[_type == "subscriber" && status == "pending"]),  "unsubscribed": count(*[_type == "subscriber" && status == "unsubscribed"])}
+export type SUBSCRIBER_STATS_QUERY_RESULT = {
+  total: number;
+  confirmed: number;
+  pending: number;
+  unsubscribed: number;
+};
+
+// Source: lib/subscribers.ts
+// Variable: ADMIN_SUBSCRIBERS_QUERY
+// Query: {  "items": *[    _type == "subscriber"    && ($status == null || status == $status)    && ($q == null || email match $q + "*")  ] | order(_createdAt desc) [$offset...$end] {    _id, email, status, source, resendContactId, _createdAt  },  "total": count(*[    _type == "subscriber"    && ($status == null || status == $status)    && ($q == null || email match $q + "*")  ])}
+export type ADMIN_SUBSCRIBERS_QUERY_RESULT = {
+  items: Array<{
+    _id: string;
+    email: string | null;
+    status: "confirmed" | "pending" | "unsubscribed" | null;
+    source: string | null;
+    resendContactId: string | null;
+    _createdAt: string;
+  }>;
+  total: number;
+};
+
 // Source: lib/tickets.ts
 // Variable: REF_EXISTS_QUERY
 // Query: count(*[_type == "ticket" && reference == $reference]) > 0
@@ -836,7 +861,7 @@ export type SERIES_INDEX_QUERY_RESULT = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: POST_BY_SLUG_QUERY
-// Query: *[_type == "post" && defined(slug.current) && publishedAt <= now() && slug.current == $slug][0] {      _id,  title,  "slug": slug.current,  excerpt,  cover,  publishedAt,  featured,  likes,  "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar },  "categories": categories[]->{ _id, title, "slug": slug.current },  "tags": tags[]->{ _id, title, "slug": slug.current },    body,    youtubeUrl,    videoCaption,    "videoFileUrl": videoFile.asset->url,    "series": series->{ _id, title, "slug": slug.current, description },    "seriesPosts": array::unique(      coalesce(series->posts[]->{ _id, title, "slug": slug.current }, [])    )      + (*[_type == "post" && defined(series) && series._ref == ^.series._ref && !(_id in ^.series->posts[]._ref) && publishedAt <= now()]        | order(publishedAt asc) { _id, title, "slug": slug.current })  }
+// Query: *[_type == "post" && defined(slug.current) && publishedAt <= now() && slug.current == $slug][0] {      _id,  title,  "slug": slug.current,  excerpt,  cover,  publishedAt,  featured,  likes,  "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar },  "categories": categories[]->{ _id, title, "slug": slug.current },  "tags": tags[]->{ _id, title, "slug": slug.current },    "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar, bio },    body,    youtubeUrl,    videoCaption,    "videoFileUrl": videoFile.asset->url,    "series": series->{ _id, title, "slug": slug.current, description },    "seriesPosts": array::unique(      coalesce(series->posts[]->{ _id, title, "slug": slug.current }, [])    )      + (*[_type == "post" && defined(series) && series._ref == ^.series._ref && !(_id in ^.series->posts[]._ref) && publishedAt <= now()]        | order(publishedAt asc) { _id, title, "slug": slug.current })  }
 export type POST_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string | null;
@@ -865,6 +890,7 @@ export type POST_BY_SLUG_QUERY_RESULT = {
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
+    bio: string | null;
   } | null;
   categories: Array<{
     _id: string;
@@ -1275,6 +1301,8 @@ declare module "@sanity/client" {
     '\n  *[_type == "ticket" && _id == $id][0] {\n    _id, reference, subject, category, priority, status,\n    name, phone, email, _createdAt,\n    "assignedTo": assignedTo { clerkId, name },\n    description,\n    "attachments": attachments[].asset->url,\n    "replies": replies[] { body, authorName, createdAt } | order(createdAt asc),\n    "internalNotes": internalNotes[] { body, authorName, createdAt } | order(createdAt asc),\n    "events": events[] { type, label, actor, createdAt } | order(createdAt asc)\n  }\n': DETAIL_QUERY_RESULT;
     '*[_type == "ticket"] | order(_createdAt desc) [0...$cap] { status, priority, category, _createdAt, assignedTo }': STATS_QUERY_RESULT;
     '*[_type == "ticket"] | order(_createdAt desc) [0...$cap] {\n  "ticketId": _id,\n  "ticketRef": reference,\n  "ticketSubject": subject,\n  "events": events[] { type, label, actor, createdAt }\n}': RECENT_EVENTS_QUERY_RESULT;
+    '{\n  "total": count(*[_type == "subscriber"]),\n  "confirmed": count(*[_type == "subscriber" && status == "confirmed"]),\n  "pending": count(*[_type == "subscriber" && status == "pending"]),\n  "unsubscribed": count(*[_type == "subscriber" && status == "unsubscribed"])\n}': SUBSCRIBER_STATS_QUERY_RESULT;
+    '{\n  "items": *[\n    _type == "subscriber"\n    && ($status == null || status == $status)\n    && ($q == null || email match $q + "*")\n  ] | order(_createdAt desc) [$offset...$end] {\n    _id, email, status, source, resendContactId, _createdAt\n  },\n  "total": count(*[\n    _type == "subscriber"\n    && ($status == null || status == $status)\n    && ($q == null || email match $q + "*")\n  ])\n}': ADMIN_SUBSCRIBERS_QUERY_RESULT;
     'count(*[_type == "ticket" && reference == $reference]) > 0': REF_EXISTS_QUERY_RESULT;
     '\n  *[_type == "ticket" && reference == $reference && (email == $contact || phone == $contact)][0] {\n    _id, reference, subject, category, priority, description, status,\n    _createdAt,\n    "attachments": attachments[].asset->url,\n    "replies": replies[] { body, authorName, createdAt } | order(createdAt asc),\n    "events": events[] { type, label, actor, createdAt } | order(createdAt asc)\n  }\n': PUBLIC_TICKET_QUERY_RESULT;
     '\n  *[_type == "ticket" && (email == $contact || phone == $contact)] | order(_createdAt desc) [0...50] {\n    _id, reference, subject, status, _createdAt\n  }\n': PUBLIC_TICKET_LIST_QUERY_RESULT;
@@ -1283,7 +1311,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "post" && defined(slug.current) && publishedAt <= now()] | order(coalesce(views, 0) desc, coalesce(likes, 0) desc, publishedAt desc) [0...$limit] { \n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  cover,\n  publishedAt,\n  featured,\n  likes,\n  "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar },\n  "categories": categories[]->{ _id, title, "slug": slug.current },\n  "tags": tags[]->{ _id, title, "slug": slug.current }\n }\n': MOST_READ_QUERY_RESULT;
     '\n  *[_type == "post" && defined(slug.current) && publishedAt <= now()] | order(publishedAt desc) [0...200] {\n    _id, title, "slug": slug.current, excerpt\n  }\n': POSTS_INDEX_QUERY_RESULT;
     '\n  *[_type == "series"] | order(title asc) [0...100] {\n    _id, title, "slug": slug.current\n  }\n': SERIES_INDEX_QUERY_RESULT;
-    '\n  *[_type == "post" && defined(slug.current) && publishedAt <= now() && slug.current == $slug][0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  cover,\n  publishedAt,\n  featured,\n  likes,\n  "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar },\n  "categories": categories[]->{ _id, title, "slug": slug.current },\n  "tags": tags[]->{ _id, title, "slug": slug.current }\n,\n    body,\n    youtubeUrl,\n    videoCaption,\n    "videoFileUrl": videoFile.asset->url,\n    "series": series->{ _id, title, "slug": slug.current, description },\n    "seriesPosts": array::unique(\n      coalesce(series->posts[]->{ _id, title, "slug": slug.current }, [])\n    )\n      + (*[_type == "post" && defined(series) && series._ref == ^.series._ref && !(_id in ^.series->posts[]._ref) && publishedAt <= now()]\n        | order(publishedAt asc) { _id, title, "slug": slug.current })\n  }\n': POST_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "post" && defined(slug.current) && publishedAt <= now() && slug.current == $slug][0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  cover,\n  publishedAt,\n  featured,\n  likes,\n  "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar },\n  "categories": categories[]->{ _id, title, "slug": slug.current },\n  "tags": tags[]->{ _id, title, "slug": slug.current }\n,\n    "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar, bio },\n    body,\n    youtubeUrl,\n    videoCaption,\n    "videoFileUrl": videoFile.asset->url,\n    "series": series->{ _id, title, "slug": slug.current, description },\n    "seriesPosts": array::unique(\n      coalesce(series->posts[]->{ _id, title, "slug": slug.current }, [])\n    )\n      + (*[_type == "post" && defined(series) && series._ref == ^.series._ref && !(_id in ^.series->posts[]._ref) && publishedAt <= now()]\n        | order(publishedAt asc) { _id, title, "slug": slug.current })\n  }\n': POST_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "post" && defined(slug.current) && publishedAt <= now() && slug.current != $slug\n    && (count(categories[]._ref[@ in $catIds]) > 0 || count(tags[]._ref[@ in $tagIds]) > 0)\n  ] | order(publishedAt desc) [0...3] { \n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  cover,\n  publishedAt,\n  featured,\n  likes,\n  "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar },\n  "categories": categories[]->{ _id, title, "slug": slug.current },\n  "tags": tags[]->{ _id, title, "slug": slug.current }\n }\n': RELATED_POSTS_QUERY_RESULT;
     '\n  *[_type == "category"] | order(title asc) { _id, title, "slug": slug.current, description }\n': CATEGORIES_QUERY_RESULT;
     '\n  *[_type == "category" && slug.current == $slug][0] { _id, title, "slug": slug.current, description }\n': CATEGORY_BY_SLUG_QUERY_RESULT;

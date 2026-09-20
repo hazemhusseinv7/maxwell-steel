@@ -2,8 +2,9 @@ import { Breadcrumbs, Chip } from "@heroui/react";
 import type { Metadata } from "next";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
+import { BsCalendar2RangeFill } from "react-icons/bs";
 import {
-  HiCalendarDays,
+  HiArrowLeft,
   HiChevronLeft,
   HiChevronRight,
   HiClock,
@@ -136,7 +137,7 @@ export default async function PostPage({ params }: Props) {
               </p>
               <p className="text-muted mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
                 <span className="flex items-center gap-1.5">
-                  <HiCalendarDays
+                  <BsCalendar2RangeFill
                     className="size-4 shrink-0"
                     aria-hidden="true"
                   />
@@ -164,8 +165,59 @@ export default async function PostPage({ params }: Props) {
             />
 
             <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_260px]">
-              <div className="min-w-0">
+              <div className="texture-panel border-border bg-surface shadow-surface min-w-0 rounded-none border p-6 sm:p-10">
                 <PortableContent body={post.body} />
+                {post.author ? (
+                  <section
+                    aria-label="الكاتب"
+                    className="border-border mt-8 border-t pt-6"
+                  >
+                    <div className="flex flex-col gap-4 sm:flex-row sm:gap-5">
+                      <NextLink
+                        href={`/author/${post.author.slug}`}
+                        aria-label={`صفحة الكاتب ${post.author.name}`}
+                        className="shrink-0"
+                      >
+                        <AuthorAvatar
+                          name={post.author.name}
+                          avatar={post.author.avatar}
+                          size="lg"
+                        />
+                      </NextLink>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-muted text-xs font-bold">
+                          بقلم الكاتب
+                        </p>
+                        <NextLink
+                          href={`/author/${post.author.slug}`}
+                          className="font-display hover:text-accent mt-1 inline-block text-lg font-bold transition-colors"
+                        >
+                          {post.author.name}
+                        </NextLink>
+                        {post.author.jobTitle ? (
+                          <p className="text-bronze mt-0.5 text-sm">
+                            {post.author.jobTitle}
+                          </p>
+                        ) : null}
+                        {post.author.bio ? (
+                          <p className="text-muted mt-2 text-sm leading-8">
+                            {post.author.bio}
+                          </p>
+                        ) : null}
+                        <NextLink
+                          href={`/author/${post.author.slug}`}
+                          className="text-accent mt-3 inline-flex items-center gap-1 text-sm font-bold transition-colors hover:opacity-80"
+                        >
+                          جميع مقالات الكاتب
+                          <HiArrowLeft
+                            className="size-3.5 shrink-0"
+                            aria-hidden="true"
+                          />
+                        </NextLink>
+                      </div>
+                    </div>
+                  </section>
+                ) : null}
               </div>
               <aside className="min-w-0">
                 <Toc headings={headings} />
@@ -180,11 +232,8 @@ export default async function PostPage({ params }: Props) {
 
             {post.series && (
               <CornerFrame>
-                <section
-                  aria-label="سلسلة المقالات"
-                  className="border-border bg-surface shadow-surface card-gradient mt-10 rounded-none border p-5"
-                >
-                  <p className="text-muted text-sm">
+                <section aria-label="سلسلة المقالات" className="mt-10">
+                  <p className="text-muted mb-3 text-sm">
                     جزء من سلسلة:{" "}
                     <NextLink
                       href={`/blog/series/${post.series.slug}`}
@@ -193,71 +242,59 @@ export default async function PostPage({ params }: Props) {
                       {post.series.title}
                     </NextLink>
                   </p>
-                  <div className="mt-3 flex items-center justify-between gap-3 text-sm">
-                    <span>
-                      {prevInSeries ? (
-                        <NextLink
-                          href={`/blog/${prevInSeries.slug}`}
-                          className="flex items-center gap-1"
-                        >
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {prevInSeries ? (
+                      <NextLink
+                        href={`/blog/${prevInSeries.slug}`}
+                        className="group border-border bg-surface shadow-surface card-gradient hover:bg-surface-secondary block rounded-none border p-5 transition-all duration-300 hover:-translate-y-0.5"
+                      >
+                        <span className="text-muted flex items-center gap-1 text-xs font-bold">
                           <HiChevronRight
                             className="size-4 shrink-0"
                             aria-hidden="true"
                           />
-                          المقال السابق: {prevInSeries.title}
-                        </NextLink>
-                      ) : (
-                        <span />
-                      )}
-                    </span>
-                    <span>
-                      {nextInSeries ? (
-                        <NextLink
-                          href={`/blog/${nextInSeries.slug}`}
-                          className="flex items-center gap-1"
-                        >
-                          المقال التالي: {nextInSeries.title}
+                          المقال السابق
+                        </span>
+                        <span className="font-display group-hover:text-accent mt-2 line-clamp-2 block font-bold transition-colors">
+                          {prevInSeries.title}
+                        </span>
+                      </NextLink>
+                    ) : (
+                      <div
+                        aria-hidden="true"
+                        className="border-border text-muted hidden rounded-none border border-dashed p-5 text-sm sm:block"
+                      >
+                        أنت في بداية السلسلة
+                      </div>
+                    )}
+                    {nextInSeries ? (
+                      <NextLink
+                        href={`/blog/${nextInSeries.slug}`}
+                        className="group border-border bg-surface shadow-surface card-gradient hover:bg-surface-secondary block rounded-none border p-5 transition-all duration-300 hover:-translate-y-0.5"
+                      >
+                        <span className="text-muted flex items-center gap-1 text-xs font-bold">
+                          المقال التالي
                           <HiChevronLeft
                             className="size-4 shrink-0"
                             aria-hidden="true"
                           />
-                        </NextLink>
-                      ) : (
-                        <span />
-                      )}
-                    </span>
+                        </span>
+                        <span className="font-display group-hover:text-accent mt-2 line-clamp-2 block font-bold transition-colors">
+                          {nextInSeries.title}
+                        </span>
+                      </NextLink>
+                    ) : (
+                      <div
+                        aria-hidden="true"
+                        className="border-border text-muted hidden rounded-none border border-dashed p-5 text-sm sm:block"
+                      >
+                        أنت في نهاية السلسلة
+                      </div>
+                    )}
                   </div>
                 </section>
               </CornerFrame>
             )}
-
-            <CornerFrame>
-              <section
-                aria-label="الكاتب"
-                className="border-border bg-surface shadow-surface card-gradient mt-10 rounded-none border"
-              >
-                {post.author ? (
-                  <NextLink
-                    href={`/author/${post.author.slug}`}
-                    className="group hover:border-accent flex items-start gap-4 p-5 transition-colors"
-                  >
-                    <AuthorAvatar
-                      name={post.author.name}
-                      avatar={post.author.avatar}
-                      tooltip={post.author.name}
-                    />
-                    <div>
-                      <span className="font-bold">{post.author.name}</span>
-                      {post.author.jobTitle ? (
-                        <p className="text-muted text-sm">
-                          {post.author.jobTitle}
-                        </p>
-                      ) : null}
-                    </div>
-                  </NextLink>
-                ) : null}
-              </section>
-            </CornerFrame>
 
             {related.length > 0 && (
               <section aria-label="مقالات ذات صلة" className="mt-10">

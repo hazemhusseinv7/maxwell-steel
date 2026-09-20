@@ -7,6 +7,7 @@ import {
   getTicketStats,
 } from "@/lib/dashboard";
 import { formatNumberAr } from "@/lib/formatters";
+import { getAdminSubscribers, getSubscriberStats } from "@/lib/subscribers";
 
 export const dynamic = "force-dynamic";
 
@@ -28,10 +29,12 @@ function lastDays(n: number): { key: string; label: string }[] {
 }
 
 export default async function DashboardHome() {
-  const [stats, recent, activity] = await Promise.all([
+  const [stats, recent, activity, subStats, subRecent] = await Promise.all([
     getTicketStats(),
     getAdminTickets({ pageSize: 10 }),
     getRecentActivity(),
+    getSubscriberStats(),
+    getAdminSubscribers({ pageSize: 10 }),
   ]);
 
   let total = 0;
@@ -166,6 +169,11 @@ export default async function DashboardHome() {
               value: formatNumberAr(resolved),
               icon: "resolved",
             },
+            {
+              label: "مشتركو النشرة",
+              value: formatNumberAr(subStats.confirmed),
+              icon: "subscribers",
+            },
           ],
           byStatus: quarter.map((d) => ({
             label: d.label,
@@ -192,6 +200,7 @@ export default async function DashboardHome() {
           activity,
           openCount: open,
           unassignedCount: unassigned,
+          recentSubscribers: subRecent.items,
           byPriority,
           byCategory,
           resolvedCount: resolved,

@@ -1,4 +1,5 @@
 import { DashboardActivity } from "@/components/dashboard-activity";
+import { RecentSubscribers } from "@/components/recent-subscribers";
 import { RecentTickets } from "@/components/recent-tickets";
 import { DashboardStats } from "@/components/stats";
 import { TicketAlerts } from "@/components/ticket-alerts";
@@ -7,12 +8,13 @@ import { TicketsResolutionDonut } from "@/components/tickets-resolution-donut";
 import { TicketsStatusChart } from "@/components/tickets-status-chart";
 import { TicketsTrendChart } from "@/components/tickets-trend-chart";
 import type { ActivityEvent, TicketRow } from "@/lib/dashboard";
+import type { SubscriberRow } from "@/lib/subscribers";
 
 export interface StatTile {
   label: string;
   value: string;
   change?: number;
-  icon: "total" | "open" | "unassigned" | "resolved";
+  icon: "total" | "open" | "unassigned" | "resolved" | "subscribers";
 }
 
 export interface DayStatus {
@@ -52,6 +54,7 @@ export interface DashboardData {
   activity: ActivityEvent[];
   openCount: number;
   unassignedCount: number;
+  recentSubscribers: SubscriberRow[];
 }
 
 export function Dashboard({ data }: { data: DashboardData }) {
@@ -69,6 +72,7 @@ export function Dashboard({ data }: { data: DashboardData }) {
       <RecentTickets items={data.recent} />
       <TicketAlerts open={data.openCount} unassigned={data.unassignedCount} />
       <DashboardActivity items={data.activity} />
+      <RecentSubscribers items={data.recentSubscribers} />
     </div>
   );
 }

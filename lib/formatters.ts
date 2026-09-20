@@ -53,6 +53,13 @@ export const TICKET_FORMS: ArabicCountForms = {
   many: "تذكرةً",
 };
 
+export const SUBSCRIBER_FORMS: ArabicCountForms = {
+  one: "مشترك",
+  two: "مشتركان",
+  few: "مشتركين",
+  many: "مشتركًا",
+};
+
 /**
  * Count + noun with CLDR Arabic plural rules, e.g. "لا مقالات"، "مقال
  * واحد"، "مقالان"، "٣ مقالات"، "١١ مقالًا"، "١٠٠ مقال".

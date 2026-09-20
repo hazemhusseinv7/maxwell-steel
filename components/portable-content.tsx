@@ -11,7 +11,7 @@ const components: PortableTextComponents = {
     h2: ({ children, value }) => (
       <h2
         id={value._key}
-        className="font-display mt-10 scroll-mt-24 text-2xl leading-10 font-bold"
+        className="font-display mt-10 scroll-mt-24 text-2xl leading-10 font-bold first:mt-0"
       >
         {children}
       </h2>
@@ -19,13 +19,13 @@ const components: PortableTextComponents = {
     h3: ({ children, value }) => (
       <h3
         id={value._key}
-        className="font-display mt-8 scroll-mt-24 text-xl leading-9 font-bold"
+        className="font-display mt-8 scroll-mt-24 text-xl leading-9 font-bold first:mt-0"
       >
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="font-display mt-6 text-lg leading-8 font-bold">
+      <h4 className="font-display mt-6 text-lg leading-8 font-bold first:mt-0">
         {children}
       </h4>
     ),

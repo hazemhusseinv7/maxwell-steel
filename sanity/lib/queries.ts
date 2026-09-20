@@ -9,6 +9,7 @@ export interface AuthorRef {
   name: string;
   slug: string;
   jobTitle?: string;
+  bio?: string | null;
   avatar?: AuthorAvatar | null;
 }
 
@@ -75,6 +76,7 @@ export interface PostIndexItem {
 export const POST_BY_SLUG_QUERY = groq`
   *[${publishedFilter} && slug.current == $slug][0] {
     ${postCardFields},
+    "author": author->{ _id, name, "slug": slug.current, jobTitle, avatar, bio },
     body,
     youtubeUrl,
     videoCaption,

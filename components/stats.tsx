@@ -1,4 +1,10 @@
-import { HiCheckCircle, HiInbox, HiTicket, HiUserPlus } from "react-icons/hi2";
+import {
+  HiCheckCircle,
+  HiEnvelope,
+  HiInbox,
+  HiTicket,
+  HiUserPlus,
+} from "react-icons/hi2";
 import type { StatTile } from "@/components/dashboard";
 import { DashboardCard } from "@/components/dashboard-card";
 import {
@@ -18,6 +24,7 @@ const TILE_ICONS = {
   open: HiInbox,
   unassigned: HiUserPlus,
   resolved: HiCheckCircle,
+  subscribers: HiEnvelope,
 } as const;
 
 export function DashboardStats({ tiles }: { tiles: StatTile[] }) {
