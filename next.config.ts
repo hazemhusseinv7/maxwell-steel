@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  reactCompiler: true,
+  reactCompiler: false,
   experimental: {
     // 2 screenshots x 10 MB + multipart/form encoding overhead
     serverActions: { bodySizeLimit: "25mb" },
